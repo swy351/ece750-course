@@ -1,0 +1,19 @@
+PROJECT SUBMISSION AND HANDOFF CHECKLIST
+
+[ ] A (10): focused question, decision, verified papers and contribution beyond simply rerunning a lab.
+[ ] B (20): data provenance, unit/target, quality audit, label process, actual IDs, timing and freeze/change record.
+[ ] C (20): defensible traditional method, correct implementation, justified assumptions and diagnostics.
+[ ] D (20): declared LLM/agent contract, bounded tools/budget, genuine records or accepted alternative, validated outputs and claim audit.
+[ ] E (20): matched results, definitions, effect/uncertainty, coverage, failures, cost/repeatability as relevant and bounded conclusions.
+[ ] F (10): clear report, source + executed HTML, environment/setup, helper code and mapped artifacts.
+[ ] Choose Python OR R; both are not required. R students need no Python checker.
+[ ] Clean-session execution tested after extracting the archive elsewhere; results agree with report/figures.
+[ ] Header-only manifests, empty traces and TODOs are replaced or explicitly justified as not applicable/not run.
+[ ] Binary predictions pass ID/method/run/schema checks; other tasks use declared task-specific checks.
+[ ] Full precision retained. Scores are oriented to the declared positive class; thresholds are frozen.
+[ ] Withheld metrics marked pending. No test-label lookup, hidden tuning or fabricated responses.
+[ ] Contributions, assistance, source attribution and access limitations are disclosed.
+[ ] No credentials, unauthorized data or instructor artifacts are included.
+[ ] LEARN deadline, naming, length, group and presentation requirements checked.
+
+The checklist is a self-audit, not a substitute for the guide. It contains no grade prediction or automatic pass threshold.

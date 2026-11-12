@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>README</title><style>body{font:17px/1.6 system-ui,sans-serif;max-width:1060px;margin:40px auto;padding:0 24px;color:#173448}h1{font-size:34px}h2{margin-top:32px;font-size:24px}a{color:#087e8b}pre{white-space:pre-wrap;background:#edf4f6;padding:18px;border-radius:8px}table{border-collapse:collapse;width:100%}th,td{padding:10px;border-bottom:1px solid #ccd;text-align:left}.anchor-link{display:none}</style></head><body><pre>ECE 750 — Student project starter kit
+12 November 2026
+
+START HERE
+1. Extract the ZIP. Work from student/. Read docs/PROJECT_GUIDE.html.
+2. Choose notebooks/project_analysis.ipynb (Python) OR project_analysis.Rmd (R).
+3. Complete docs/PROJECT_PROPOSAL_TEMPLATE.txt and your evaluation protocol.
+4. Add only permitted project data to data/. No dataset, model answers or labels are supplied.
+5. Complete the analysis TODOs, manifests and genuine run records. Preserve original failures.
+6. Freeze choices before final evaluation, export results and perform the relevant checks.
+7. Complete docs/PROJECT_FINAL_REPORT_TEMPLATE.txt and the submission checklist.
+
+This is an organizational scaffold, not a solution. Empty templates and clean starter execution do not constitute completed analyses. Adapt filenames to your task and map them in README. A report template is not a replacement for a notebook. Current LEARN policies control deadlines, scope, length, groups, access alternatives and course weighting. No live model calls or automatic data downloads are enabled.
+
+PYTHON
+Create a virtual environment and install requirements-python.txt. From student/:
+  python -m jupyter nbconvert --execute --to notebook --inplace notebooks/project_analysis.ipynb
+  python -m jupyter nbconvert --to html notebooks/project_analysis.ipynb
+Add your chosen analysis packages with exact versions. The starter itself uses only the standard library beyond the notebook tools.
+
+R
+Install rmarkdown and knitr from your usual R package repository, plus Pandoc (bundled with RStudio). Record versions and installation instructions. From student/:
+  Rscript -e &#x27;rmarkdown::render(&quot;notebooks/project_analysis.Rmd&quot;)&#x27;
+Include sessionInfo() and a versioned package list or renv.lock. Add your task&#x27;s packages; Python is not required for R students.
+
+BINARY PREDICTION CHECK (OPTIONAL; NO QUALITY SCORES)
+Fill templates/evaluation_ids.csv with every expected ID and templates/expected_methods.csv with each executed method/run pair. A one-run study still needs a declared run_id (for example run01). Write results/test_predictions.csv with exact ordered columns:
+  id,method,run_id,prediction,score
+This starter includes run_id to support repetitions; use a different announced task schema when required. Do not submit this extra column to an existing course scorer unless that scorer supports it; create per-run files with the course&#x27;s exact columns instead.
+Python:
+  python src/validate_predictions.py results/test_predictions.csv templates/evaluation_ids.csv templates/expected_methods.csv
+R, from student/:
+  Rscript -e &#x27;source(&quot;src/validate_predictions.R&quot;); print(validate_predictions(&quot;results/test_predictions.csv&quot;, &quot;templates/evaluation_ids.csv&quot;, &quot;templates/expected_methods.csv&quot;))&#x27;
+These tools check schema, duplicate/missing/extra IDs, method/run coverage, literal labels and score range. They never load true outcomes, establish model quality, detect leakage or validate interpretation. All methods in this checker use the same ID set. Different justified scopes need a registered task-specific checker. Header-only files fail by design. General task outputs are a starting schema to adapt, not an automatic binary-scoring input.
+
+FILE MAP
+notebooks/ : equivalent Python and R TODO scaffolds; choose one.
+src/ : language-matched optional format checkers.
+templates/ : header-only data, split, method, results, audit, contribution and freeze records; protocol JSON; empty genuine-event JSONL log and descriptor.
+docs/ : project guide, editable proposal/report, presentation outlines, handoff checklist and rubric evidence map.
+data/, results/, runs/ : places for YOUR permitted inputs, computed results and genuine traces.
+
+TRACE AND MANIFEST RULES
+Read docs/RECORDS_GUIDE.txt. Empty JSONL is intentional, not evidence of execution. Fill protocol budget nulls before any model call; they are unconfigured, not unlimited. Keep declared not-run methods in the protocol/experiment log, not fabricated predictions. Use unavailable for service metadata not exposed. Blank CSVs and TODOs must be completed or explicitly justified as not applicable.
+
+PRIVACY AND FINAL PACKAGE
+No credentials, instructor materials or unauthorized data should be in the submission or model inputs. Keep hidden outcomes separate. Include permitted data or exact access instructions, notebook source + executed HTML, helper code, environment, report, genuine traces and result files. Verify your archive after extraction into a clean directory. Presentations are outlines, not new deadlines or mandatory extra slide counts.
+</pre></body></html>

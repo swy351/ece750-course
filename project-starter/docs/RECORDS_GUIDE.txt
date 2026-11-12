@@ -1,0 +1,15 @@
+RECORDS GUIDE — fill only what applies and document adaptations
+
+Data manifest/dictionary: source version, hash, license, unit, field meaning, timing and target. Hash exact source bytes. Never use a checksum as a substitute for access/permission information.
+Split manifest: actual stable IDs, partition, group/time and inner fold. IDs may appear in a documented repeated-CV layout; state uniqueness keys. The binary checker uses a separate evaluation_ids file with exactly one row per expected test ID and no labels.
+Expected methods: each completed method/run pair once; prevents an entirely missing method from passing coverage checks. Unexecuted methods belong in the protocol and experiment_log with not_run status.
+Model manifest: feature and preprocessing fit scope, formula/estimator, hyperparameters, threshold, selection rule, actual folds and freeze configuration. A common seed is not a cross-language split definition.
+Protocol JSON: draft until TODOs and null budgets are replaced or explicitly marked not applicable. Define repeat count, stopping rule and tool permissions. This file does not execute an agent.
+Experiment log: one row per attempt, including failure, cancellation and not_run status. Separate missing model metadata from an unexecuted experiment. Currency and tokens are not interchangeable cost units.
+Run trace JSONL: genuine chronological events only. One JSON object per line, following trace_schema.json's field documentation. Store large inputs/outputs in permitted files and refer to their paths/hashes. No authored response fixtures are supplied.
+Claim audit: quote a consequential claim, cite the run/input/tool evidence, independently recompute/check it, and record verdict and correction or confirmation. Do not invent an error if the claim is sound.
+Decision/change logs: record when choices were made, what information was visible, the evidence and any change after evaluation access. A late timestamp does not restore independence.
+Metric definitions/results summary: define the population, denominator, score orientation, ties and abstentions; distinguish AP from trapezoidal PR area. Keep raw precision in exports. Use status measured/pending/not_run; do not enter zero for unavailable results.
+General outputs: adapt to parsing, localization, ranking, regression or explanation and define the schema in your proposal. For non-predictive studies use estimates/contrasts and evidence rather than invented test predictions.
+Freeze record: hash artifacts before evaluating. Python's hashlib.sha256, R digest::digest(file=..., algo="sha256") or a trusted system SHA-256 utility can be used. Record exact tool/version. Never silently replace the originally submitted predictions.
+Contributions/assistance: record actual work, AI/human help, reused external code, affected files and verification. Coding assistance is distinct from the measured LLM/agent treatment.

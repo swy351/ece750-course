@@ -1,0 +1,25 @@
+{
+  "status": "draft",
+  "research_question": "TODO",
+  "task_type": "TODO",
+  "unit": "TODO",
+  "target_or_estimand": "TODO",
+  "primary_metric": "TODO",
+  "data_manifest": "templates/data_manifest.csv",
+  "split_manifest": "templates/split_manifest.csv",
+  "information_boundaries": {
+    "traditional": "TODO",
+    "llm": "TODO",
+    "agent_tools": "TODO"
+  },
+  "selection_and_freeze_rule": "TODO",
+  "uncertainty_plan": "TODO",
+  "planned_repetitions": null,
+  "max_model_decisions": null,
+  "max_tokens": null,
+  "max_cost": null,
+  "currency": null,
+  "retry_and_stopping_rule": "TODO",
+  "access_alternative_status": "not requested",
+  "changes": "templates/change_log.csv"
+}

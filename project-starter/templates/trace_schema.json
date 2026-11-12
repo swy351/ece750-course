@@ -1,0 +1,27 @@
+{
+  "description": "Each JSONL line is a genuine observed event. This descriptor is documentation, not a response or completed trace.",
+  "required_fields": [
+    "run_id",
+    "event_index",
+    "timestamp",
+    "event_type",
+    "input_or_request_ref",
+    "output_or_observation_ref",
+    "status",
+    "human_intervention"
+  ],
+  "event_types": [
+    "model_request",
+    "model_response",
+    "tool_request",
+    "tool_result",
+    "validation",
+    "failure",
+    "final"
+  ],
+  "rules": [
+    "Retain failed and corrected events.",
+    "Use unavailable for metadata the service does not expose.",
+    "Keep credentials and hidden outcomes out of traces."
+  ]
+}

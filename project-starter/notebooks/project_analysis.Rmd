@@ -1,0 +1,108 @@
+---
+title: "ECE 750 project — R student starter"
+output:
+  html_document:
+    toc: true
+---
+
+Choose this notebook **or** the Python version. Complete TODOs using approved project data. No dataset, solution, model response or grading key is included. A successful starter render checks setup only.
+
+## Setup
+
+```{r setup}
+ROOT <- normalizePath(if (dir.exists("src")) "." else "..")
+stopifnot(file.exists(file.path(ROOT, "src", "validate_predictions.R")))
+source(file.path(ROOT, "src", "validate_predictions.R"))
+RUN_LIVE <- FALSE
+cat(R.version.string, "\nStarter only: no project data or model calls executed.\n")
+```
+
+## 1. Question and context — A (10)
+
+**TODO:** State your question, unit, target/estimand, decision context and paper connection. Distinguish replication, extension and exploration. Complete the proposal before interpreting results.
+
+**Your reasoning and evidence:** TODO
+
+```{r step-0}
+# TODO: implement this section. Keep genuinely unexecuted work marked not run.
+```
+
+## 2. Data audit and evaluation contract — B (20)
+
+**TODO:** Load only your permitted data. Check IDs, units, missingness, duplicates, timing, label provenance and exclusions. Save actual split/fold IDs. Fit transformations within training. For explanatory studies document sample/specification instead of imposing an unnecessary holdout.
+
+**Your reasoning and evidence:** TODO
+
+```{r step-1}
+# TODO: implement this section. Keep genuinely unexecuted work marked not run.
+```
+
+## 3. Traditional analysis — C (20)
+
+**TODO:** Implement your justified baseline or statistical model. Document features, transformations, assumptions, fit scope and selection rules. Produce relevant diagnostics and uncertainty. Add labeled figures when they help answer the question; derive them from computed values.
+
+**Your reasoning and evidence:** TODO
+
+```{r step-2}
+# TODO: implement this section. Keep genuinely unexecuted work marked not run.
+```
+
+## 4. LLM/agent experiment and audit — D (20)
+
+**TODO:** Implement your declared input/prompt/schema and bounded tools. Validate outputs and preserve genuine records, including failures. Separate coding assistance from the evaluated treatment. Use information controls or state the confound. No live calls are supplied or enabled by this starter.
+
+**Your reasoning and evidence:** TODO
+
+```{r step-3}
+# TODO: implement this section. Keep genuinely unexecuted work marked not run.
+```
+
+## 5. Matched comparison and error analysis — E (20)
+
+**TODO:** Compare the same IDs and target. State metrics, uncertainty, coverage, repeats and costs where relevant. Verify consequential model claims and examine disagreements. Mark withheld metrics pending and unexecuted methods not run. Do not fabricate results or tune on final feedback.
+
+**Your reasoning and evidence:** TODO
+
+```{r step-4}
+# TODO: implement this section. Keep genuinely unexecuted work marked not run.
+```
+
+## 6. Freeze and export — B, E and F
+
+**TODO:** Freeze configurations before final predictions. Export full-precision outputs, hashes and genuine logs. For binary tasks use the optional validator below; other tasks need a justified task-specific checker. Validate schema separately from statistical correctness.
+
+**Your reasoning and evidence:** TODO
+
+```{r step-5}
+# TODO: implement this section. Keep genuinely unexecuted work marked not run.
+```
+
+## 7. Interpretation and reproducibility — F (10)
+
+**TODO:** Answer the question with measured evidence and limits. Complete report, artifact map, contributions and assistance statement. Re-run from a fresh session. A successful untouched starter run demonstrates setup only, not a finished project.
+
+**Your reasoning and evidence:** TODO
+
+```{r step-6}
+# TODO: implement this section. Keep genuinely unexecuted work marked not run.
+```
+
+## Optional binary prediction format check
+
+Fill evaluation IDs, expected method/run pairs and predictions first. This checks format and coverage, never outcome labels or performance. Exclude unexecuted methods from the expected-method manifest and explain their status in the protocol.
+
+```{r format-check}
+p <- file.path(ROOT, "results", "test_predictions.csv")
+if (file.exists(p)) {
+  print(validate_predictions(p, file.path(ROOT, "templates", "evaluation_ids.csv"),
+                            file.path(ROOT, "templates", "expected_methods.csv")))
+} else {
+  cat("Not run: supply completed predictions and manifests first.\n")
+}
+```
+
+## Environment record
+
+```{r environment}
+sessionInfo()
+```

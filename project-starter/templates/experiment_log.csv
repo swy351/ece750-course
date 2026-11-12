@@ -1,0 +1,1 @@
+run_id,method,status,started_at,ended_at,model_id,settings_ref,input_ids_ref,prompt_ref,response_ref,trace_ref,latency_seconds,tokens,cost,currency,failures,human_intervention

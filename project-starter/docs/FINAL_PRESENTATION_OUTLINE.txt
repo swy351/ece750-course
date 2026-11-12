@@ -1,0 +1,13 @@
+FINAL PRESENTATION / DEMONSTRATION OUTLINE
+
+Follow the offering's presentation policy and allotted time; this outline adds no new requirement.
+1. Research question and contribution (A): precise scope and paper connection.
+2. Data and design (B): unit, provenance, labels, split/estimand, timing and information boundary.
+3. Methods (C/D): defend the traditional comparator; show the model/agent workflow, budgets and controls.
+4. Main evidence (E): one clearly labeled figure/table per key claim; matched IDs, metric definitions, uncertainty and coverage. Pending/not-run outcomes must be explicit.
+5. Error and claim audit (D/E): trace one disagreement from source evidence through validation to conclusion. Do not fabricate an agent failure.
+6. Costs and limits (E): report resource use when available, sampling, confounding, repeatability and generalization.
+7. Reproduction walkthrough (F): README, environment, notebook entry point, one representative deterministic result and frozen-output checks. Saved model traces may be used; a fresh paid/live model call is not necessary for a reproducibility demonstration.
+8. Conclusion: supported answer, strongest limitation and next step. Explain each member's contribution.
+
+Before the presentation, verify offline access to permitted artifacts, readable axes/units, exact sources and a fallback if live tools are unavailable. Be ready to explain and modify your own work rather than delegating the explanation to a model.
