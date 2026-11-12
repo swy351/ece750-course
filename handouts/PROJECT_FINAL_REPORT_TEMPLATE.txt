@@ -1,0 +1,145 @@
+# ECE 750 — Project final report template
+
+**Student template · 12 November 2026**
+
+Replace every `[TODO: ...]` with your own evidence and writing. Remove instructional prompts in the submitted report. Follow LEARN's length, format and submission requirements; do not infer a new deadline from this template. Submit a self-contained PDF or HTML report plus the complete runnable artifact required by the Project guide. The six rubric categories total 100 project points; course weighting is separate. A justified negative result can earn full credit.
+
+## Project information
+
+- Title: [TODO]
+- Author(s) and identifiers required by LEARN: [TODO]
+- Submission date/version: [TODO]
+- Language(s): [TODO: Python or R and any external tools]
+- Artifact entry point/location: [TODO: archive path or permitted link]
+- Approved scope/access changes: [TODO: reference the decision record, or none]
+
+## Abstract
+
+[TODO: summarize the question, data and unit, methods, main supported result and principal limitation. Include quantitative evidence only when actually measured. State when final test outcomes are pending or a model experiment was not run.]
+
+## 1. Question, prior work and contribution — rubric A (10)
+
+**Question and intended decision:** [TODO: precise target/estimand, unit and scope.]
+
+**Prior work:** [TODO: accurately describe the motivating paper claims and assumptions; provide verified references.]
+
+| Paper/method | Reused element | Project change or extension | Consequence for interpretation |
+|---|---|---|---|
+| [TODO] | [TODO] | [TODO] | [TODO] |
+
+**Contribution:** [TODO: what this study establishes beyond repeating a supplied lab. Separate replication, extension, comparison and exploratory findings.]
+
+## 2. Data and experimental design — rubric B (20)
+
+**Data provenance and measurement:** [TODO: source/version/license, unit, IDs, fields, target and timing, label/annotation process. Link the data manifest and dictionary.]
+
+| Audit item | Observed count/finding | Action and rationale | Artifact/evidence location |
+|---|---|---|---|
+| Sampling and population | [TODO] | [TODO] | [TODO] |
+| Missingness and exclusions | [TODO] | [TODO] | [TODO] |
+| Duplicates/related records | [TODO] | [TODO] | [TODO] |
+| Units, joins and label quality | [TODO] | [TODO] | [TODO] |
+
+**Evaluation contract:** [TODO: supplied/project-managed splits and actual IDs; time/project/group separation; fit scope; permitted information for each method; metrics and selection rules. For an explanatory study, specify sample and model-selection strategy rather than inventing a predictive task.]
+
+**Freeze record and protocol changes:** [TODO: dates/configuration hashes, when final outcomes were first accessed, changes from proposal and their consequences. Explain contaminated evaluation honestly; do not describe a tuned-on test as independent.]
+
+## 3. Traditional method and diagnostics — rubric C (20)
+
+[TODO: describe the reproducible baseline or statistical specification, features, transformations, assumptions, preprocessing fit scope and method-selection rationale. Include a formula or pseudocode when useful.]
+
+- Training/validation or specification decisions: [TODO]
+- Diagnostics and convergence: [TODO]
+- Uncertainty method and dependence assumptions: [TODO]
+- Implementation verification: [TODO: representative checks and evidence]
+- Known method limitations: [TODO]
+
+## 4. LLM/agent method and claim audit — rubric D (20)
+
+[TODO: describe the measured model treatment separately from coding assistance. Record model identity/settings, prompt/schema versions, permitted context, tools, decision budget, stopping rule, failures, retries and human interventions. Point to genuine run records.]
+
+| Condition | Inputs/context | Tools and budget | Configuration/run record | Status |
+|---|---|---|---|---|
+| Traditional comparator | [TODO] | [TODO] | [TODO] | [TODO] |
+| LLM/agent condition(s) | [TODO] | [TODO] | [TODO] | [TODO] |
+| Information control, if relevant | [TODO] | [TODO] | [TODO] | [TODO: or justified not applicable] |
+
+**Output validation:** [TODO: schema/ID checks, invalid responses, abstentions, evidence verification and tool restrictions.]
+
+**Consequential claim audit:**
+
+| Model claim and run ID | Supporting input/tool evidence | Independent check | Verdict | Correction or confirmation |
+|---|---|---|---|---|
+| [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
+
+**Access limitations:** [TODO: report actual execution status. If a protocol-only alternative was accepted, reference it and mark all unexecuted results not run. Authored examples are not measured model responses.]
+
+## 5. Results, comparison and interpretation — rubric E (20)
+
+### 5.1 Primary evidence
+
+| Method/condition | Evaluation sample and n | Metric/effect (definition) | Value and uncertainty | Coverage | Evidence/run ID |
+|---|---|---|---|---|---|
+| [TODO] | [TODO] | [TODO] | [TODO: measured, pending, or not run] | [TODO] | [TODO] |
+
+[TODO: interpret the comparison using matched samples and denominators. Explain information or budget differences. For explanatory work, report estimates, contrasts and intervals on the correct scale; do not force the study into accuracy/AP.]
+
+### 5.2 Repetitions, costs and sensitivity
+
+[TODO: planned and completed runs, seeds/settings, aggregation, uncertainty and sensitivity evidence. Explain missing runs and available latency/token/cost measurements. Identify a single-run limitation when applicable. Do not select only the best trial.]
+
+### 5.3 Disagreements and failures
+
+| Case/run | Methods' disagreement or failure | Verified evidence | Likely explanation | Implication/limitation |
+|---|---|---|---|---|
+| [TODO] | [TODO] | [TODO] | [TODO] | [TODO] |
+
+[TODO: state how cases were selected. Do not manufacture an error; explain the scope of the audit if none was found.]
+
+### 5.4 Threats to validity and answer to the question
+
+[TODO: sampling/prevalence, measurement/labels, dependence, confounding, model nondeterminism and generalization. Distinguish association, prediction and causation. State what the evidence supports, what remains unresolved, and what would change the conclusion.]
+
+**Withheld-test status:** [TODO: when labels are instructor-held, report validation evidence and frozen prediction coverage; mark final test metrics pending instructor evaluation. Do not retrieve labels or tune after feedback. For project-managed labels, document the isolation and first scoring date.]
+
+## 6. Reproducibility, artifact map and disclosures — rubric F (10)
+
+| Required evidence | Exact archive path | How to regenerate/check | Status or limitation |
+|---|---|---|---|
+| Report | [TODO] | [TODO] | [TODO] |
+| Notebook source and executed HTML | [TODO] | [TODO] | [TODO] |
+| Helper code and environment | [TODO] | [TODO] | [TODO] |
+| Data manifest/dictionary and split/fold IDs | [TODO] | [TODO] | [TODO] |
+| Protocol, frozen configurations and decision log | [TODO] | [TODO] | [TODO] |
+| Machine-readable results and figures/tables | [TODO] | [TODO] | [TODO] |
+| Prompts/responses/tool traces and claim audit | [TODO] | [TODO] | [TODO] |
+| Contributions/assistance statement | [TODO] | [TODO] | [TODO] |
+
+**Environment and clean execution:** [TODO: Python version/pinned dependencies plus executed `.ipynb`, or R version/`sessionInfo()`/versioned packages plus `.Rmd`; both require executed HTML and helper code. State fresh-session run order, working directory, resources, expected outputs, and what was actually reproduced.]
+
+**Machine-readable outputs:** [TODO: schema, stable string IDs, method/run IDs, target orientation, metric definitions, full precision and missingness/abstention rules. For binary predictions use `id,method,prediction,score`, with separate files or `run_id` for repeats. Use exact task-appropriate schemas for other outputs. Export without an index (`index=False` / `row.names=FALSE`) and describe successful round-trip, ID and duplicate checks.]
+
+**Language-specific differences:** [TODO: explain meaningful model, solver, threshold, interval or resampling choices. You need not implement both languages or match reference scores. A common seed does not ensure identical R/Python draws.]
+
+**Contributions:** [TODO: each member's concrete work, following the announced group policy.]
+
+**Assistance and attribution:** [TODO: human help, external code/data and AI tools; affected files/sections, what was accepted or changed and how verified. Do not include credentials or restricted information.]
+
+## Conclusion
+
+[TODO: concise answer to the research question supported by reported evidence; strongest limitation and a realistic next step. Avoid unsupported superiority or causal claims.]
+
+## References
+
+[TODO: verified paper/data/software citations. Every cited claim must be traceable; unverified generated references are not acceptable.]
+
+## Submission self-check
+
+- [ ] A (10): question, paper connection and scoped contribution are clear.
+- [ ] B (20): data audit, target, timing, design, boundaries and freeze record are documented.
+- [ ] C (20): traditional implementation, assumptions and diagnostics are justified.
+- [ ] D (20): model protocol, authentic records or accepted alternative, validation and claim audit are present.
+- [ ] E (20): comparisons, uncertainty, coverage, failures and interpretation are evidence-backed.
+- [ ] F (10): report, source, HTML, environment, manifests, results and disclosures are complete.
+- [ ] No placeholders, fabricated outputs, hidden labels or credentials remain.
+- [ ] Final archive and any presentation follow current LEARN requirements.

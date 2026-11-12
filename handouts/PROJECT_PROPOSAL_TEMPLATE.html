@@ -1,0 +1,214 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ECE 750 Project Proposal Template</title><style>body{font:17px/1.6 system-ui,sans-serif;max-width:1050px;margin:45px auto;padding:0 30px;color:#173448}h1{font-size:35px;color:#152b3a}h2{font-size:25px;margin-top:34px}h3{font-size:20px;margin-top:24px}table{border-collapse:collapse;width:100%;font-size:15px;margin:18px 0}th,td{padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid #cbd7df}th{background:#edf4f6}code{font-size:.9em}a{color:#087e8b}.anchor-link{display:none}li{margin:5px 0}@media print{body{font-size:10.5pt;margin:0;padding:0}h1{font-size:22pt}h2{font-size:15pt}h3{font-size:12pt}table{font-size:9.5pt}h1,h2,h3{break-after:avoid}tr{break-inside:avoid}@page{size:A4;margin:18mm}</style></head><body><p><a href="../index.html#assignments">← ECE 750 assignments and project</a> · <a href="PROJECT_GUIDE.html">Project guide</a> · <a href="PROJECT_PROPOSAL_TEMPLATE.txt" download>Download editable template</a></p><h1 id="ECE-750-%E2%80%94-Project-proposal-template">ECE 750 &#8212; Project proposal template<a class="anchor-link" href="#ECE-750-%E2%80%94-Project-proposal-template">&#182;</a></h1><p><strong>Student template · 12 November 2026</strong></p>
+<p>Replace every <code>[TODO: ...]</code> with your own content. Delete instructional prompts when preparing the final document, but retain the section structure or provide a clear mapping. This template helps prepare the Week 8 proposal; follow current LEARN requirements for submission date, length, format and presentation. The rubric mapping refers to the final project's 100 points, not a separate proposal grading scheme. Describe plans as plans; do not invent preliminary results.</p>
+<h2 id="Project-information">Project information<a class="anchor-link" href="#Project-information">&#182;</a></h2><ul>
+<li>Working title: [TODO: specific title]</li>
+<li>Author(s) and identifiers required by LEARN: [TODO]</li>
+<li>Proposal date/version: [TODO]</li>
+<li>Analysis language: [TODO: Python or R; external tools if needed]</li>
+<li>Data type: [TODO: source code, developer text, metrics, logs, telemetry/traces, commits, or justified alternative]</li>
+<li>Artifact location/access plan: [TODO: course submission location or permitted repository; no secrets]</li>
+</ul>
+<h2 id="1.-Question,-motivation-and-contribution-%E2%80%94-rubric-A-(10)">1. Question, motivation and contribution &#8212; rubric A (10)<a class="anchor-link" href="#1.-Question,-motivation-and-contribution-%E2%80%94-rubric-A-(10)">&#182;</a></h2><p><strong>Research question:</strong> [TODO: one focused, answerable question. Identify the unit, target/estimand and intended engineering decision.]</p>
+<p><strong>Why this matters:</strong> [TODO: who could use the finding, and what decision might change?]</p>
+<p><strong>Paper connection:</strong></p>
+<table>
+<thead>
+<tr>
+  <th>Paper and verified citation</th>
+  <th>Relevant claim or method</th>
+  <th>What we reuse</th>
+  <th>What we change or test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>[TODO]</td>
+  <td>[TODO: section/location]</td>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Contribution and scope:</strong> [TODO: replication, extension, comparison or exploration. Explain what goes beyond rerunning a lab and what is outside scope. A new model is not required.]</p>
+<p><strong>Possible outcomes:</strong> [TODO: what evidence would support, weaken or leave the claim unresolved? Explain why a negative result would still be informative.]</p>
+<h2 id="2.-Data-and-experimental-design-%E2%80%94-rubric-B-(20)">2. Data and experimental design &#8212; rubric B (20)<a class="anchor-link" href="#2.-Data-and-experimental-design-%E2%80%94-rubric-B-(20)">&#182;</a></h2><table>
+<thead>
+<tr>
+  <th>Item</th>
+  <th>Planned choice and rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Source, version and access/license</td>
+  <td>[TODO]</td>
+</tr>
+<tr>
+  <td>Unit of analysis and stable ID</td>
+  <td>[TODO]</td>
+</tr>
+<tr>
+  <td>Target/estimand and label provenance</td>
+  <td>[TODO: human labels, observed outcomes, or other defensible reference]</td>
+</tr>
+<tr>
+  <td>Population, sampling and expected scale</td>
+  <td>[TODO: distinguish expected from inspected counts]</td>
+</tr>
+<tr>
+  <td>Information available at decision time</td>
+  <td>[TODO]</td>
+</tr>
+<tr>
+  <td>Data-quality checks</td>
+  <td>[TODO: missingness, duplicates, units, joins, prevalence, exclusions]</td>
+</tr>
+<tr>
+  <td>Annotation protocol, if applicable</td>
+  <td>[TODO: definitions, ambiguity, disagreement checks; predictions are not independent gold labels]</td>
+</tr>
+<tr>
+  <td>Data boundary and permitted model inputs</td>
+  <td>[TODO: what each method/tool may and may not access]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Partition plan:</strong> [TODO: development/training, validation and final evaluation; justify time/project/group separation and handling of related records. Preserve supplied final holdouts. For a purely explanatory study, state sample and specification strategy and explain why predictive partitions do not apply.]</p>
+<p><strong>Leakage risks and controls:</strong> [TODO: outcome-derived predictors, future information, duplicate content, preprocessing fit scope, test-label access.]</p>
+<p><strong>Freeze and change plan:</strong> [TODO: what will be fixed before evaluation, how configurations/IDs will be saved, and how protocol changes will be recorded.]</p>
+<h2 id="3.-Traditional-analysis-plan-%E2%80%94-rubric-C-(20)">3. Traditional analysis plan &#8212; rubric C (20)<a class="anchor-link" href="#3.-Traditional-analysis-plan-%E2%80%94-rubric-C-(20)">&#182;</a></h2><ul>
+<li>Baseline or explanatory method: [TODO: definition/formula/algorithm and rationale]</li>
+<li>Features, transformations and preprocessing: [TODO: include fit scope]</li>
+<li>Selection/tuning rule: [TODO: permitted data, folds and threshold selection, or explain why not applicable]</li>
+<li>Assumptions and diagnostics: [TODO]</li>
+<li>Uncertainty method: [TODO: statistic, interval/resampling design and dependence assumptions]</li>
+<li>Small feasibility check: [TODO: actual evidence if completed; otherwise mark planned/not run]</li>
+</ul>
+<h2 id="4.-LLM/agent-method-and-audit-plan-%E2%80%94-rubric-D-(20)">4. LLM/agent method and audit plan &#8212; rubric D (20)<a class="anchor-link" href="#4.-LLM/agent-method-and-audit-plan-%E2%80%94-rubric-D-(20)">&#182;</a></h2><p><strong>Experimental treatment:</strong> [TODO: what the model does and why it might help. Distinguish it from coding assistance.]</p>
+<table>
+<thead>
+<tr>
+  <th>Item</th>
+  <th>Planned specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Model/environment and access</td>
+  <td>[TODO: known model identity or selection plan]</td>
+</tr>
+<tr>
+  <td>Inputs and permitted context</td>
+  <td>[TODO]</td>
+</tr>
+<tr>
+  <td>Prompt and response schema</td>
+  <td>[TODO: attach draft or point to file]</td>
+</tr>
+<tr>
+  <td>Tools and restrictions</td>
+  <td>[TODO: names, inputs/outputs, read-only boundaries or inspected execution controls]</td>
+</tr>
+<tr>
+  <td>Finite budget and stopping rule</td>
+  <td>[TODO: model decisions/tokens/cost, failures, retries and final response]</td>
+</tr>
+<tr>
+  <td>Validation and abstention</td>
+  <td>[TODO: schema, IDs, labels, cited evidence and invalid outputs]</td>
+</tr>
+<tr>
+  <td>Independent claim audit</td>
+  <td>[TODO: which consequential claims will be verified and how]</td>
+</tr>
+<tr>
+  <td>Records and interventions</td>
+  <td>[TODO: prompts, responses, tool observations, settings, failures, human changes]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Information control:</strong> [TODO: how baseline/LLM/agent conditions are matched. If an agent retrieves extra context, plan a fixed-context information control where feasible; otherwise explain the resulting limitation.]</p>
+<p><strong>Access contingency:</strong> [TODO: local/approved model access and resource feasibility. If access fails, follow the course alternative-access process; a protocol-only proposal is not permission to claim empirical model results.]</p>
+<h2 id="5.-Evaluation-and-interpretation-plan-%E2%80%94-rubric-E-(20)">5. Evaluation and interpretation plan &#8212; rubric E (20)<a class="anchor-link" href="#5.-Evaluation-and-interpretation-plan-%E2%80%94-rubric-E-(20)">&#182;</a></h2><table>
+<thead>
+<tr>
+  <th>Comparison/question</th>
+  <th>Evaluation IDs or sample</th>
+  <th>Metric/effect and exact definition</th>
+  <th>Uncertainty/repetitions</th>
+  <th>Interpretation limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+  <td>[TODO: primary outcome]</td>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Matched inputs, denominators and information budgets: [TODO]</li>
+<li>Coverage/abstention and failure accounting: [TODO]</li>
+<li>Resource measurements, where relevant: [TODO: latency, tokens, cost; note unavailable metadata]</li>
+<li>Planned repetitions/seeds and aggregation: [TODO: report all planned runs; justify single-run limitations]</li>
+<li>Error/disagreement analysis: [TODO: selection rule and evidence to inspect]</li>
+<li>Held-out labels: [TODO: instructor-held or project-managed; how independence is protected]</li>
+<li>Expected limitations: [TODO: sampling, measurement, validity, dependence and causal claims]</li>
+</ul>
+<h2 id="6.-Reproducibility,-milestones-and-responsibilities-%E2%80%94-rubric-F-(10)">6. Reproducibility, milestones and responsibilities &#8212; rubric F (10)<a class="anchor-link" href="#6.-Reproducibility,-milestones-and-responsibilities-%E2%80%94-rubric-F-(10)">&#182;</a></h2><p><strong>Language and environment:</strong> [TODO: Python notebook and pinned dependencies, or R Markdown with R/package versions and setup instructions. Document external tools.]</p>
+<p><strong>Planned artifact:</strong> [TODO: report, notebook source plus executed HTML, helper code, data manifest/dictionary, actual split/fold IDs, protocol, machine-readable results, traces, claim audit and contributions/assistance statement.]</p>
+<table>
+<thead>
+<tr>
+  <th>Milestone</th>
+  <th>Concrete evidence/output</th>
+  <th>Owner(s)</th>
+  <th>Target date</th>
+  <th>Main risk and fallback</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Feasibility/data audit</td>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+</tr>
+<tr>
+  <td>Baseline and model protocol</td>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+</tr>
+<tr>
+  <td>Freeze and evaluation</td>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+</tr>
+<tr>
+  <td>Audit, reproduction and report</td>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+  <td>[TODO]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Assistance used in preparing this proposal:</strong> [TODO: tool/person, purpose, affected content and verification; write none if applicable.]</p>
+<h2 id="References-and-proposal-checklist">References and proposal checklist<a class="anchor-link" href="#References-and-proposal-checklist">&#182;</a></h2><p>[TODO: verified references with titles, authors, venues/years and source links or identifiers.]</p>
+<ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Question and contribution are feasible and connected to specific prior work.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Data access, unit, target, labels and leakage controls are explicit.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Traditional and model conditions have a defensible comparison plan.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Metrics, uncertainty, budgets and freeze rules are defined before results.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Risks, milestones, responsibilities and reproducibility are concrete.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Planned work is not presented as completed evidence; current LEARN policies are followed.</li>
+</ul>
+</body></html>

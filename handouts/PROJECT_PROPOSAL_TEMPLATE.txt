@@ -1,0 +1,117 @@
+# ECE 750 — Project proposal template
+
+**Student template · 12 November 2026**
+
+Replace every `[TODO: ...]` with your own content. Delete instructional prompts when preparing the final document, but retain the section structure or provide a clear mapping. This template helps prepare the Week 8 proposal; follow current LEARN requirements for submission date, length, format and presentation. The rubric mapping refers to the final project's 100 points, not a separate proposal grading scheme. Describe plans as plans; do not invent preliminary results.
+
+## Project information
+
+- Working title: [TODO: specific title]
+- Author(s) and identifiers required by LEARN: [TODO]
+- Proposal date/version: [TODO]
+- Analysis language: [TODO: Python or R; external tools if needed]
+- Data type: [TODO: source code, developer text, metrics, logs, telemetry/traces, commits, or justified alternative]
+- Artifact location/access plan: [TODO: course submission location or permitted repository; no secrets]
+
+## 1. Question, motivation and contribution — rubric A (10)
+
+**Research question:** [TODO: one focused, answerable question. Identify the unit, target/estimand and intended engineering decision.]
+
+**Why this matters:** [TODO: who could use the finding, and what decision might change?]
+
+**Paper connection:**
+
+| Paper and verified citation | Relevant claim or method | What we reuse | What we change or test |
+|---|---|---|---|
+| [TODO] | [TODO: section/location] | [TODO] | [TODO] |
+
+**Contribution and scope:** [TODO: replication, extension, comparison or exploration. Explain what goes beyond rerunning a lab and what is outside scope. A new model is not required.]
+
+**Possible outcomes:** [TODO: what evidence would support, weaken or leave the claim unresolved? Explain why a negative result would still be informative.]
+
+## 2. Data and experimental design — rubric B (20)
+
+| Item | Planned choice and rationale |
+|---|---|
+| Source, version and access/license | [TODO] |
+| Unit of analysis and stable ID | [TODO] |
+| Target/estimand and label provenance | [TODO: human labels, observed outcomes, or other defensible reference] |
+| Population, sampling and expected scale | [TODO: distinguish expected from inspected counts] |
+| Information available at decision time | [TODO] |
+| Data-quality checks | [TODO: missingness, duplicates, units, joins, prevalence, exclusions] |
+| Annotation protocol, if applicable | [TODO: definitions, ambiguity, disagreement checks; predictions are not independent gold labels] |
+| Data boundary and permitted model inputs | [TODO: what each method/tool may and may not access] |
+
+**Partition plan:** [TODO: development/training, validation and final evaluation; justify time/project/group separation and handling of related records. Preserve supplied final holdouts. For a purely explanatory study, state sample and specification strategy and explain why predictive partitions do not apply.]
+
+**Leakage risks and controls:** [TODO: outcome-derived predictors, future information, duplicate content, preprocessing fit scope, test-label access.]
+
+**Freeze and change plan:** [TODO: what will be fixed before evaluation, how configurations/IDs will be saved, and how protocol changes will be recorded.]
+
+## 3. Traditional analysis plan — rubric C (20)
+
+- Baseline or explanatory method: [TODO: definition/formula/algorithm and rationale]
+- Features, transformations and preprocessing: [TODO: include fit scope]
+- Selection/tuning rule: [TODO: permitted data, folds and threshold selection, or explain why not applicable]
+- Assumptions and diagnostics: [TODO]
+- Uncertainty method: [TODO: statistic, interval/resampling design and dependence assumptions]
+- Small feasibility check: [TODO: actual evidence if completed; otherwise mark planned/not run]
+
+## 4. LLM/agent method and audit plan — rubric D (20)
+
+**Experimental treatment:** [TODO: what the model does and why it might help. Distinguish it from coding assistance.]
+
+| Item | Planned specification |
+|---|---|
+| Model/environment and access | [TODO: known model identity or selection plan] |
+| Inputs and permitted context | [TODO] |
+| Prompt and response schema | [TODO: attach draft or point to file] |
+| Tools and restrictions | [TODO: names, inputs/outputs, read-only boundaries or inspected execution controls] |
+| Finite budget and stopping rule | [TODO: model decisions/tokens/cost, failures, retries and final response] |
+| Validation and abstention | [TODO: schema, IDs, labels, cited evidence and invalid outputs] |
+| Independent claim audit | [TODO: which consequential claims will be verified and how] |
+| Records and interventions | [TODO: prompts, responses, tool observations, settings, failures, human changes] |
+
+**Information control:** [TODO: how baseline/LLM/agent conditions are matched. If an agent retrieves extra context, plan a fixed-context information control where feasible; otherwise explain the resulting limitation.]
+
+**Access contingency:** [TODO: local/approved model access and resource feasibility. If access fails, follow the course alternative-access process; a protocol-only proposal is not permission to claim empirical model results.]
+
+## 5. Evaluation and interpretation plan — rubric E (20)
+
+| Comparison/question | Evaluation IDs or sample | Metric/effect and exact definition | Uncertainty/repetitions | Interpretation limit |
+|---|---|---|---|---|
+| [TODO] | [TODO] | [TODO: primary outcome] | [TODO] | [TODO] |
+
+- Matched inputs, denominators and information budgets: [TODO]
+- Coverage/abstention and failure accounting: [TODO]
+- Resource measurements, where relevant: [TODO: latency, tokens, cost; note unavailable metadata]
+- Planned repetitions/seeds and aggregation: [TODO: report all planned runs; justify single-run limitations]
+- Error/disagreement analysis: [TODO: selection rule and evidence to inspect]
+- Held-out labels: [TODO: instructor-held or project-managed; how independence is protected]
+- Expected limitations: [TODO: sampling, measurement, validity, dependence and causal claims]
+
+## 6. Reproducibility, milestones and responsibilities — rubric F (10)
+
+**Language and environment:** [TODO: Python notebook and pinned dependencies, or R Markdown with R/package versions and setup instructions. Document external tools.]
+
+**Planned artifact:** [TODO: report, notebook source plus executed HTML, helper code, data manifest/dictionary, actual split/fold IDs, protocol, machine-readable results, traces, claim audit and contributions/assistance statement.]
+
+| Milestone | Concrete evidence/output | Owner(s) | Target date | Main risk and fallback |
+|---|---|---|---|---|
+| Feasibility/data audit | [TODO] | [TODO] | [TODO] | [TODO] |
+| Baseline and model protocol | [TODO] | [TODO] | [TODO] | [TODO] |
+| Freeze and evaluation | [TODO] | [TODO] | [TODO] | [TODO] |
+| Audit, reproduction and report | [TODO] | [TODO] | [TODO] | [TODO] |
+
+**Assistance used in preparing this proposal:** [TODO: tool/person, purpose, affected content and verification; write none if applicable.]
+
+## References and proposal checklist
+
+[TODO: verified references with titles, authors, venues/years and source links or identifiers.]
+
+- [ ] Question and contribution are feasible and connected to specific prior work.
+- [ ] Data access, unit, target, labels and leakage controls are explicit.
+- [ ] Traditional and model conditions have a defensible comparison plan.
+- [ ] Metrics, uncertainty, budgets and freeze rules are defined before results.
+- [ ] Risks, milestones, responsibilities and reproducibility are concrete.
+- [ ] Planned work is not presented as completed evidence; current LEARN policies are followed.
