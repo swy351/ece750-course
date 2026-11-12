@@ -1,0 +1,500 @@
+{
+  "weeks": [
+    {
+      "week": 1,
+      "title": "Introduction to software analytics",
+      "subtitle": "Research questions, data and defensible evidence",
+      "tag": "Foundations",
+      "notebook": "week01_introduction_to_software_analytics",
+      "connection": "Project: define a research question, unit of analysis and data source.",
+      "lessons": [
+        {
+          "title": "Begin with a decision",
+          "text": "Software data becomes useful when it supports a concrete engineering decision. Before choosing a technique, name the question, the people who will use the result, and what action could change. “Find technical debt” is incomplete until you define what counts as an admission of debt and how a reviewer would use a finding."
+        },
+        {
+          "title": "Define one observation",
+          "text": "A comment, a class, a commit and a service incident are different units of analysis. Their labels and dependencies differ too. Repeated comments from the same project are not necessarily independent evidence. Record the population, sampling rule, identifier and target before calculating a metric."
+        },
+        {
+          "title": "Make the comparison fair",
+          "text": "A keyword rule offers explicit matching behavior; an LLM can use context but may produce unsupported explanations. Compare them on the same records, preserve uncertainty, and inspect disagreements. A plausible explanation is a hypothesis to verify. The small annotation exercise teaches this process; it does not establish general model superiority."
+        }
+      ],
+      "papers": [
+        {
+          "title": "Software Analytics in Practice",
+          "url": "https://www.microsoft.com/en-us/research/publication/software-analytics-practice-2/",
+          "venue": "IEEE Software / 2013",
+          "idea": "Software data supports concrete engineering decisions.",
+          "question": "Where does an analytical result become actionable?",
+          "connection": "Frame the comment-labeling task around a review decision."
+        },
+        {
+          "title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+          "url": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/edac78c3e300629acfe6cbe9ca88fb84-Abstract-Conference.html",
+          "venue": "ICLR 2024 / selected sections",
+          "idea": "An executable evaluation links issue resolution to tests.",
+          "question": "What does passing a benchmark establish, and what remains unknown?",
+          "connection": "Compare evaluation contracts. Our comment task is classification, not issue repair."
+        }
+      ],
+      "traditional": "<h2 id=\"3.-Traditional-analysis-%E2%80%94-TODO\">3. Traditional analysis &#8212; TODO<a class=\"anchor-link\" href=\"#3.-Traditional-analysis-%E2%80%94-TODO\">&#182;</a></h2><p>Manually annotate the 12 comments before using a model. Define SATD, a positive label, and an uncertain label. Record id, label, exact evidence text, and rationale. Ask a partner to annotate independently; quantify agreement and discuss disagreements. Implement a keyword baseline and compare its flags with your manual judgments. Plot counts by method without calling agreement correctness.</p>\n",
+      "llm": "<p>Write a prompt using only id and commenttext. Require label, quoted evidence, and uncertainty for each ID. Run it on the same comments, or save an unexecuted prompt if no model is available. Check evidence quotes occur in the input and keep a separate model-annotation table.</p>\n",
+      "discussion": "<h2 id=\"Checks-and-discussion\">Checks and discussion<a class=\"anchor-link\" href=\"#Checks-and-discussion\">&#182;</a></h2><ol>\n<li>What exactly counts as debt rather than a normal implementation note?</li>\n<li>Which disagreement requires more code context?</li>\n<li>Why is this sample unsuitable for estimating deployment precision?</li>\n<li>What would change if the task were prioritizing comments for review?</li>\n</ol>\n<h2 id=\"Next-steps\">Next steps<a class=\"anchor-link\" href=\"#Next-steps\">&#182;</a></h2><p>Submit a small disagreement table in class. This is practice, not a new graded assignment.</p>\n<p><strong>Your response:</strong> TODO</p>\n"
+    },
+    {
+      "week": 2,
+      "title": "Reading and reviewing empirical research",
+      "subtitle": "Claims, evidence and exception-handling failures",
+      "tag": "Research methods",
+      "notebook": "week02_paper_review_and_study_design",
+      "connection": "Assignment 2: operational definitions and paper critique. Project: identify a claim to investigate.",
+      "lessons": [
+        {
+          "title": "Reconstruct the argument",
+          "text": "Read a paper as a chain: research question, data, operational definition, method, result and inference. For each central claim, record the exact section, figure or table that supports it. Distinguish what the authors measured from the broader interpretation you might be tempted to attach to it."
+        },
+        {
+          "title": "Review the evidence",
+          "text": "Ask who or what is missing from the sample, how labels were created, and which alternative explanations remain. A prevalence study describes observed patterns; it does not by itself show that removing those patterns prevents failures. A useful review identifies a consequential limitation and a feasible way to investigate it."
+        },
+        {
+          "title": "Use a model as a critic",
+          "text": "Complete your own review and manual annotation before asking a model to critique them. Check every citation and quotation against the assigned paper. Agreement between annotators can reveal consistency, but agreement alone cannot validate the coding scheme. Preserve “uncertain” when a scenario omits the contract needed to judge it."
+        }
+      ],
+      "papers": [
+        {
+          "title": "Simple Testing Can Prevent Most Critical Failures: An Analysis of Production Failures in Distributed Data-Intensive Systems",
+          "url": "https://www.usenix.org/conference/osdi14/technical-sessions/presentation/yuan",
+          "venue": "Yuan et al. / OSDI 2014",
+          "idea": "Study production failures and the testing opportunities they expose.",
+          "question": "How does the sampled failure population limit the conclusion?",
+          "connection": "Use the paper’s actual cases for reading. Lab scenarios are authored teaching examples, not extracted incidents."
+        },
+        {
+          "title": "Studying the Prevalence of Exception Handling Anti-Patterns",
+          "url": "https://learn.uwaterloo.ca/d2l/le/content/1115318/viewContent/5833095/View",
+          "venue": "Pádua and Shang / ICPC 2017",
+          "idea": "Operationalize anti-patterns and measure their prevalence.",
+          "question": "Does a detectable pattern necessarily imply a harmful behavior?",
+          "connection": "Use the assigned definitions for Assignment 2. Preserve the distinction between detection and contextual assessment."
+        }
+      ],
+      "traditional": "<h2 id=\"3.-Traditional-analysis-%E2%80%94-TODO\">3. Traditional analysis &#8212; TODO<a class=\"anchor-link\" href=\"#3.-Traditional-analysis-%E2%80%94-TODO\">&#182;</a></h2><p>Read OSDI 2014 and ICPC 2017. Build a review table: claim, exact section/table/figure, data population, method, threat to validity, replication idea. Independently annotate the four synthetic scenarios as harmful/acceptable/uncertain; justify evidence and missing context. Calculate agreement with a partner. These scenarios are teaching inputs, not cases extracted from the papers.</p>\n",
+      "llm": "<p>Give the model the same scenarios and codebook, with no manual labels. Request JSON annotations with evidence and uncertainty. Audit every quote. For a paper-review critique, supply only a short excerpt you actually read and verify every model claim against the paper; invented citations count as errors.</p>\n",
+      "discussion": "<h2 id=\"Checks-and-discussion\">Checks and discussion<a class=\"anchor-link\" href=\"#Checks-and-discussion\">&#182;</a></h2><ul>\n<li>Which labels depend on assumptions beyond the scenario?</li>\n<li>Can annotator agreement validate the coding scheme by itself?</li>\n<li>Does a prevalence study show that removing a pattern prevents failures?</li>\n<li>Which OSDI claim would you replicate first, and what data would you need?</li>\n</ul>\n<h2 id=\"Next-steps\">Next steps<a class=\"anchor-link\" href=\"#Next-steps\">&#182;</a></h2><p>Write a short review: contribution, strongest evidence, one material limitation, and a feasible follow-up. Carry ICPC operational definitions into Assignment 2.</p>\n<p><strong>Your response:</strong> TODO</p>\n"
+    },
+    {
+      "week": 3,
+      "title": "Source code and exception handling",
+      "subtitle": "From syntactic rules to policy-aware analysis",
+      "tag": "Source code",
+      "notebook": "week03_source_code_and_exception_handling",
+      "connection": "Assignment 2: separate detector findings, policy judgments and evaluation targets.",
+      "lessons": [
+        {
+          "title": "Patterns are operational definitions",
+          "text": "A detector translates a paper definition into observable syntax or program behavior. AST rules can recognize a catch body or caught type, but names alone may miss bindings and propagation. Record the exact rule, scope, location and unresolved cases so that another researcher can reproduce your counts."
+        },
+        {
+          "title": "Context changes the judgment",
+          "text": "A structural pattern and a harmful behavior are separate targets. The same shape can implement an intentional policy in one setting and violate a required contract in another. Analyze the handler, caller expectations and propagation path. Do not silently label an unknown contract as safe or harmful."
+        },
+        {
+          "title": "Connect detection to the papers",
+          "text": "The ORM reading demonstrates operationalizing performance anti-patterns. Exception-flow analysis motivates following behavior beyond a local handler. EH-Fixer brings contextual reasoning and repair into the discussion, while this lab remains Java detection and assessment. A detection result is not evidence that a generated repair is correct."
+        }
+      ],
+      "papers": [
+        {
+          "title": "Detecting Performance Anti-patterns for Applications Developed Using Object-Relational Mapping",
+          "url": "https://www.cse.yorku.ca/~zmjiang/publications/icse2014_chen.pdf",
+          "venue": "Chen et al. • ICSE 2014",
+          "idea": "Traditional lens: program structure and domain-specific performance patterns.",
+          "question": "Which parts of a domain rule can be checked mechanically?",
+          "connection": "Transfer to this lab: explicit rules and their assumptions. The lab studies exceptions, not ORM performance."
+        },
+        {
+          "title": "Revisiting Exception Handling Practices with Exception Flow Analysis",
+          "url": "https://guipadua.github.io/resources/scam2017-revisiting-eh_cr.pdf",
+          "venue": "Padua and Shang • SCAM 2017",
+          "idea": "Traditional lens: exception behavior requires flow and context beyond catch syntax.",
+          "question": "What information is lost when the detector inspects only one catch clause?",
+          "connection": "Transfer: trace a failure from the operation through the handler to the caller."
+        },
+        {
+          "title": "Error Delayed Is Not Error Handled: Understanding and Fixing Propagated Error-Handling Bugs",
+          "url": "https://leopard-lab.github.io/paper/FSE2025-HaoranLiu.pdf",
+          "venue": "Liu et al. / FSE 2025",
+          "idea": "EH-Fixer combines static analysis and LLM-assisted repair of propagated errors.",
+          "question": "Which caller and propagation evidence does a local catch inspection miss?",
+          "connection": "Transfer the context-retrieval idea to Java. This lab does not reproduce the C/C++ repair system."
+        }
+      ],
+      "traditional": "<h2 id=\"3.-Traditional-analysis-%E2%80%94-TODO\">3. Traditional analysis &#8212; TODO<a class=\"anchor-link\" href=\"#3.-Traditional-analysis-%E2%80%94-TODO\">&#182;</a></h2><p>Parse Java using javalang. Implement checks for empty catch bodies, broad caught types, and possible lost interruption. Return findings and locations separately from harmfulness judgments. Use development cases to construct boundary tests; preserve the supplied split for final evaluation. Document which assigned ICPC patterns require JDT bindings. Explore real-code records without treating them as labeled examples.</p>\n",
+      "llm": "<p>Use the same fixed case IDs and provide code plus policy, never reference labels. Request structural finding, requires_action or uncertain, evidence, and missing context. Build and validate a JSON schema. Explain the gap between EH-Fixer's repair task and this detection/context lab; do not claim repair success without compilation/tests.</p>\n",
+      "discussion": "<h2 id=\"Discussion-questions\">Discussion questions<a class=\"anchor-link\" href=\"#Discussion-questions\">&#182;</a></h2><ol>\n<li>When is an empty catch legitimate? Which policy information would a static analyzer need to decide?</li>\n<li>How would two annotators resolve disagreement about “requires action”?</li>\n<li>The LLM receives policy text while the baseline ignores it. What is needed for an information-controlled comparison?</li>\n<li>Why does perfect agreement on these authored cases say little about real software?</li>\n<li>What changes when exception propagation crosses methods or libraries?</li>\n</ol>\n<p><strong>Your response:</strong> TODO</p>\n"
+    },
+    {
+      "week": 4,
+      "title": "Implementing an exception detector",
+      "subtitle": "JDT visitors, boundary tests and contextual evidence",
+      "tag": "Source code",
+      "notebook": "week04_detector_implementation_and_agent_context",
+      "connection": "Assignment 2: implementation, boundary tests, context tools and demonstration preparation.",
+      "lessons": [
+        {
+          "title": "Build a testable detector",
+          "text": "Write the expected behavior of boundary cases before running the implementation. Include relevant positive, negative and unresolved cases. Comments, nested handlers and qualified names can expose differences between text matching and AST analysis. A parse or binding failure belongs in an explicit status field, not in the negative class."
+        },
+        {
+          "title": "Control retrieved context",
+          "text": "A context agent chooses what information to inspect through a declared read-only interface. Limit the available tools and decision budget, and record every observation. To understand why retrieval helped, give a fixed prompt the same retrieved context. This separates the benefit of information from the benefit of orchestration."
+        },
+        {
+          "title": "Explain the implementation",
+          "text": "A successful demonstration connects a predicted result to the actual AST or binding evidence. Each contributor should explain a failure mode and make a small tested modification. The notebook records the experiment; it does not replace the required JDT implementation or establish binding correctness by itself."
+        }
+      ],
+      "papers": [],
+      "traditional": "<h2 id=\"3.-Traditional-analysis-%E2%80%94-TODO\">3. Traditional analysis &#8212; TODO<a class=\"anchor-link\" href=\"#3.-Traditional-analysis-%E2%80%94-TODO\">&#182;</a></h2><p>Implement your assigned pattern visitor in the course Eclipse/JDT environment; this notebook records the experiment. Write at least six boundary tests spanning positive, negative, ambiguous, comment-only, nested-handler, and unresolved-binding cases as appropriate to your pattern. State expected structural behavior before running your implementation. Export id, file, line, pattern, parse/binding status. A Python AST prototype is optional and does not replace JDT.</p>\n",
+      "llm": "<p>Design a read-only context tool that returns a named caller contract from a small explicit mapping. Compare fixed-context prompting with a maximum-three-decision agent on the same cases. Implement allowlisted actions and a stop budget; log each requested item and returned text. Keep references and instructor files inaccessible. Separate gains from extra context from gains from orchestration.</p>\n",
+      "discussion": "<h2 id=\"Checks-and-discussion\">Checks and discussion<a class=\"anchor-link\" href=\"#Checks-and-discussion\">&#182;</a></h2><ol>\n<li>Why does a comment-only handler count as an empty AST body?</li>\n<li>Which findings require symbol bindings rather than strings?</li>\n<li>Why is pattern matching distinct from harm?</li>\n<li>Does retrieval help because of extra information or because of agent orchestration?</li>\n</ol>\n<h2 id=\"Next-steps\">Next steps<a class=\"anchor-link\" href=\"#Next-steps\">&#182;</a></h2><p>Port the boundary tests into your assigned JDT detector. Export locations and findings, preserve unresolved bindings, and prepare the Assignment 2 demonstration. See <code>ASSIGNMENT_2.md</code>.</p>\n<p><strong>Your response:</strong> TODO</p>\n"
+    },
+    {
+      "week": 5,
+      "title": "Developer comments and technical debt",
+      "subtitle": "Text classification, project transfer, and grounded explanations",
+      "tag": "Developer text",
+      "notebook": "week05_developer_comments_and_technical_debt",
+      "connection": "Assignment 3 Q1: group comparisons, sampling, magnitude and uncertainty.",
+      "lessons": [
+        {
+          "title": "Learn from developer text",
+          "text": "Self-admitted technical debt is an admission of a limitation or compromise in developer text. Keyword rules can miss implicit statements and flag ordinary uses of technical words. TF–IDF learns a vocabulary from training data; an LLM interprets wording. Both need a documented labeling contract."
+        },
+        {
+          "title": "Hold out the project",
+          "text": "Shared vocabulary and duplicated comments can make evaluation deceptively easy. Keep projects separated and fit the vocabulary on training projects only. Choose a threshold on validation, then freeze it before testing. Curated class balance changes what accuracy and precision mean for deployment."
+        },
+        {
+          "title": "Move from comments to review metrics",
+          "text": "The Qt extension studies a different unit: components with measured review activity and outcomes. Inspect distributions, compare magnitude and uncertainty, and consider alternative explanations such as size and prior defects. A difference in an observed metric is not automatically an effect of changing review practices."
+        }
+      ],
+      "papers": [
+        {
+          "title": "Examining the Impact of Self-Admitted Technical Debt on Software Quality",
+          "url": "https://users.encs.concordia.ca/~eshihab/pubs/Wehaibi_SANER2016.pdf",
+          "venue": "Wehaibi, Shihab, and Guerrouj • SANER 2016",
+          "idea": "Traditional lens: operationalize SATD and relate it to software-quality outcomes.",
+          "question": "Which label and unit of analysis would support a quality claim?",
+          "connection": "Our lab detects comment-level SATD. Detection accuracy alone does not show that debt causes defects."
+        },
+        {
+          "title": "The Impact of Code Review Coverage and Code Review Participation on Software Quality",
+          "url": "https://rebels.cs.uwaterloo.ca/papers/msr2014_mcintosh.pdf",
+          "venue": "McIntosh et al. • MSR 2014",
+          "idea": "Traditional lens: measure development activity and examine its relationship with quality.",
+          "question": "Which confounders could explain a review–quality association?",
+          "connection": "The SATD sample contains comments. The Qt extension supplies component-level review metrics."
+        },
+        {
+          "title": "Large language model ChatGPT versus small deep learning models for self-admitted technical debt detection: Why not together?",
+          "url": "https://doi.org/10.1002/spe.3360",
+          "venue": "Li et al. • Software: Practice and Experience",
+          "idea": "Hybrid lens: compare large and small models for SATD detection.",
+          "question": "When should an inexpensive classifier defer to a larger model?",
+          "connection": "Design a routing experiment with an explicit inference budget and held-out project."
+        }
+      ],
+      "traditional": "<h2 id=\"3.-Traditional-analysis-%E2%80%94-TODO\">3. Traditional analysis &#8212; TODO<a class=\"anchor-link\" href=\"#3.-Traditional-analysis-%E2%80%94-TODO\">&#182;</a></h2><p>Audit IDs, missing text, normalized duplicates, and project overlap by supplied split. Join only development labels. Implement a keyword baseline and TF–IDF/logistic classifier, fitting vocabulary on training projects and choosing threshold on validation only. Plot validation precision–recall. For the Qt extension, compare review_rate distributions by post_bugs &gt; 0 in training data and bootstrap an effect interval; distinguish review metrics from comments.</p>\n",
+      "llm": "<p>Choose a fixed small validation batch before looking at model performance. Prompt with id/commenttext only and request SATD label, evidence, uncertainty. Compare both methods on exactly those IDs. Freeze the protocol before predicting the test project. Inspect failure types rather than selecting only convincing examples.</p>\n",
+      "discussion": "<h2 id=\"Discussion-questions\">Discussion questions<a class=\"anchor-link\" href=\"#Discussion-questions\">&#182;</a></h2><ol>\n<li>Which comments reveal debt without TODO/FIXME? Which keyword matches are harmless?</li>\n<li>What does WITHOUT_CLASSIFICATION mean in the original protocol, and what label uncertainty remains?</li>\n<li>How does imposed class balance affect precision and calibration?</li>\n<li>Can duplicated or near-duplicated comments inflate cross-project performance?</li>\n<li>Is an exact supporting quotation enough to show that the LLM interpreted the comment correctly?</li>\n</ol>\n<p><strong>Your response:</strong> TODO</p>\n"
+    },
+    {
+      "week": 6,
+      "title": "Software metrics and explanatory modeling",
+      "subtitle": "Association, uncertainty, and auditing an analysis agent",
+      "tag": "Software metrics",
+      "notebook": "week06_software_metrics_and_explanatory_modeling",
+      "connection": "Assignment 3 Q2–Q3: explanatory modeling and verified effect interpretation.",
+      "lessons": [
+        {
+          "title": "Specify an explanatory question",
+          "text": "An explanatory model describes conditional associations under a stated specification. Define the outcome, measurement timing and proposed predictors before fitting. Skew, missing data and correlated size metrics affect both the sample and interpretation. Report what was excluded and why."
+        },
+        {
+          "title": "Interpret the actual scale",
+          "text": "A coefficient for a transformed predictor is not a change per original unit. Odds, probabilities and expected counts are different quantities. Use a meaningful predictor contrast and a stated covariate scenario to verify an interpretation. An uncertainty interval that includes a null value does not establish an exact zero effect."
+        },
+        {
+          "title": "Audit a model plan",
+          "text": "Give the independent agent a schema and permitted training summaries, then ask for a structured plan. Validate columns and transformations before trusted code executes it. Compare choices and assumptions with your reference model. An absent term means it was not included, not that its coefficient was estimated as zero."
+        }
+      ],
+      "papers": [
+        {
+          "title": "Studying the Relationship between Logging Characteristics and the Code Quality of Platform Software",
+          "url": "https://cs.uwaterloo.ca/~m2nagapp/publications/pdfs/Studying-the-Relationship-between-Logging-Characteristics-and-the-Code-Quality-of-Platform-Software.pdf",
+          "venue": "Shang, Nagappan, and Hassan • EMSE 2015",
+          "idea": "Traditional lens: measure logging and examine its association with code quality.",
+          "question": "Why might logging correlate with defects even if logging is useful?",
+          "connection": "Confounding example: difficult code may need more logging and also contain more defects."
+        },
+        {
+          "title": "Studying the Relationship between Exception Handling Practices and Post-release Defects",
+          "url": "https://guipadua.github.io/resources/eh-model-defects2018_cr.pdf",
+          "venue": "Padua and Shang • MSR 2018",
+          "idea": "Traditional lens: connect measurable exception practices with defect outcomes.",
+          "question": "How do controls and observation windows affect the claim?",
+          "connection": "Our Ant sample illustrates modeling mechanics. It lacks the paper’s exception-practice variables."
+        },
+        {
+          "title": "Data Interpreter: An LLM Agent For Data Science",
+          "url": "https://arxiv.org/abs/2402.18679",
+          "venue": "Hong et al. • 2024 preprint",
+          "idea": "Agent lens: coordinate a sequence of data-analysis tasks.",
+          "question": "What must be checked beyond whether generated code executes?",
+          "connection": "This is a general data-science agent paper. The lab uses a narrower validated plan and trusted execution."
+        }
+      ],
+      "traditional": "<h2 id=\"3.-Traditional-analysis-%E2%80%94-TODO\">3. Traditional analysis &#8212; TODO<a class=\"anchor-link\" href=\"#3.-Traditional-analysis-%E2%80%94-TODO\">&#182;</a></h2><p>Define class-level binary bug presence from bug &gt; 0 and inspect missingness, zero values, skew and correlations. Pre-specify 1–3 pre-outcome metrics and justify transforms. Fit a binomial GLM; report sample exclusions, coefficients, odds ratios and confidence intervals. Plot distributions and an effect interval. Distinguish association from prediction and causation.</p>\n",
+      "llm": "<p>Give a model the schema and training/descriptive summaries you computed, excluding your final chosen model and interpretation. Ask for a model plan, assumptions, and checks. Validate allowed features and transformations, then implement the accepted plan yourself. Compare coefficient interpretation and uncertainty; do not execute arbitrary model-written code.</p>\n",
+      "discussion": "<h2 id=\"Discussion-questions\">Discussion questions<a class=\"anchor-link\" href=\"#Discussion-questions\">&#182;</a></h2><ol>\n<li>Why can a variable correlate with defects but weaken after controlling for size?</li>\n<li>What does a one-unit increase in log1p(LOC) mean on the original scale?</li>\n<li>How would you distinguish “logging causes bugs” from “complex code needs more logging”?</li>\n<li>Does an executable, numerically correct agent analysis necessarily answer a sensible research question?</li>\n<li>Which threats are not addressed by robust confidence intervals?</li>\n</ol>\n<p><strong>Your response:</strong> TODO</p>\n"
+    },
+    {
+      "week": 7,
+      "title": "Consolidation and project preparation",
+      "subtitle": "Reading week: no new required material",
+      "tag": "Workshop",
+      "notebook": "week07_optional_consolidation",
+      "connection": "Assignment 2 consolidation and Week 8 project proposal preparation.",
+      "lessons": [
+        {
+          "title": "Consolidate rather than add scope",
+          "text": "This is a reading and consolidation week, with no new required paper or lab. Check whether your detector can be built and tested from its README. Resolve the most important uncertain assumption before adding new features."
+        },
+        {
+          "title": "Test project feasibility",
+          "text": "Confirm access to the intended data, the unit of analysis, the labels and the evaluation split. Identify a minimal baseline and an alternative if access or labeling fails. A small feasible question is more valuable than a broad question with no defensible evaluation."
+        },
+        {
+          "title": "Prepare evidence for discussion",
+          "text": "Bring a working detector, a limitation you can demonstrate, and a one-page proposal. Optional model feedback can help identify questions, but each useful suggestion needs a test or source. This worksheet records readiness, not new empirical results."
+        }
+      ],
+      "papers": [],
+      "traditional": "<h2 id=\"3.-Traditional-analysis-%E2%80%94-TODO\">3. Traditional analysis &#8212; TODO<a class=\"anchor-link\" href=\"#3.-Traditional-analysis-%E2%80%94-TODO\">&#182;</a></h2><p>Optional reading-week consolidation: inventory Assignment 2 tests, unresolved findings, dataset access, and project feasibility. Fill the readiness table with links to your own evidence. Identify one assumption and design the smallest test that could refute it. No new required analysis or graded lab.</p>\n",
+      "llm": "<p>Optional: ask an LLM to critique a de-identified summary of your test plan. Verify each suggestion against the assigned paper or a runnable test. Record accepted/rejected suggestions and why. Do not treat the critique as experimental evidence.</p>\n",
+      "discussion": "<p>Which assumption matters most this week? What evidence would change your conclusion?</p>"
+    },
+    {
+      "week": 8,
+      "title": "Demonstrations and project proposals",
+      "subtitle": "Evidence, individual understanding and feasible scope",
+      "tag": "Workshop",
+      "notebook": "week08_demo_and_proposal_workshop",
+      "connection": "Assignment 2 demonstration and project proposal review.",
+      "lessons": [
+        {
+          "title": "Demonstrate individual understanding",
+          "text": "Predict the output on an unseen case before executing the detector. Explain why the implementation behaves that way, including unresolved states. A discrepancy is an opportunity to trace assumptions and improve tests, not a reason to hide the case."
+        },
+        {
+          "title": "Freeze a feasible proposal",
+          "text": "Write the question, data source, unit, baseline, LLM treatment, split and metric in one place. Check whether the planned comparison isolates a method difference or merely gives one method more information. Record budget constraints before implementation."
+        },
+        {
+          "title": "Use feedback to make decisions",
+          "text": "A peer or model critique should lead to an explicit accept/reject decision supported by evidence. Revise the scope when necessary, retain the reasoning, and distinguish a proposal change from test-set tuning. There is no new required reading this week."
+        }
+      ],
+      "papers": [],
+      "traditional": "<h2 id=\"3.-Traditional-analysis-%E2%80%94-TODO\">3. Traditional analysis &#8212; TODO<a class=\"anchor-link\" href=\"#3.-Traditional-analysis-%E2%80%94-TODO\">&#182;</a></h2><p>Record your prediction for an unseen case before running the Assignment 2 detector. Explain mismatches and individual contributions. Complete the project proposal table and peer-review feasibility, label availability, split design, and evaluation budget. Identify the smallest viable baseline.</p>\n",
+      "llm": "<p>Ask a model to critique the proposal or detector test coverage using only your supplied evidence. Record prompt, critique, and a verified accept/reject decision for each point. Keep this advisory role separate from the project's measured LLM treatment.</p>\n",
+      "discussion": "<p>Which assumption matters most this week? What evidence would change your conclusion?</p>"
+    },
+    {
+      "week": 9,
+      "title": "Execution logs and event templates",
+      "subtitle": "Parsing quality, parameter boundaries, and downstream errors",
+      "tag": "Execution logs",
+      "notebook": "week09_execution_logs_and_event_templates",
+      "connection": "Project option: log parsing and its downstream analytical consequences.",
+      "lessons": [
+        {
+          "title": "Abstract messages into events",
+          "text": "An event template separates meaningful constants from changing values such as identifiers. Masking too much merges different events; masking too little splits one event into many. Template choices therefore affect downstream counts and rare-event detection."
+        },
+        {
+          "title": "Measure two different properties",
+          "text": "Grouping agreement asks whether records are partitioned together. Exact recovery asks whether the template preserves the correct constants and variables. A parser can group consistently while producing the wrong text. Evaluate systems separately and inspect both merge and split errors."
+        },
+        {
+          "title": "Compare parsers on matched records",
+          "text": "Implement a transparent conventional parser and ask an LLM to infer templates for the same fixed IDs. Keep reference templates outside the prompt, validate coverage and retain failures. The regex lab transfers ideas from the readings; it is not an implementation of Logram or the full LogParser-LLM system."
+        }
+      ],
+      "papers": [
+        {
+          "title": "An Automated Approach for Abstracting Execution Logs to Execution Events",
+          "url": "https://sail.cs.queensu.ca/data/pdfs/JSME_AnAutomatedApproachForAbstractingExecutionLogsToExecutionEvents.pdf",
+          "venue": "Jiang et al. • 2008",
+          "idea": "Traditional lens: turn free-form messages into structured execution events.",
+          "question": "What does an event abstraction preserve or discard?",
+          "connection": "Compare recovered log structure with the constants and wildcards in our parser."
+        },
+        {
+          "title": "Logram: Efficient Log Parsing Using n-Gram Dictionaries",
+          "url": "https://arxiv.org/abs/2001.03038",
+          "venue": "Dai et al. • 2020 preprint",
+          "idea": "Traditional lens: use token-sequence statistics to distinguish constants and variables.",
+          "question": "Which frequency assumptions break for rare events?",
+          "connection": "Our regex baseline is a simpler teaching comparator, not a Logram reproduction."
+        },
+        {
+          "title": "LogParser-LLM: Advancing Efficient Log Parsing with Large Language Models",
+          "url": "https://arxiv.org/abs/2408.13727",
+          "venue": "Zhong et al. • KDD 2024",
+          "idea": "LLM lens: infer log structure using language-model capabilities.",
+          "question": "How should parsing quality be balanced against model calls and context cost?",
+          "connection": "Compare template inference, reuse, and evaluation. A plausible template still needs exact validation."
+        }
+      ],
+      "traditional": "<h2 id=\"3.-Traditional-analysis-%E2%80%94-TODO\">3. Traditional analysis &#8212; TODO<a class=\"anchor-link\" href=\"#3.-Traditional-analysis-%E2%80%94-TODO\">&#182;</a></h2><p>Implement a transparent regex parser that masks candidate variable fields with &lt;*&gt;. Inspect constants versus variables and record rule order. Produce a predicted template and event grouping for each message, counts by system and template, and a rare-event plot. This baseline is not a reproduction of Logram. No gold EventIds or templates are distributed.</p>\n",
+      "llm": "<p>Infer templates for the supplied fixed IDs using raw Content only. Define a JSON response with id/template and validate exact ID coverage. Use the same messages for the regex comparison. Measure prompt size, runtime and failures; do not include inferred reference labels in prompts.</p>\n",
+      "discussion": "<h2 id=\"Discussion-questions\">Discussion questions<a class=\"anchor-link\" href=\"#Discussion-questions\">&#182;</a></h2><ol>\n<li>Can a parser have high grouping accuracy but an incorrect template?</li>\n<li>When is a number an event-defining constant rather than a variable?</li>\n<li>How can template merging hide an unusual event?</li>\n<li>What changes when the evaluation contains previously unseen templates?</li>\n<li>Why is it invalid to reconstruct workload timing from an arbitrary 2,000-message sample?</li>\n</ol>\n<p><strong>Your response:</strong> TODO</p>\n"
+    },
+    {
+      "week": 10,
+      "title": "Performance telemetry and root cause analysis",
+      "subtitle": "Multimodal evidence, bounded investigation, and abstention",
+      "tag": "Metrics and traces",
+      "notebook": "week10_performance_telemetry_and_root_cause_analysis",
+      "connection": "Project option: evidence-based diagnosis across metrics, logs and traces.",
+      "lessons": [
+        {
+          "title": "Align the incident timeline",
+          "text": "Metrics, logs and traces may use different timestamp units and sampling windows. Normalize time before joining evidence and state the display timezone. The preceding interval is a comparison window, not a certified healthy baseline. A window median may dilute a short or late event."
+        },
+        {
+          "title": "Separate symptoms from causes",
+          "text": "A large metric change identifies a candidate, not a cause. Inspect timing, alternative explanations and dependencies. Trace parents can be missing because of roots, external calls or sampling; nested span durations cannot simply be summed into end-to-end latency. A component mapping must be supported by evidence."
+        },
+        {
+          "title": "Bound an investigation",
+          "text": "A diagnostic agent should gather bounded observations through declared tools and return evidence, uncertainty and alternatives. Compare metrics-only and multimodal conditions under a fixed budget. Localizing a component and explaining a mechanism are separate judgments; abstention can be appropriate when the supplied evidence is insufficient."
+        }
+      ],
+      "papers": [
+        {
+          "title": "Automatic Identification of Load Testing Problems",
+          "url": "https://cs.uwaterloo.ca/~m2nagapp/courses/CS846/1171/papers/jiang_icsm08.pdf",
+          "venue": "Jiang et al. • 2008",
+          "idea": "Traditional lens: diagnose problems using measurements collected during load testing.",
+          "question": "What must remain comparable across baseline and incident runs?",
+          "connection": "Identify workload changes that could mimic a fault."
+        },
+        {
+          "title": "Leveraging Performance Counters and Execution Logs to Diagnose Memory-Related Performance Issues",
+          "url": "https://www.cse.yorku.ca/~zmjiang/publications/icsm2013_syer.pdf",
+          "venue": "Syer et al. • 2013",
+          "idea": "Traditional lens: combine counters and logs to investigate memory-related problems.",
+          "question": "Which independent observations would corroborate a memory hypothesis?",
+          "connection": "Ask whether a counter change is a cause, symptom, or recovery signal."
+        },
+        {
+          "title": "OpenRCA: Can Large Language Models Locate Root Cause of Software Failures?",
+          "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/d29b8d53678015079e1d245c023e49d2-Paper-Conference.pdf",
+          "venue": "Xu et al. • ICLR 2025",
+          "idea": "Agent lens: investigate software failures using operational evidence.",
+          "question": "How should tool use, diagnosis quality, and investigation cost be evaluated?",
+          "connection": "The lab uses small adapted windows and a bounded tool controller, not the full benchmark."
+        }
+      ],
+      "traditional": "<h2 id=\"3.-Traditional-analysis-%E2%80%94-TODO\">3. Traditional analysis &#8212; TODO<a class=\"anchor-link\" href=\"#3.-Traditional-analysis-%E2%80%94-TODO\">&#182;</a></h2><p>Align metric/log epoch seconds with trace epoch milliseconds; display UTC+8 and retain duration source units. Implement baseline-versus-incident median changes scaled by baseline MAD, documenting a finite floor. Rank components and plot a timeline. Join parent spans within trace_id, quantify missing parents, and inspect p95 durations. Do not sum nested spans or assume the baseline is healthy.</p>\n",
+      "llm": "<p>Implement bounded read-only tools for metrics, memory, logs and traces. An agent may request at most five actions and must finish with ranked components, evidence references, mechanism, uncertainty or abstention. Validate action names and cap returned rows. Compare a metrics-only and multimodal run under the same budget; keep root-cause labels outside every tool.</p>\n",
+      "discussion": "<h2 id=\"Discussion-questions\">Discussion questions<a class=\"anchor-link\" href=\"#Discussion-questions\">&#182;</a></h2><ol>\n<li>Why can the most anomalous metric belong to a downstream symptom or a recovering component?</li>\n<li>How does a 30-minute median hide a failure that begins near the end of the window?</li>\n<li>Which component names exist only in traces, and what mapping evidence is missing?</li>\n<li>How do baseline contamination and zero-variance counters distort ranking?</li>\n<li>What evidence would justify a network-latency diagnosis rather than memory pressure?</li>\n<li>Why are archived full-data model scores not comparable with this sampled-data exercise?</li>\n</ol>\n<p><strong>Your response:</strong> TODO</p>\n"
+    },
+    {
+      "week": 11,
+      "title": "Commit histories and just-in-time prediction",
+      "subtitle": "Temporal evaluation, code context, and inspection effort",
+      "tag": "Commit histories",
+      "notebook": "week11_commit_histories_and_just_in_time_prediction",
+      "connection": "Assignment 3 Q4: training-only model selection and matched predictive evaluation.",
+      "lessons": [
+        {
+          "title": "Predict with information available then",
+          "text": "Incoming-change prediction uses information available at a decision time. Chronological splitting helps, but author timestamps do not prove when defects were discovered. Audit feature timing, labeling delays and project boundaries before making a deployment claim."
+        },
+        {
+          "title": "Evaluate the review budget",
+          "text": "Average precision describes ranking; a fixed threshold produces hard decisions. Inspection effort adds another question: how many labeled risky changes can be found within a limited review budget? Changed lines are a proxy, not human time. Count whole commits and declare how ties are handled."
+        },
+        {
+          "title": "Control the information advantage",
+          "text": "A diff-informed LLM sees information that a numeric metric model does not. Compare numeric-only, diff-only and combined conditions when attributing gains. The sample uses functional defect labels; it cannot directly reproduce PerfJIT’s performance-regression target. Freeze prompts and thresholds before testing."
+        }
+      ],
+      "papers": [
+        {
+          "title": "A Large-Scale Empirical Study of Just-in-Time Quality Assurance",
+          "url": "https://das.encs.concordia.ca/pdf/Kamei_TSE2013.pdf",
+          "venue": "Kamei et al. • IEEE TSE 2013",
+          "idea": "Traditional lens: use change-level attributes to prioritize quality assurance.",
+          "question": "Which evaluation measure matches a limited reviewer budget?",
+          "connection": "Connect size, diffusion, and developer-history features to review effort."
+        },
+        {
+          "title": "PerfJIT: Test-level Just-in-time Prediction for Performance Regression Introducing Commits",
+          "url": "https://users.encs.concordia.ca/~fu_chen/paper/PerfJIT.pdf",
+          "venue": "ICSE 2021 journal-first presentation",
+          "idea": "Traditional lens: predict performance-regression risk at test level.",
+          "question": "How does changing the outcome change the dataset and evaluation?",
+          "connection": "Our functional-defect labels cannot evaluate the performance-regression task."
+        },
+        {
+          "title": "Towards integrating large model with small model for Just-in-Time Defect Prediction and Localization",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0950584926002338",
+          "venue": "Information and Software Technology • 2026",
+          "idea": "Hybrid lens: combine learned change signals with large-model reasoning.",
+          "question": "How can a model’s localization evidence improve review prioritization?",
+          "connection": "Separate gains from extra code context from gains attributable to the modeling method."
+        }
+      ],
+      "traditional": "<h2 id=\"3.-Traditional-analysis-%E2%80%94-TODO\">3. Traditional analysis &#8212; TODO<a class=\"anchor-link\" href=\"#3.-Traditional-analysis-%E2%80%94-TODO\">&#182;</a></h2><p>Audit IDs and chronological train/validation/test order within each project. Fit preprocessing and a change-metric classifier on each project's training data only. Choose threshold on validation data. Use added+deleted lines as an effort proxy and compute a validation inspection-budget curve using whole commits. Explain label-availability leakage and sampling bias.</p>\n",
+      "llm": "<p>Assess the supplied fixed later-commit IDs using message, metrics and bounded diff context. Require id, risky label, score, evidence, uncertainty. Compare numeric-only versus diff-informed inputs as an information-access ablation. Freeze prompts before collecting test predictions; use no future bug labels.</p>\n",
+      "discussion": "<h2 id=\"Discussion-questions\">Discussion questions<a class=\"anchor-link\" href=\"#Discussion-questions\">&#182;</a></h2><ol>\n<li>What future information can leak into a commit classifier even after a chronological split?</li>\n<li>Why are author timestamps and defect-discovery timestamps different?</li>\n<li>What bias is introduced by selecting small commits and balancing classes?</li>\n<li>When is a plausible diff explanation inconsistent with a mined bug label?</li>\n<li>How would you compare two methods under the same inspection and inference-cost budgets?</li>\n<li>Why do these labels not support a claim about performance regressions?</li>\n</ol>\n<p><strong>Your response:</strong> TODO</p>\n"
+    },
+    {
+      "week": 12,
+      "title": "Integrated modeling and agent audit",
+      "subtitle": "Assignment 3 and the project evaluation clinic",
+      "tag": "Software metrics",
+      "notebook": "week12_integrated_modeling_and_agent_audit",
+      "connection": "Assignment 3: integrate Q1–Q4, audit an independent agent, and freeze the final evaluation.",
+      "lessons": [
+        {
+          "title": "Keep explanation and prediction distinct",
+          "text": "Group comparisons, conditional models, effect interpretations and prediction answer different questions. Use the supplied training partition for exploration and all method selection. Preserve the held-out rows for frozen predictive evaluation, even when a model has an attractive explanatory story."
+        },
+        {
+          "title": "Verify an independent analysis",
+          "text": "Freeze the reference decisions before the agent’s attempt. Give the agent training summaries and a limited plan interface, preserve its original result, and verify one consequential claim or choice. Make one justified correction or record why no change is warranted. Do not manufacture errors or select the best hidden attempt."
+        },
+        {
+          "title": "Report what the evidence supports",
+          "text": "Describe the unit, split, preprocessing, metrics and uncertainties alongside results. An observed association is not a causal intervention, and a high accuracy can hide poor recall under imbalance. The Qt lab prepares the workflow; use your assigned dataset and metric for Assignment 3."
+        }
+      ],
+      "papers": [],
+      "traditional": "<h2 id=\"3.1.-Traditional-analysis-%E2%80%94-Q1-TODO\">3.1. Traditional analysis &#8212; Q1 TODO<a class=\"anchor-link\" href=\"#3.1.-Traditional-analysis-%E2%80%94-Q1-TODO\">&#182;</a></h2><p>On training data, compare your chosen focal metric across bug-present groups. Show distributions and an effect-size interval with justified resampling assumptions.</p>\n<h2 id=\"3.2.-Traditional-analysis-%E2%80%94-Q2-TODO\">3.2. Traditional analysis &#8212; Q2 TODO<a class=\"anchor-link\" href=\"#3.2.-Traditional-analysis-%E2%80%94-Q2-TODO\">&#182;</a></h2><p>Pre-specify a small binomial GLM with justified pre-outcome predictors and transformations; report exclusions, correlation checks and uncertainty.</p>\n<h2 id=\"3.3.-Traditional-analysis-%E2%80%94-Q3-TODO\">3.3. Traditional analysis &#8212; Q3 TODO<a class=\"anchor-link\" href=\"#3.3.-Traditional-analysis-%E2%80%94-Q3-TODO\">&#182;</a></h2><p>Calculate and verify one meaningful odds contrast and one conditional probability contrast.</p>\n<h2 id=\"3.4.-Traditional-analysis-%E2%80%94-Q4-TODO\">3.4. Traditional analysis &#8212; Q4 TODO<a class=\"anchor-link\" href=\"#3.4.-Traditional-analysis-%E2%80%94-Q4-TODO\">&#182;</a></h2><p>Use cross-validation inside training data to select predictive settings. Fit all preprocessing inside folds; freeze choices before generating one prediction and score per held-out ID. Test outcomes are withheld.</p>\n",
+      "llm": "<p>Create an independent bounded agent that sees training data summaries, not your reference conclusions or any test labels. Implement allowlisted schema/group-summary/correlation tools and a maximum-five-decision budget. Require a structured model plan; validate features, transformations and model family before trusted code fits it. Save every decision/observation. Audit one consequential disagreement and allow one documented correction before freezing the plan. Compare reference, independent and corrected plans using training-only validation.</p>\n",
+      "discussion": "<h2 id=\"Discussion\">Discussion<a class=\"anchor-link\" href=\"#Discussion\">&#182;</a></h2><ol>\n<li>Which predictors are available before the outcome, and what evidence supports that timing?</li>\n<li>How does the intended deployment differ from a random split?</li>\n<li>Which agent decision most affects your conclusion?</li>\n<li>What does a coefficient interval establish, and what does it not establish?</li>\n<li>What changed after your one correction, and was it justified before seeing test feedback?</li>\n</ol>\n<p><strong>Your response:</strong> TODO</p>\n"
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Assignment 2 Student Handout</title><style>body{font:17px/1.6 system-ui,sans-serif;max-width:1050px;margin:45px auto;padding:0 30px;color:#173448}h1{font-size:35px;color:#152b3a}h2{font-size:25px;margin-top:34px}h3{font-size:20px;margin-top:24px}table{border-collapse:collapse;width:100%;font-size:15px;margin:18px 0}th,td{padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid #cbd7df}th{background:#edf4f6}code{font-size:.9em}a{color:#087e8b}.anchor-link{display:none}li{margin:5px 0}@media print{body{font-size:10.5pt;margin:0;padding:0}h1{font-size:22pt}h2{font-size:15pt}h3{font-size:12pt}table{font-size:9.5pt}h1,h2,h3{break-after:avoid}tr{break-inside:avoid}@page{size:A4;margin:18mm}</style></head><body><p><a href="../index.html#assignments">← ECE 750 assignments</a></p><h1 id="ECE-750-Assignment-2">ECE 750 Assignment 2<a class="anchor-link" href="#ECE-750-Assignment-2">&#182;</a></h1><h2 id="Replicate-and-evaluate-an-exception-handling-detector">Replicate and evaluate an exception handling detector<a class="anchor-link" href="#Replicate-and-evaluate-an-exception-handling-detector">&#182;</a></h2><p>Build a detector for your assigned exception-handling anti-patterns, test where its conclusions hold, and compare it with an LLM and a bounded agent. Your submission must distinguish a <strong>structural pattern match</strong> from a <strong>contextual judgment of harm</strong>.</p>
+<table>
+<thead>
+<tr>
+  <th>At a glance</th>
+  <th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Working arrangement</td>
+  <td>Groups of two, using the group and pattern allocation posted on LEARN</td>
+</tr>
+<tr>
+  <td>Course contribution</td>
+  <td>13% of the course grade</td>
+</tr>
+<tr>
+  <td>Main preparation</td>
+  <td>Weeks 2–4; consolidation in Week 7; demonstration in Week 8</td>
+</tr>
+<tr>
+  <td>Implementation</td>
+  <td>Course Eclipse/JDT environment, or an instructor-approved equivalent</td>
+</tr>
+<tr>
+  <td>Deadline and assigned projects</td>
+  <td>Use the current Assignment 2 instructions on LEARN</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Learning-goals">Learning goals<a class="anchor-link" href="#Learning-goals">&#182;</a></h2><p>Translate research definitions into an executable analysis; design tests that challenge the implementation; compare methods on matched inputs; and explain findings using code, contracts and evidence. The goal is not to produce the largest finding count or make an agent beat your detector.</p>
+<h2 id="Part-A-Implement-the-assigned-definitions">Part A Implement the assigned definitions<a class="anchor-link" href="#Part-A-Implement-the-assigned-definitions">&#182;</a></h2><ol>
+<li>Read Pádua and Shang’s ICPC 2017 paper and identify the exact definition of each assigned pattern. Create a specification table with pattern, paper section, operational rule, required context and known limitations.</li>
+<li>Implement detection using the assigned Java project(s). Report project revision, files analyzed and any exclusions. Do not quietly change the paper definition to make implementation easier.</li>
+<li>Export each finding with project, revision, file, method, line/location, pattern and the code evidence supporting it. Explain how you prevent duplicate findings.</li>
+<li>Record parser failures, unresolved bindings and unsupported constructs separately. An unresolved analysis is not a negative finding. Explain any differences between your implementation and the paper.</li>
+</ol>
+<p>A portable Python AST prototype can support exploration, but it does not establish JDT binding correctness or replace the required implementation. Automated repair is optional and is not needed for full credit.</p>
+<h2 id="Part-B-Test-the-detector-and-define-the-evaluation">Part B Test the detector and define the evaluation<a class="anchor-link" href="#Part-B-Test-the-detector-and-define-the-evaluation">&#182;</a></h2><p>Create at least six boundary cases across your assigned patterns, including both positive and negative examples. Cover relevant cases such as comment-only handlers, qualified type names, nested catches, logging-only bodies and unresolved bindings. Choose cases that challenge your particular definitions; explain any listed category that does not apply.</p>
+<p>For each test, state the expected <strong>structural</strong> result before running the detector and justify it from the paper. Show the observed result and investigate mismatches. Report per-pattern precision and recall and source-location correctness on an explicitly labeled development evaluation set. State the labeling process and denominator; do not treat your detector’s own predictions as ground truth.</p>
+<p>Keep a separate contextual-harm field: does the behavior violate the supplied policy or contract? Use <code>requires_action</code>, <code>acceptable</code> or <code>uncertain</code> in your analysis. A broad catch is not automatically harmful, and a handler without your chosen structural pattern is not automatically safe. Do not combine these targets into one accuracy value.</p>
+<p>For the supplied Week 3 benchmark, develop using its development cases and freeze your methods before predicting the 16 test cases. Those test judgments are withheld. The real-code extension is unlabeled and supports exploration, not an automatically scored accuracy claim. For other assigned projects, use the instructor-specified evaluation cases and labeling protocol.</p>
+<h2 id="Part-C-Compare-four-controlled-conditions">Part C Compare four controlled conditions<a class="anchor-link" href="#Part-C-Compare-four-controlled-conditions">&#182;</a></h2><p>Use the same case IDs and assigned definitions for all conditions. Preserve evidence and uncertainty for each result.</p>
+<table>
+<thead>
+<tr>
+  <th>Condition</th>
+  <th>What it receives and does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Traditional detector</td>
+  <td>Your frozen implementation analyzes the code and reports structural findings. State any rule used to turn findings into a contextual-harm prediction.</td>
+</tr>
+<tr>
+  <td>Fixed-context LLM</td>
+  <td>A fixed prompt receives the code and the initially permitted policy/context. It returns structured findings, harm judgment, evidence and uncertainty.</td>
+</tr>
+<tr>
+  <td>Bounded context agent</td>
+  <td>The model can request permitted context through a documented read-only interface, then return its judgment.</td>
+</tr>
+<tr>
+  <td>Fixed-context information control</td>
+  <td>A fixed prompt receives the same context retrieved by the agent. This checks whether a gain comes from additional information rather than agent orchestration.</td>
+</tr>
+</tbody>
+</table>
+<p>For the course context-retrieval exercise, use at most <strong>three model decisions per case, including the final decision</strong>. Count unsuccessful decisions toward the budget and record retries. Tools may return only the declared context, such as a named caller contract or permitted source excerpt. They must not access evaluation labels, arbitrary files, or the instructor materials. If the assigned project requires a different budget, obtain and record the instructor-approved budget before evaluation.</p>
+<p>Choose prompt, schema and settings on development cases. Validate the response IDs and labels, and verify that cited evidence actually appears in the input or a recorded tool result. Keep both structural and harm predictions. Report abstention coverage and performance on answered cases separately; also state the total number of cases. For withheld cases, submit frozen predictions and mark metrics pending instructor evaluation.</p>
+<h2 id="Part-D-Explain-findings-and-demonstrate-understanding">Part D Explain findings and demonstrate understanding<a class="anchor-link" href="#Part-D-Explain-findings-and-demonstrate-understanding">&#182;</a></h2><p>Explain representative disagreements, including at least one limitation of the traditional detector and one limitation or uncertainty in the LLM/agent workflow when observed. Do not manufacture a model error if none occurred; explain what was checked and the limits of the sample. Propose and justify one improvement using development evidence, then freeze it before testing.</p>
+<p>At the Week 8 demonstration, each student should be ready to predict the detector’s behavior on an unseen case, run it, explain the relevant AST/binding evidence, and make and test a small modification. Explain individual contributions and one failure mode. Keep the demo reproducible without relying on a model to explain your code.</p>
+<h2 id="Deliverables">Deliverables<a class="anchor-link" href="#Deliverables">&#182;</a></h2><p>Submit one group archive containing:</p>
+<table>
+<thead>
+<tr>
+  <th>File or folder</th>
+  <th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>README</code> and dependency/build files</td>
+  <td>Exact build, test and run commands; environment; project revisions; known limitations</td>
+</tr>
+<tr>
+  <td><code>src/</code></td>
+  <td>Runnable detector source</td>
+</tr>
+<tr>
+  <td><code>tests/</code></td>
+  <td>Boundary cases, expected structural results, rationales and test runner</td>
+</tr>
+<tr>
+  <td><code>findings.csv</code></td>
+  <td>Project/revision/file/method/location/pattern/evidence, with analysis status recorded</td>
+</tr>
+<tr>
+  <td><code>analysis.ipynb</code> and <code>analysis.html</code></td>
+  <td>Specification, evaluation, matched comparison, plots/tables, error analysis and limitations</td>
+</tr>
+<tr>
+  <td><code>predictions.csv</code></td>
+  <td>Frozen contextual-harm predictions for the supplied held-out benchmark, using the format below</td>
+</tr>
+<tr>
+  <td><code>runs/</code></td>
+  <td>Prompts, responses, tool traces, settings, timing and failures; or the explicit not-run protocol</td>
+</tr>
+<tr>
+  <td><code>decision_log</code> and <code>assistance_statement</code></td>
+  <td>Final configuration, interventions, sources, AI use and each member’s contribution</td>
+</tr>
+</tbody>
+</table>
+<p>For the supplied test benchmark, use columns <code>id,method,prediction</code>; <code>score</code> is optional. Method names should distinguish <code>traditional</code>, <code>fixed_llm</code>, <code>agent</code> and <code>context_control</code>. Use the supplied stable case ID exactly once per executed method. <code>prediction</code> is <code>1</code> for requires action, <code>0</code> for acceptable, or <code>ABSTAIN</code> for unresolved. If supplied, <code>score</code> must be a finite value from 0 to 1, higher meaning more likely to require action; blank scores are allowed only for abstentions. An unexecuted method belongs in the not-run protocol, not in a fabricated prediction file. Structural findings belong in <code>findings.csv</code> and are assessed separately.</p>
+<h2 id="Rubric">Rubric<a class="anchor-link" href="#Rubric">&#182;</a></h2><p>The following percentages are within Assignment 2 and total 100%.</p>
+<table>
+<thead>
+<tr>
+  <th>Component</th>
+  <th style="text-align:right">Weight</th>
+  <th>What earns full credit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Faithful detector implementation</td>
+  <td style="text-align:right">30%</td>
+  <td>Correct assigned definitions and locations; reproducible analysis; explicit parse/binding limitations</td>
+</tr>
+<tr>
+  <td>Boundary tests and evaluation</td>
+  <td style="text-align:right">25%</td>
+  <td>Meaningful positive/negative cases; justified expected results; correct denominators, metrics and separation of targets</td>
+</tr>
+<tr>
+  <td>LLM/agent comparison and information control</td>
+  <td style="text-align:right">20%</td>
+  <td>Matched inputs; fixed prompt, bounded agent and same-context control; valid records and responses; no answer leakage</td>
+</tr>
+<tr>
+  <td>Findings and limitations</td>
+  <td style="text-align:right">10%</td>
+  <td>Evidence-based disagreement analysis, appropriate uncertainty and a justified improvement</td>
+</tr>
+<tr>
+  <td>Demonstration and individual understanding</td>
+  <td style="text-align:right">15%</td>
+  <td>Each member explains the implementation, predicts behavior and demonstrates a small tested change</td>
+</tr>
+</tbody>
+</table>
+<p>Clear partial implementations with accurate limitations earn partial credit. Unverified outputs, missing tests or unsupported interpretations lose credit in the relevant category. A higher model score does not compensate for invalid evaluation. You do not need to reproduce a particular score or make the agent outperform the detector.</p>
+<h2 id="Papers-and-course-connections">Papers and course connections<a class="anchor-link" href="#Papers-and-course-connections">&#182;</a></h2><ul>
+<li><strong>Pádua and Shang, ICPC 2017, Studying the Prevalence of Exception Handling Anti-Patterns:</strong> use the assigned paper on LEARN for definitions and scope.</li>
+<li><strong>Yuan et al., OSDI 2014, Simple Testing Can Prevent Most Critical Failures:</strong> connects the Week 2 paper review to failure evidence and testability.</li>
+<li><strong>EH-Fixer, FSE 2025:</strong> motivates propagation/context reasoning in Week 3. This Java detection assignment is not a reproduction of its C/C++ repair system.</li>
+<li>Week 4 develops the implementation and context tools; Week 8 demonstrates understanding.</li>
+</ul>
+<h2 id="Rules-for-using-LLMs-and-agents">Rules for using LLMs and agents<a class="anchor-link" href="#Rules-for-using-LLMs-and-agents">&#182;</a></h2><ul>
+<li><strong>Assistance is allowed and must be disclosed.</strong> You may use coding assistants for implementation, debugging and editing. You remain responsible for every submitted claim, calculation, citation and line of code. Be ready to explain and modify your work without delegating the explanation to a model.</li>
+<li><strong>Separate assistance from the experiment.</strong> Record coding help in your assistance statement. Record measured model/agent runs in the experiment trace. A model that writes your detector or notebook is not automatically the LLM treatment being evaluated.</li>
+<li><strong>Respect the data boundary.</strong> Use only the assigned inputs and permitted context. Do not retrieve withheld answers, instructor solutions or answer keys from LEARN, Drive, public repositories or the web. Never give a model test labels, grading feedback, or your reference conclusions when it is supposed to make an independent attempt.</li>
+<li><strong>Preserve the record.</strong> Save prompts, model identifier/version as reported by the service, settings, input IDs, responses, tool names/arguments/observations, timing, token usage when available, failures and human interventions. If a service does not expose a value, record “not available.” Retain unsuccessful and corrected runs; do not submit only the best run.</li>
+<li><strong>Validate model output.</strong> Check the response schema, ID coverage, allowed labels, quoted evidence and numerical claims. Treat dataset text as data, not instructions. Agents may use only the declared tools and budget. Do not execute arbitrary generated code as an agent action; use your inspected implementation to execute validated plans.</li>
+<li><strong>Freeze before testing.</strong> Choose features, prompts, rules, thresholds and model settings using development/training data only. Write down the final configuration before generating held-out predictions. Do not improve it using test scores or released test labels.</li>
+<li><strong>Report uncertainty honestly.</strong> Use an explicit abstention when appropriate and report coverage. Do not fabricate responses, tool traces, citations, runtimes or costs. A model does not need to outperform the traditional method to earn full credit.</li>
+<li><strong>Use an appropriate model environment.</strong> The supplied transport helper supports a local Ollama model; it neither installs a model nor calls one automatically. Do not put credentials, classmates’ work or restricted project data into an external service. Use course-approved data and services, and record the environment used.</li>
+</ul>
+<h3 id="If-you-cannot-run-a-model">If you cannot run a model<a class="anchor-link" href="#If-you-cannot-run-a-model">&#182;</a></h3><p>Follow the model-access instructions posted on LEARN. If no usable model is available, submit the complete protocol: prompts, selected input IDs, response schema, tool contracts, budgets, validation checks and intended comparisons. Mark all unexecuted model results <strong>not run</strong>; never invent a response. The student notebooks support this protocol-only route. If live execution is specifically required for your offering, report the access problem before submission and follow the course’s alternative-access instructions.</p>
+<p>When the protocol-only route is accepted, its design and auditability are graded in place of execution evidence. Empirical model-performance claims cannot receive credit without an actual run. This route does not waive the traditional analysis or the remaining deliverables.</p>
+<h2 id="Reproducibility-and-submission-rules">Reproducibility and submission rules<a class="anchor-link" href="#Reproducibility-and-submission-rules">&#182;</a></h2><p>Submit your code and written work through the Assignment submission area on LEARN, following its due date, naming conventions and late-submission policy. Do not assume that the dates from the 2025 offering apply. Use the current allocation posted on LEARN for your patterns, project or dataset. If an allocation or split file is missing, report that before carrying out the dependent evaluation; do not silently substitute a different task.</p>
+<p>Use stable relative paths and a dependency file. Restart your notebook kernel and run from the beginning before submitting. Include an executed notebook and a readable HTML export. Retain outputs in your completed submission; the starter notebooks were intentionally distributed without them. Screenshots supplement, but do not replace, runnable code and machine-readable results. Remove credentials and unnecessary personal information from your submission.</p>
+<p>Your assistance statement should list the tool/model, purpose, affected files or sections, what you accepted or changed, and how you verified it. Also disclose relevant human help and reused external code with attribution. Cite papers using verified titles and locations in the actual paper, not unverified model-generated references.</p>
+<h2 id="Final-submission-checklist">Final submission checklist<a class="anchor-link" href="#Final-submission-checklist">&#182;</a></h2><ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Assigned definitions and project revisions are documented.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Detector and tests run from the README instructions.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Structural matches and contextual harm are separate.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Comparisons use matched IDs and declared information access.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Test predictions were frozen without using hidden answers.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Prompts/traces or a complete not-run protocol are included.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Each group member can explain the code and contribution.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Required files, HTML export, sources and assistance statement are included.</li>
+</ul>
+</body></html>

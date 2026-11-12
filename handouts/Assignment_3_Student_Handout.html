@@ -1,0 +1,226 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Assignment 3 Student Handout</title><style>body{font:17px/1.6 system-ui,sans-serif;max-width:1050px;margin:45px auto;padding:0 30px;color:#173448}h1{font-size:35px;color:#152b3a}h2{font-size:25px;margin-top:34px}h3{font-size:20px;margin-top:24px}table{border-collapse:collapse;width:100%;font-size:15px;margin:18px 0}th,td{padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid #cbd7df}th{background:#edf4f6}code{font-size:.9em}a{color:#087e8b}.anchor-link{display:none}li{margin:5px 0}@media print{body{font-size:10.5pt;margin:0;padding:0}h1{font-size:22pt}h2{font-size:15pt}h3{font-size:12pt}table{font-size:9.5pt}h1,h2,h3{break-after:avoid}tr{break-inside:avoid}@page{size:A4;margin:18mm}</style></head><body><p><a href="../index.html#assignments">← ECE 750 assignments</a></p><h1 id="ECE-750-Assignment-3">ECE 750 Assignment 3<a class="anchor-link" href="#ECE-750-Assignment-3">&#182;</a></h1><h2 id="Build-and-audit-an-empirical-software-analysis">Build and audit an empirical software analysis<a class="anchor-link" href="#Build-and-audit-an-empirical-software-analysis">&#182;</a></h2><p>Answer four research questions using your assigned software dataset. Develop a student-controlled reference analysis, obtain an independent agent analysis using training data, verify its claims, and document one evidence-based correction or confirmation. Keep predictive test outcomes withheld until your pipelines and predictions are frozen.</p>
+<table>
+<thead>
+<tr>
+  <th>At a glance</th>
+  <th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Working arrangement</td>
+  <td>Individual assignment</td>
+</tr>
+<tr>
+  <td>Course contribution</td>
+  <td>10% of the course grade: Q1 2%, Q2 2%, Q3 3%, Q4 3%</td>
+</tr>
+<tr>
+  <td>Dataset and Q1 metric</td>
+  <td>Use your allocation on LEARN; do not substitute the practice dataset</td>
+</tr>
+<tr>
+  <td>Split</td>
+  <td>Instructor-supplied two-thirds training / one-third testing partition</td>
+</tr>
+<tr>
+  <td>Preparation</td>
+  <td>Week 5 for Q1; Week 6 for Q2–Q3; Week 11 for Q4; Week 12 for integration</td>
+</tr>
+<tr>
+  <td>Deadline</td>
+  <td>Use the current Assignment 3 submission date and policies on LEARN</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Start-with-the-assigned-data">Start with the assigned data<a class="anchor-link" href="#Start-with-the-assigned-data">&#182;</a></h2><p>Confirm the dataset, assigned Q1 metric, row identifier and unit of analysis. The course dataset options include Eclipse, Lucene, Mylyn and PDE; the assigned Q1 metric may be pre-release bugs, lines of code, number of attributes or CvsLinEntropy. Follow your allocation rather than choosing the combination that gives the strongest result.</p>
+<p>The Week 12 Qt notebook and the Mylyn companion are practice scaffolds. They do not replace your assigned dataset or questionnaire. A row called a “file” in a questionnaire may actually represent a class: state what the data identify.</p>
+<p>For Q2–Q4, use <strong>binary post-release bug presence</strong> as the core outcome: positive when the post-release bug count is greater than zero. Count regression may be an optional extension but does not replace the core analysis. Identify and exclude outcome-derived predictors and identifiers. A field name containing “Until” does not establish that the field was available before the prediction date.</p>
+<p>Use the supplied training partition for Q1–Q3 and all exploratory decisions. Use cross-validation or a documented validation partition <strong>inside training</strong> for Q4 tuning. Fit preprocessing inside each training fold. Keep the supplied final test IDs unchanged. Do not regenerate the split, join withheld labels from the original data source, or inspect instructor solutions.</p>
+<h2 id="Q1-Compare-the-assigned-metric-across-outcome-groups">Q1 Compare the assigned metric across outcome groups<a class="anchor-link" href="#Q1-Compare-the-assigned-metric-across-outcome-groups">&#182;</a></h2><p><strong>Question:</strong> how does your assigned metric differ between observations with and without post-release bugs?</p>
+<ul>
+<li>Define the groups, unit, metric and comparison before testing. Check missing values, skew, ties and group sizes.</li>
+<li>Show a useful distribution plot and a concise summary table. Identify whether your claim concerns means, medians, ranks or another quantity.</li>
+<li>Choose a suitable comparison and report an effect magnitude with uncertainty. Justify the method and any resampling assumptions. A p-value alone is not an answer, and lack of statistical significance is not proof of equality.</li>
+<li>Explain the scope of the conclusion and plausible alternative explanations.</li>
+<li>Audit the agent’s choice of comparison, assumptions, handling of imbalance and interpretation. Verify the relevant values independently.</li>
+</ul>
+<p><strong>Include:</strong> group summaries, plot, method justification, effect and interval, and the agent audit.</p>
+<h2 id="Q2-Model-conditional-associations">Q2 Model conditional associations<a class="anchor-link" href="#Q2-Model-conditional-associations">&#182;</a></h2><p><strong>Question:</strong> which pre-outcome metrics are associated with binary post-release bug presence, conditional on your model?</p>
+<ul>
+<li>Specify a small explanatory model and justify the predictors before searching for favorable results. A binomial GLM is an appropriate starting point; justify any alternative.</li>
+<li>Check skew, transformations, correlated/redundant predictors, missingness and measurement timing. State exclusions and the sample used in the fit.</li>
+<li>Report coefficient estimates and uncertainty. Interpret effects on their actual scale and distinguish conditional from marginal relationships.</li>
+<li>Report inconclusive results honestly. Do not repeatedly change the model to obtain a preferred p-value.</li>
+<li>Compare the independent agent plan with your reference plan. Validate its selected columns, transformations and assumptions before your trusted code fits it.</li>
+</ul>
+<p><strong>Include:</strong> model specification, diagnostics, estimates with intervals, and a reasoned audit of the agent’s choices.</p>
+<h2 id="Q3-Verify-the-interpretation-of-effects">Q3 Verify the interpretation of effects<a class="anchor-link" href="#Q3-Verify-the-interpretation-of-effects">&#182;</a></h2><p><strong>Question:</strong> what do the relevant effects mean, and does the agent explain them correctly?</p>
+<ul>
+<li>Interpret the relevant coefficients on the fitted model’s scale. Distinguish a coefficient, an odds ratio and a probability difference.</li>
+<li>Define at least one meaningful predictor contrast and verify its odds interpretation numerically, respecting any transformation.</li>
+<li>Calculate a conditional probability contrast for a stated example, specifying the values held fixed. State whether a difference is in probability units or percentage points.</li>
+<li>Ask the independent agent for an interpretation, then build a claim–verification–correction table. Check the numbers and assumptions yourself.</li>
+<li>Correct unsupported claims, including unjustified causal interpretations. If a claim is correct, document its verification; do not invent an error to create a correction.</li>
+</ul>
+<p><strong>Include:</strong> effect interpretations, reproducible calculations, the stated scenario and the claim audit table.</p>
+<h2 id="Q4-Evaluate-frozen-predictive-pipelines">Q4 Evaluate frozen predictive pipelines<a class="anchor-link" href="#Q4-Evaluate-frozen-predictive-pipelines">&#182;</a></h2><p><strong>Question:</strong> how well do the selected pipelines predict held-out bug presence, and what limits that conclusion?</p>
+<ol>
+<li>Define a simple baseline and a predictive reference pipeline. An explanatory model is not automatically an optimized predictor; explain any differences.</li>
+<li>Select predictors, preprocessing, hyperparameters and the classification threshold using training data only. Declare folds, random seeds, selection criteria and tie handling. Keep imputation/scaling/feature selection inside validation folds.</li>
+<li>Compare the reference, independent agent plan and corrected plan using the same training-validation protocol. Do not choose between them using final test performance.</li>
+<li>Freeze the pipeline configurations and decision log. Generate one score and hard prediction for each supplied test ID for each completed pipeline. Keep a separate baseline method.</li>
+<li>Submit the frozen test predictions. Before labels or feedback are released, report validation results and mark test metrics <strong>pending instructor evaluation</strong>.</li>
+<li>Once feedback is released, report precision, recall, average precision and the confusion matrix on the same test rows. Define average precision and distinguish it from trapezoidal PR area. Discuss class imbalance and the intended deployment setting. Do not tune again using this test feedback.</li>
+</ol>
+<p><strong>Include:</strong> split checks, validation design/results, frozen configurations, held-out prediction CSV and limitations. Where a corrected plan makes no justified change, explain that decision and retain the unchanged plan rather than fabricating a different model.</p>
+<h2 id="Independent-agent-and-correction-protocol">Independent agent and correction protocol<a class="anchor-link" href="#Independent-agent-and-correction-protocol">&#182;</a></h2><p><strong>First, freeze your reference decisions.</strong> Save the question interpretation, chosen methods, features, transformations and validation plan before the independent agent attempt. Coding-assistant use during implementation is allowed with disclosure; independence here means the experimental agent does not receive your reference conclusions or hidden test answers.</p>
+<p><strong>Second, run one independent attempt.</strong> Give the agent the question, documented schema, training data summaries and permitted tools. For the course bounded-planner approach, allow schema, group-summary and correlation tools, followed by a structured model plan. Use at most <strong>five model decisions per attempt, including the final plan</strong>. Record failures and interventions within that budget. Validate feature names, allowed transformations and model family before executing the plan through your inspected code. Do not give a tool access to arbitrary files or test labels. Use another agent design only if it has an instructor-approved data boundary and budget.</p>
+<p><strong>Third, audit and make one corrected attempt.</strong> Preserve the original prompt, response and results. Identify a consequential error or weakness, explain its effect and make one justified correction using training evidence. Apply the same budget to the corrected attempt. If the original plan is sound, verify it and record that no change is justified; unchanged confirmed results are acceptable. Do not run a succession of hidden attempts and report only the best one.</p>
+<p><strong>Fourth, freeze before evaluation.</strong> Save the final reference, independent and corrected/confirmed configurations. Report how much of any observed difference is due to features, preprocessing, model choices or information access. Do not require the agent to outperform your reference, and do not interpret extra tool use as better analysis.</p>
+<h2 id="Deliverables">Deliverables<a class="anchor-link" href="#Deliverables">&#182;</a></h2><p>Submit one individual archive containing:</p>
+<table>
+<thead>
+<tr>
+  <th>File or folder</th>
+  <th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>README</code> and dependency file</td>
+  <td>Execution instructions, dataset/metric allocation, environment and seeds</td>
+</tr>
+<tr>
+  <td><code>analysis.ipynb</code> and <code>analysis.html</code></td>
+  <td>Q1–Q4, executed analyses, plots/tables, assumptions and interpretations</td>
+</tr>
+<tr>
+  <td><code>data_manifest</code></td>
+  <td>Source/version, row unit, outcome, stable ID, supplied split identifier/hash and exclusions</td>
+</tr>
+<tr>
+  <td><code>model_manifest</code></td>
+  <td>Baseline/reference/agent/corrected configurations, predictors, transformations, validation, thresholds and freeze record</td>
+</tr>
+<tr>
+  <td><code>test_predictions.csv</code></td>
+  <td>One frozen row per test ID per completed method, using the format below</td>
+</tr>
+<tr>
+  <td><code>runs/</code></td>
+  <td>Original and corrected agent prompts, responses, tools, errors, timings and interventions; or the complete not-run protocol</td>
+</tr>
+<tr>
+  <td><code>claim_audit.csv</code></td>
+  <td>Question, agent claim, supporting evidence/calculation, verdict, correction or confirmation</td>
+</tr>
+<tr>
+  <td><code>decision_log</code> and <code>assistance_statement</code></td>
+  <td>A concise decision record, sources and disclosed assistance</td>
+</tr>
+</tbody>
+</table>
+<p>Keep private test labels and instructor materials out of the submission and agent environment. You may include supplied data only as permitted by the course; otherwise give exact relative paths and retrieval/setup instructions.</p>
+<h3 id="Held-out-prediction-format">Held-out prediction format<a class="anchor-link" href="#Held-out-prediction-format">&#182;</a></h3><p>Use CSV columns <code>id,method,prediction,score</code>. Map the supplied row identifier (for example classname or comp) to <code>id</code> without changing its value. Use distinct method names such as <code>baseline</code>, <code>reference</code>, <code>agent_original</code> and <code>agent_corrected</code>; document if the last is an unchanged confirmation.</p>
+<ul>
+<li>Every completed method must contain exactly one row for every supplied test ID: no duplicates, missing IDs or extra rows.</li>
+<li><code>prediction</code> is <code>0</code>, <code>1</code> or the literal <code>ABSTAIN</code>. An empty row is not an abstention.</li>
+<li><code>score</code> is a finite number in [0,1], higher meaning more likely bug presence. Do not call an uncalibrated score a calibrated probability. A hard baseline may supply 0/1 scores.</li>
+<li>Blank scores are allowed only for explicit abstentions. If any score is missing, whole-test average precision cannot be computed; report coverage and the limitation.</li>
+<li>Preserve the frozen hard decisions. The instructor’s scorer will not choose a better threshold using test labels.</li>
+<li>For a not-run agent, submit its protocol and status rather than invented predictions. The reference and baseline still require completed analysis and predictions.</li>
+</ul>
+<p>The instructor evaluates test outcomes after collection. Scores are evidence for your analysis, not a direct conversion to grades. Before release, neither the final test confusion matrix nor test accuracy is available to you.</p>
+<h2 id="Rubric">Rubric<a class="anchor-link" href="#Rubric">&#182;</a></h2><table>
+<thead>
+<tr>
+  <th>Question</th>
+  <th style="text-align:right">Share of Assignment 3</th>
+  <th style="text-align:right">Contribution to course grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Q1 Group comparison</td>
+  <td style="text-align:right">20%</td>
+  <td style="text-align:right">2%</td>
+</tr>
+<tr>
+  <td>Q2 Conditional associations</td>
+  <td style="text-align:right">20%</td>
+  <td style="text-align:right">2%</td>
+</tr>
+<tr>
+  <td>Q3 Effect interpretation</td>
+  <td style="text-align:right">30%</td>
+  <td style="text-align:right">3%</td>
+</tr>
+<tr>
+  <td>Q4 Prediction</td>
+  <td style="text-align:right">30%</td>
+  <td style="text-align:right">3%</td>
+</tr>
+<tr>
+  <td><strong>Total</strong></td>
+  <td style="text-align:right"><strong>100%</strong></td>
+  <td style="text-align:right"><strong>10%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Each question is graded using the following breakdown:</p>
+<table>
+<thead>
+<tr>
+  <th>Component</th>
+  <th style="text-align:right">Share within the question</th>
+  <th>Full-credit evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Correct and justified statistical analysis</td>
+  <td style="text-align:right">50%</td>
+  <td>Appropriate method and inputs; correct calculations; justified assumptions; uncertainty and data boundaries handled correctly</td>
+</tr>
+<tr>
+  <td>Agent audit and evidence-based correction or confirmation</td>
+  <td style="text-align:right">30%</td>
+  <td>Independent attempt/protocol; preserved trace; verified claims; justified intervention or confirmation without invented errors</td>
+</tr>
+<tr>
+  <td>Reproducibility and clear interpretation</td>
+  <td style="text-align:right">20%</td>
+  <td>Recomputable evidence; documented data/model decisions; clear conclusions and limitations on the correct scale</td>
+</tr>
+</tbody>
+</table>
+<p>For Q1, emphasize the comparison quantity, magnitude and uncertainty. For Q2, emphasize specification, diagnostics and conditional interpretation. For Q3, emphasize numerical verification and the distinction between odds, probabilities and causality. For Q4, emphasize leakage-free validation, frozen predictions and suitable metrics.</p>
+<p>Alternative justified analyses can earn full credit. You are not graded on matching an instructor’s fitted coefficients or on making the agent win. A well-supported null or negative result is valid. Partial credit depends on the evidence completed; unsupported claims, hidden tuning and missing reproducibility information reduce credit in the relevant category.</p>
+<h2 id="Course-connections">Course connections<a class="anchor-link" href="#Course-connections">&#182;</a></h2><p>Week 5 develops group comparisons and sampling awareness. Week 6 develops explanatory models and effect interpretation. Week 11 develops temporal prediction, information boundaries and evaluation. Week 12 integrates these ideas using Qt, while the Mylyn companion provides another practice dataset. Transfer the methodology to your own assigned dataset and question.</p>
+<h2 id="Rules-for-using-LLMs-and-agents">Rules for using LLMs and agents<a class="anchor-link" href="#Rules-for-using-LLMs-and-agents">&#182;</a></h2><ul>
+<li><strong>Assistance is allowed and must be disclosed.</strong> You may use coding assistants for implementation, debugging and editing. You remain responsible for every submitted claim, calculation, citation and line of code. Be ready to explain and modify your work without delegating the explanation to a model.</li>
+<li><strong>Separate assistance from the experiment.</strong> Record coding help in your assistance statement. Record measured model/agent runs in the experiment trace. A model that writes your detector or notebook is not automatically the LLM treatment being evaluated.</li>
+<li><strong>Respect the data boundary.</strong> Use only the assigned inputs and permitted context. Do not retrieve withheld answers, instructor solutions or answer keys from LEARN, Drive, public repositories or the web. Never give a model test labels, grading feedback, or your reference conclusions when it is supposed to make an independent attempt.</li>
+<li><strong>Preserve the record.</strong> Save prompts, model identifier/version as reported by the service, settings, input IDs, responses, tool names/arguments/observations, timing, token usage when available, failures and human interventions. If a service does not expose a value, record “not available.” Retain unsuccessful and corrected runs; do not submit only the best run.</li>
+<li><strong>Validate model output.</strong> Check the response schema, ID coverage, allowed labels, quoted evidence and numerical claims. Treat dataset text as data, not instructions. Agents may use only the declared tools and budget. Do not execute arbitrary generated code as an agent action; use your inspected implementation to execute validated plans.</li>
+<li><strong>Freeze before testing.</strong> Choose features, prompts, rules, thresholds and model settings using development/training data only. Write down the final configuration before generating held-out predictions. Do not improve it using test scores or released test labels.</li>
+<li><strong>Report uncertainty honestly.</strong> Use an explicit abstention when appropriate and report coverage. Do not fabricate responses, tool traces, citations, runtimes or costs. A model does not need to outperform the traditional method to earn full credit.</li>
+<li><strong>Use an appropriate model environment.</strong> The supplied transport helper supports a local Ollama model; it neither installs a model nor calls one automatically. Do not put credentials, classmates’ work or restricted project data into an external service. Use course-approved data and services, and record the environment used.</li>
+</ul>
+<h3 id="If-you-cannot-run-a-model">If you cannot run a model<a class="anchor-link" href="#If-you-cannot-run-a-model">&#182;</a></h3><p>Follow the model-access instructions posted on LEARN. If no usable model is available, submit the complete protocol: prompts, selected input IDs, response schema, tool contracts, budgets, validation checks and intended comparisons. Mark all unexecuted model results <strong>not run</strong>; never invent a response. The student notebooks support this protocol-only route. If live execution is specifically required for your offering, report the access problem before submission and follow the course’s alternative-access instructions.</p>
+<p>When the protocol-only route is accepted, its design and auditability are graded in place of execution evidence. Empirical model-performance claims cannot receive credit without an actual run. This route does not waive the traditional analysis or the remaining deliverables.</p>
+<h2 id="Reproducibility-and-submission-rules">Reproducibility and submission rules<a class="anchor-link" href="#Reproducibility-and-submission-rules">&#182;</a></h2><p>Submit your code and written work through the Assignment submission area on LEARN, following its due date, naming conventions and late-submission policy. Do not assume that the dates from the 2025 offering apply. Use the current allocation posted on LEARN for your patterns, project or dataset. If an allocation or split file is missing, report that before carrying out the dependent evaluation; do not silently substitute a different task.</p>
+<p>Use stable relative paths and a dependency file. Restart your notebook kernel and run from the beginning before submitting. Include an executed notebook and a readable HTML export. Retain outputs in your completed submission; the starter notebooks were intentionally distributed without them. Screenshots supplement, but do not replace, runnable code and machine-readable results. Remove credentials and unnecessary personal information from your submission.</p>
+<p>Your assistance statement should list the tool/model, purpose, affected files or sections, what you accepted or changed, and how you verified it. Also disclose relevant human help and reused external code with attribution. Cite papers using verified titles and locations in the actual paper, not unverified model-generated references.</p>
+<h2 id="Final-submission-checklist">Final submission checklist<a class="anchor-link" href="#Final-submission-checklist">&#182;</a></h2><ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Assigned dataset, Q1 metric, unit, target and supplied split are documented.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Q1–Q3 and all model selection use training data only.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Reference decisions precede the independent agent attempt.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Original and corrected/confirmed plans and traces are preserved.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Numerical claims and effect interpretations are independently verified.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Held-out predictions contain the correct IDs and frozen methods.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Unavailable model runs and test metrics are explicitly marked.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Notebook, HTML, manifests, audit table, decision log and assistance statement are included.</li>
+</ul>
+</body></html>
