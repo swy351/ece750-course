@@ -1,0 +1,190 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ECE 750 Project guide — Python and R</title><style>body{font:17px/1.6 system-ui,sans-serif;max-width:1050px;margin:45px auto;padding:0 30px;color:#173448}h1{font-size:35px;color:#152b3a}h2{font-size:25px;margin-top:34px}h3{font-size:20px;margin-top:24px}table{border-collapse:collapse;width:100%;font-size:15px;margin:18px 0}th,td{padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid #cbd7df}th{background:#edf4f6}code{font-size:.9em}a{color:#087e8b}.anchor-link{display:none}li{margin:5px 0}@media print{body{font-size:10.5pt;margin:0;padding:0}h1{font-size:22pt}h2{font-size:15pt}h3{font-size:12pt}table{font-size:9.5pt}h1,h2,h3{break-after:avoid}tr{break-inside:avoid}@page{size:A4;margin:18mm}</style></head><body><p><a href="../index.html#assignments">← ECE 750 assignments and project</a></p><h1 id="ECE-750-Project-guide">ECE 750 Project guide<a class="anchor-link" href="#ECE-750-Project-guide">&#182;</a></h1><p><strong>Updated 12 November 2026 — Python and R submissions.</strong></p>
+<p>Investigate one focused software-analytics question with a defensible traditional baseline and a motivated LLM/agent component. Choose among source code, comments/review records, class/component metrics, logs, performance telemetry/traces, or commits. State the unit of analysis, target, intended decision and information available at decision time. Explain how your project extends or tests a research idea beyond simply rerunning a supplied lab.</p>
+<p>Use the current LEARN instructions for group arrangements, deadlines, report length, presentation requirements and the project's contribution to the course grade. The rubric below allocates 100 points <strong>within the project</strong>; it does not change the course weighting. Resolve any offering-specific requirements with the instructor before collecting results.</p>
+<h2 id="Choose-Python-or-R">Choose Python or R<a class="anchor-link" href="#Choose-Python-or-R">&#182;</a></h2><p><strong>Python and R are equally acceptable</strong> for traditional analysis, LLM/agent experiments, visualization and evaluation. Submit one complete implementation in your chosen language; implementing both is not required and earns no extra credit by itself. External tools or languages are appropriate when the research task needs them, but include their source, dependencies and execution instructions. For example, Java/JDT may supply source-code findings that you analyze in Python or R. The Assignment 2 detector requirement is not a blanket restriction on all project topics.</p>
+<table>
+<thead>
+<tr>
+  <th>Language</th>
+  <th>Required analysis source and readable output</th>
+  <th>Required environment record</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Python</td>
+  <td>Executed <code>analysis.ipynb</code>, <code>analysis.html</code>, and all imported <code>.py</code> helpers</td>
+  <td>Python version, pinned dependencies such as <code>requirements.txt</code>, and exact setup/run/export commands</td>
+</tr>
+<tr>
+  <td>R</td>
+  <td>Completed <code>analysis.Rmd</code>, knitted <code>analysis.html</code>, and all sourced <code>.R</code> helpers</td>
+  <td>R version, <code>sessionInfo()</code>, package versions via <code>renv.lock</code> or a versioned list with setup instructions, and exact render commands</td>
+</tr>
+</tbody>
+</table>
+<p>Multiple notebooks are acceptable: identify the entry point and run order in <code>README</code>. A standalone script or rendered report alone does not replace the notebook source, reasoning and executable evidence. If both languages are used, document both environments and their execution order.</p>
+<p>Restart the Python kernel and run all cells in order, or render R Markdown in a fresh R session. For example: <code>Rscript -e 'rmarkdown::render(&quot;analysis.Rmd&quot;, output_format=&quot;html_document&quot;)'</code>. Record the working directory, system dependencies and relative data paths. Include assets needed by the HTML. Complete the TODOs and retain outputs; do not submit an unchanged starter notebook.</p>
+<h2 id="Milestones-and-evidence">Milestones and evidence<a class="anchor-link" href="#Milestones-and-evidence">&#182;</a></h2><p>These are preparation stages, not additional deadlines or separate grade weights.</p>
+<table>
+<thead>
+<tr>
+  <th>Stage</th>
+  <th>Evidence to prepare</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Weeks 1–3</td>
+  <td>Focused research question; unit and target; motivating paper(s); candidate data and access constraints</td>
+</tr>
+<tr>
+  <td>Weeks 5–6</td>
+  <td>Small data-quality audit; sample baseline run; feasible LLM/agent task; initial risks and resource estimate</td>
+</tr>
+<tr>
+  <td>Week 8 proposal</td>
+  <td>Question and contribution; paper connection; data/label provenance; baseline and model conditions; split, metrics, uncertainty method, tool boundaries and budget</td>
+</tr>
+<tr>
+  <td>Weeks 9–11</td>
+  <td>Implemented methods, preserved run records, development error analysis and documented protocol changes</td>
+</tr>
+<tr>
+  <td>Week 12 clinic</td>
+  <td>Preliminary evidence, leakage checks, uncertainty, limitations and an artifact reproduction check</td>
+</tr>
+<tr>
+  <td>Final submission</td>
+  <td>Report, runnable artifact, frozen results and contribution/assistance statement on the published schedule</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Research-and-evaluation-requirements">Research and evaluation requirements<a class="anchor-link" href="#Research-and-evaluation-requirements">&#182;</a></h2><ol>
+<li><strong>Define the claim.</strong> Frame a question that the available data can answer. Explain what you borrow from the motivating papers and what you change. Distinguish replication, extension, comparison and exploratory analysis. A new model or larger dataset is not required for a strong project.</li>
+<li><strong>Audit the data.</strong> Record source/version, permitted use, sampling, unit, stable IDs, fields, missingness, duplicates, class prevalence and exclusions. Explain how labels were obtained. If you annotate, supply a labeling protocol and assess disagreements; model or detector predictions are not independent ground truth.</li>
+<li><strong>Implement a defensible traditional baseline.</strong> Choose a relevant rule, statistical model or conventional learning method. Explain its assumptions and fit preprocessing only within the permitted training/development data. A deliberately weak comparator does not establish a useful gain.</li>
+<li><strong>Specify the LLM/agent treatment.</strong> Define inputs, prompts, output schema, model identity/settings, allowed tools and a finite decision/token/cost budget before the final evaluation. Explain the mechanism you are testing. Separate coding assistance from the model being evaluated. If the agent retrieves extra context, include an information-matched fixed-context control when feasible; otherwise identify the confounding and narrow the claim.</li>
+<li><strong>Freeze an evaluation contract.</strong> Define development and evaluation partitions before optimization. Prevent related records, duplicates, later information and outcome-derived features from leaking across splits. Use time/project/group separation when the intended use requires it. Keep supplied final holdouts unchanged. For purely explanatory studies, define the estimand, sample and specification instead of manufacturing a prediction task.</li>
+<li><strong>Compare on matched evidence.</strong> Use the same evaluation IDs, target and metric definitions. Match information and computational budgets, or explicitly treat their differences as part of the experiment. Report effect magnitudes, uncertainty and error categories, plus coverage/abstention and resource use where relevant. For stochastic pipelines, predeclare repeat counts and seeds; report all planned runs, not only the best. Justify a single-run study as a limitation when resources prevent replication.</li>
+<li><strong>Interpret conservatively.</strong> Investigate representative disagreements, verify quoted evidence and numerical claims, and report failures and negative results. Distinguish association, prediction and causation. State how sampling, labels, dependence and model access limit generalization. Do not claim superiority from authored example responses.</li>
+</ol>
+<p>For instructor-held evaluation labels, submit frozen predictions and mark test metrics <strong>pending instructor evaluation</strong>. For a project-managed test set, document how it stayed separate during development and when it was first scored. Do not tune after seeing test results and reuse that same test as an untouched final evaluation. Record any necessary protocol change and its consequences.</p>
+<h2 id="Final-deliverables">Final deliverables<a class="anchor-link" href="#Final-deliverables">&#182;</a></h2><p>Submit one project archive through the designated LEARN submission area. Keep the paths below or provide an explicit mapping in <code>README</code>.</p>
+<table>
+<thead>
+<tr>
+  <th>File or folder</th>
+  <th>Required contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>README</code></td>
+  <td>Project title, authors, research question, file map, exact setup and run order, expected outputs, runtime/resource needs and known limitations</td>
+</tr>
+<tr>
+  <td><code>report.pdf</code> or <code>report.html</code></td>
+  <td>Self-contained question and paper motivation, data, methods, evaluation design, results, uncertainty, error analysis, threats to validity and references; follow LEARN's length/format requirements</td>
+</tr>
+<tr>
+  <td><code>analysis.ipynb</code> <strong>or</strong> <code>analysis.Rmd</code>, plus <code>analysis.html</code></td>
+  <td>Executed traditional analysis and genuine LLM/agent results, figures, tables and narrative reasoning; clearly marked unexecuted portions</td>
+</tr>
+<tr>
+  <td><code>src/</code> and environment files</td>
+  <td>All helper code and any detector/tool implementations; runtime/package versions, dependency installation instructions and external-tool configuration</td>
+</tr>
+<tr>
+  <td><code>data_manifest</code> and <code>data_dictionary</code></td>
+  <td>Provenance, licenses/access instructions, source hashes, unit/fields/target, labeling protocol, exclusions, and actual split/fold IDs; include data only when redistribution is permitted</td>
+</tr>
+<tr>
+  <td><code>protocol</code> and <code>decision_log</code></td>
+  <td>Predeclared comparisons, metrics, budgets, repetitions, selection rules, freeze record, configurations and justified changes</td>
+</tr>
+<tr>
+  <td><code>results/</code></td>
+  <td>Machine-readable predictions or task outputs, aggregate metrics, uncertainty calculations and evidence linking tables/figures to their source runs; preserve full precision</td>
+</tr>
+<tr>
+  <td><code>runs/</code></td>
+  <td>Prompts, responses, model settings, input IDs, tool arguments/observations, failures, timing, token/cost records when available and human interventions</td>
+</tr>
+<tr>
+  <td><code>claim_audit.csv</code></td>
+  <td>Claim, supporting data/run/evidence, independent verification, verdict, and correction or confirmation for consequential model claims</td>
+</tr>
+<tr>
+  <td><code>contributions_and_assistance</code></td>
+  <td>Each member's contribution; human help; reused code; AI tools used, affected files, accepted/changed output and verification</td>
+</tr>
+</tbody>
+</table>
+<p>If a presentation or demonstration is required on LEARN, submit its requested materials and be ready to explain the implementation and reproduce a representative result. A narrated screenshot is not a replacement for executable source.</p>
+<h3 id="Machine-readable-outputs">Machine-readable outputs<a class="anchor-link" href="#Machine-readable-outputs">&#182;</a></h3><p>For binary classification, use UTF-8 CSV with <code>id,method,prediction,score</code>. Include a separate file per run or a documented <code>run_id</code> column for repeated trials. Each completed method/run must have exactly one row per evaluation ID. Define the positive class; use <code>0</code>, <code>1</code> or literal <code>ABSTAIN</code>, with finite scores in [0,1] oriented toward the positive class. Blank scores are allowed only for abstentions. Report coverage and explain when whole-sample ranking metrics cannot be computed. Do not silently re-threshold submitted predictions.</p>
+<p>For parsing, localization, ranking, regression or explanatory studies, declare a task-appropriate schema in the proposal: stable ID where applicable, method/run, output or estimate, uncertainty/status and evidence reference. Do not force these tasks into binary labels. Include the evaluation code and metric definitions. Instructor-scored tasks must use the supplied schema and evaluation scope.</p>
+<p>Python CSV exports should use <code>index=False</code>; R exports should use <code>row.names=FALSE</code>. Preserve IDs as character strings from import, exact column names, full-precision values and explicit abstentions. <code>NA</code>, <code>NaN</code>, blanks and <code>TRUE/FALSE</code> are not binary prediction labels. Read the exported file back and check coverage, duplicates, missing values and schema before submission. Avoid including private labels, credentials or restricted data in shared artifacts or model inputs.</p>
+<h2 id="Grading-rubric-%E2%80%94-100-project-points">Grading rubric &#8212; 100 project points<a class="anchor-link" href="#Grading-rubric-%E2%80%94-100-project-points">&#182;</a></h2><table>
+<thead>
+<tr>
+  <th>Criterion</th>
+  <th style="text-align:right">Points</th>
+  <th>Full-credit evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Research question and paper-based motivation</td>
+  <td style="text-align:right">10</td>
+  <td>Focused, answerable question; accurate use of prior work; clearly scoped contribution and decision context</td>
+</tr>
+<tr>
+  <td>Data quality and experimental design</td>
+  <td style="text-align:right">20</td>
+  <td>Traceable data/labels; correct unit and target; appropriate sampling/splits; leakage prevention; predeclared metrics and information boundaries</td>
+</tr>
+<tr>
+  <td>Traditional analysis</td>
+  <td style="text-align:right">20</td>
+  <td>Correct, reproducible baseline or statistical analysis; justified assumptions and preprocessing; meaningful diagnostics and relevant uncertainty</td>
+</tr>
+<tr>
+  <td>LLM/agent method and audit</td>
+  <td style="text-align:right">20</td>
+  <td>Motivated treatment; explicit tools/budgets; authentic preserved runs; validated outputs; independent verification of consequential claims and fair information controls</td>
+</tr>
+<tr>
+  <td>Comparative results and interpretation</td>
+  <td style="text-align:right">20</td>
+  <td>Matched comparisons; suitable metrics/effect sizes; uncertainty and coverage; evidence-based failure analysis; cost/repeatability where relevant; conclusions bounded by validity limits</td>
+</tr>
+<tr>
+  <td>Reproducibility and communication</td>
+  <td style="text-align:right">10</td>
+  <td>Complete runnable artifact and environment; consistent report/notebook/CSV outputs; clear limitations, citations, contributions and assistance disclosure</td>
+</tr>
+<tr>
+  <td><strong>Total</strong></td>
+  <td style="text-align:right"><strong>100</strong></td>
+  <td></td>
+</tr>
+</tbody>
+</table>
+<p>A correct, well-supported negative result can earn full credit. Model accuracy, novelty of a model name, language choice or an agent beating the baseline is not a direct grade multiplier. Partial credit reflects the evidence actually completed. Unsupported claims, broken data boundaries and missing source/run records reduce credit in the relevant criterion. One root error should not receive repeated deductions merely because it propagates through later calculations; explain valid downstream reasoning and the limits of the original result.</p>
+<h3 id="Acceptable-Python/R-differences">Acceptable Python/R differences<a class="anchor-link" href="#Acceptable-Python/R-differences">&#182;</a></h3><p>Both languages use this same rubric. Identical records and frozen predictions with identical metric definitions should give matching counts and confusion matrices and numerically consistent scores. Different documented solvers, regularization, training-selected thresholds, quantile conventions or uncertainty methods can legitimately produce different results. A common seed does not generate identical cross-language folds or bootstrap samples: preserve the actual IDs and record the resampling method.</p>
+<p>State the model formula, transformations, preprocessing fit scope, interval method and convergence information. Justify meaningful differences rather than trying to match a reference score. Changed targets, silent exclusions, test-set tuning, reversed class coding and different metric definitions are methodological errors, not language effects.</p>
+<h2 id="LLM/agent-use-and-access">LLM/agent use and access<a class="anchor-link" href="#LLM/agent-use-and-access">&#182;</a></h2><p>Coding and writing assistance is allowed with disclosure; you remain responsible for submitted code, calculations, citations and claims. Preserve the distinction between assistance used to build the artifact and the independent model treatment being measured. Treat dataset contents as data, not tool instructions. Restrict tools to the declared data and operations, validate plans before trusted code executes them, and keep hidden labels and instructor solutions out of prompts and tool access.</p>
+<p>Do not invent responses, citations, runtimes, costs or tool traces. Record unavailable service metadata as unavailable. Retain failed and corrected attempts, not just successful ones. If live model access is unavailable, follow the course alternative-access instructions and document the issue early. An accepted protocol-only alternative must include prompts, input IDs, schemas, tool contracts, budgets, validation checks and intended comparisons, with all empirical model results marked <strong>not run</strong>. Its design and auditability replace execution evidence only under that accepted alternative; it does not waive the traditional analysis or justify performance claims.</p>
+<h2 id="Dataset-specific-cautions">Dataset-specific cautions<a class="anchor-link" href="#Dataset-specific-cautions">&#182;</a></h2><p>SATD sampling imposes class prevalence. Ant lacks the logging/exception variables of the motivating papers. Loghub samples do not constitute full operational timelines. OpenRCA traces are sampled and boundary-clipped; component anomalies alone do not establish causality. The JIT sample has functional-defect labels and cannot reproduce PerfJIT performance labels. Authored LLM fixtures cannot substantiate model superiority.</p>
+<h2 id="Final-checklist">Final checklist<a class="anchor-link" href="#Final-checklist">&#182;</a></h2><ul>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Question, paper connection, contribution, unit, target and data provenance are clear.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Traditional and LLM/agent methods have explicit inputs, budgets and evaluation rules.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Development decisions and final evaluation are separated and documented.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Notebook source, executed HTML, helper code and environment records reproduce the report.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Predictions/task outputs pass schema and ID checks; withheld metrics are marked pending.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Run records, claim audit, uncertainty, failures and limitations support the conclusions.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Contributions, assistance and external sources are disclosed; restricted information is excluded.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Archive and any required presentation follow current LEARN policies.</li>
+</ul>
+</body></html>
