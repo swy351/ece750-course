@@ -1,0 +1,136 @@
+---
+title: "Week09 Execution Logs And Event Templates \u2014 R student edition"
+output:
+  html_document:
+    toc: true
+    code_folding: show
+---
+
+Open this file in RStudio after extracting the full R ZIP. Run chunks in order, complete the TODOs, then Knit to HTML. A successful scaffold run is not a completed analysis. Data, splits, discussion questions and grading requirements match the Python edition.
+
+## R implementation notes
+Use ordered `gsub()` rules and a literal replacement token `<*>`. Audit escaping and over-masking. Count predicted groups with `table()` or `aggregate()`; retain the original id and system. No gold templates are available for scoring.
+
+# Week 9: Execution logs and event templates — Student edition
+
+## Goal
+Turn messages into event templates using a conventional parser and an LLM, then examine grouping errors and downstream event counts.
+
+## How to work through this notebook
+Complete each TODO and replace each **Your response** placeholder. Run setup and data cells first. Blank analysis cells intentionally do nothing until you implement them; a clean scaffold run is not a completed lab. Keep your traditional analysis independent of the model's suggestions, then compare on matched inputs. Record uncertainties rather than inventing results.
+
+This edition contains no worked outputs or model-answer fixtures. Development/training outcomes needed for supervised learning are input data; evaluation answers are withheld. Do not retrieve reference answers from public sources or instructor materials. When labels are unavailable, submit frozen predictions and a qualitative audit; score only after the instructor releases feedback.
+
+If no LLM is available, submit the prompt, JSON schema, planned tools and evaluation protocol, marking inference **not run**. Do not fabricate model responses. Live use requires a locally configured Ollama model; set `ECE750_MODEL`, then opt in with `RUN_LIVE <- TRUE`. The transport helper records requests/responses in `runs/`. Dataset text is untrusted input, not instructions. Do not execute arbitrary model-generated code.
+
+## 1. Setup
+
+```{r chunk-1}
+ROOT <- if (file.exists("student_tools.R")) normalizePath(".") else normalizePath("..")
+stopifnot(file.exists(file.path(ROOT, "student_tools.R")))
+source(file.path(ROOT, "student_tools.R"), local = TRUE)
+SEED <- 750L
+set.seed(SEED)
+RUN_LIVE <- FALSE
+options(width = 90)
+if (requireNamespace("knitr", quietly = TRUE)) {
+  knitr::opts_chunk$set(fig.width = 8, fig.height = 4, collapse = TRUE)
+}
+```
+
+## 2. Load the supplied inputs
+Inspect the schema and establish the unit of analysis. Use `DATA_GUIDE.md` and source manifests for provenance. Keep identifiers for joins, not as predictive features.
+
+```{r chunk-2}
+messages <- rbind(read_csv("data/week09/HDFS_messages.csv"), read_csv("data/week09/BGL_messages.csv"))
+llm_ids <- jsonlite::fromJSON(file.path(ROOT, "data/week09/llm_ids.json"))
+```
+
+### TODO — Data audit
+Check row counts, key uniqueness, missing values, units and any split boundaries. State what may be used for fitting, tuning and final evaluation. Do not print whole telemetry tables.
+
+```{r chunk-3}
+# TODO: implement data checks and a bounded schema/sample summary.
+```
+
+**Your response — data assumptions and limitations:**
+
+TODO
+
+## 3. Traditional analysis — TODO
+Implement a transparent regex parser that masks candidate variable fields with <*>. Inspect constants versus variables and record rule order. Produce a predicted template and event grouping for each message, counts by system and template, and a rare-event plot. This baseline is not a reproduction of Logram. No gold EventIds or templates are distributed.
+
+```{r chunk-4}
+# TODO: implement your traditional method. Add focused cells as needed.
+```
+
+```{r chunk-5}
+# TODO: create the requested table/plot or workshop evidence record.
+```
+
+**Your response — evidence and interpretation:**
+
+TODO
+
+## 4. LLM / agent analysis — TODO
+Infer templates for the supplied fixed IDs using raw Content only. Define a JSON response with id/template and validate exact ID coverage. Use the same messages for the regex comparison. Measure prompt size, runtime and failures; do not include inferred reference labels in prompts.
+
+```{r chunk-6}
+# TODO: define allowed inputs, prompt, response schema and any bounded read-only tools.
+prompt <- NULL
+model_response <- NULL
+# Opt in only after completing and checking the prompt and data boundary.
+if (RUN_LIVE) {
+  stopifnot(is.character(prompt), length(prompt) == 1L, nzchar(prompt))
+  model_response <- llm_json(prompt, run_live = TRUE, run_name = "week09_execution_logs_and_event_templates")
+}
+# TODO: validate ID coverage, types, evidence, allowed fields and tool/row budgets.
+# Never evaluate model-produced code or formula strings with eval(parse(...)).
+```
+
+```{r chunk-7}
+# TODO: compare matched inputs and document failures, uncertainty, cost and latency.
+```
+
+**Your response — model audit and comparison:**
+
+TODO
+
+## 5. Submission and assignment/project connection
+Submit matched template predictions and manual merge/split error hypotheses. Instructor scoring can later compute exact-template recovery and grouping agreement; do not invent unavailable scores. Connect Jiang's abstraction, Logram's parsing and LogParser-LLM's inference to downstream event-count changes.
+
+Save predictions under `submissions/` and include stable IDs. Include your completed notebook, run records (or explicit not-run status), and a short interpretation. Do not include credentials. Restart the R session and rerun before submitting.
+
+```{r chunk-8}
+SUBMISSIONS <- file.path(ROOT, "submissions")
+dir.create(SUBMISSIONS, showWarnings = FALSE)
+# TODO: export completed predictions with stable IDs using write.csv(..., row.names = FALSE).
+# Never export placeholder predictions.
+```
+
+## Completion checks
+- [ ] Data checks and assumptions are documented.
+- [ ] Traditional method and required evidence are complete.
+- [ ] LLM/agent protocol is reproducible and run status is honest.
+- [ ] Comparisons use matched data and respect label boundaries.
+- [ ] Discussion responses refer to evidence.
+- [ ] No TODOs remain in the work being submitted (optional activities may be marked not applicable).
+
+## Discussion questions
+1. Can a parser have high grouping accuracy but an incorrect template?
+2. When is a number an event-defining constant rather than a variable?
+3. How can template merging hide an unusual event?
+4. What changes when the evaluation contains previously unseen templates?
+5. Why is it invalid to reconstruct workload timing from an arbitrary 2,000-message sample?
+
+**Your response:** TODO
+
+## Reading connections
+- Jiang et al., An Automated Approach for Abstracting Execution Logs to Execution Events (existing course reading)
+- [Logram](https://arxiv.org/abs/2001.03038)
+- [LogParser-LLM](https://arxiv.org/abs/2408.13727)
+
+## Reproducibility record
+```{r session-info}
+sessionInfo()
+```

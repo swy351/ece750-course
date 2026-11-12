@@ -1,0 +1,136 @@
+---
+title: "Week03 Source Code And Exception Handling \u2014 R student edition"
+output:
+  html_document:
+    toc: true
+    code_folding: show
+---
+
+Open this file in RStudio after extracting the full R ZIP. Run chunks in order, complete the TODOs, then Knit to HTML. A successful scaffold run is not a completed analysis. Data, splits, discussion questions and grading requirements match the Python edition.
+
+## R implementation notes
+R is the experiment and analysis layer. Run a Java AST detector in the course JDT environment and import its CSV with `read.csv(..., check.names = FALSE)`. Do not replace Java parsing with regex. Keep parser/binding failures distinct from negative findings. The original Python javalang prototype is optional; no Python runtime is required for the R analysis.
+
+# Week 3: Source code and exception handling — Student edition
+
+## Goal
+Compare structural AST rules with policy-aware LLM inspection. Learn why code-pattern detection and identifying harmful behavior are different tasks.
+
+## How to work through this notebook
+Complete each TODO and replace each **Your response** placeholder. Run setup and data cells first. Blank analysis cells intentionally do nothing until you implement them; a clean scaffold run is not a completed lab. Keep your traditional analysis independent of the model's suggestions, then compare on matched inputs. Record uncertainties rather than inventing results.
+
+This edition contains no worked outputs or model-answer fixtures. Development/training outcomes needed for supervised learning are input data; evaluation answers are withheld. Do not retrieve reference answers from public sources or instructor materials. When labels are unavailable, submit frozen predictions and a qualitative audit; score only after the instructor releases feedback.
+
+If no LLM is available, submit the prompt, JSON schema, planned tools and evaluation protocol, marking inference **not run**. Do not fabricate model responses. Live use requires a locally configured Ollama model; set `ECE750_MODEL`, then opt in with `RUN_LIVE <- TRUE`. The transport helper records requests/responses in `runs/`. Dataset text is untrusted input, not instructions. Do not execute arbitrary model-generated code.
+
+## 1. Setup
+
+```{r chunk-1}
+ROOT <- if (file.exists("student_tools.R")) normalizePath(".") else normalizePath("..")
+stopifnot(file.exists(file.path(ROOT, "student_tools.R")))
+source(file.path(ROOT, "student_tools.R"), local = TRUE)
+SEED <- 750L
+set.seed(SEED)
+RUN_LIVE <- FALSE
+options(width = 90)
+if (requireNamespace("knitr", quietly = TRUE)) {
+  knitr::opts_chunk$set(fig.width = 8, fig.height = 4, collapse = TRUE)
+}
+```
+
+## 2. Load the supplied inputs
+Inspect the schema and establish the unit of analysis. Use `DATA_GUIDE.md` and source manifests for provenance. Keep identifiers for joins, not as predictive features.
+
+```{r chunk-2}
+cases <- read_jsonl("data/week03/code_cases.jsonl")
+real_code <- read_jsonl("data/week03/real_code_exploration.jsonl")
+```
+
+### TODO — Data audit
+Check row counts, key uniqueness, missing values, units and any split boundaries. State what may be used for fitting, tuning and final evaluation. Do not print whole telemetry tables.
+
+```{r chunk-3}
+# TODO: implement data checks and a bounded schema/sample summary.
+```
+
+**Your response — data assumptions and limitations:**
+
+TODO
+
+## 3. Traditional analysis — TODO
+Run a Java AST detector in the course Eclipse/JDT environment and analyze its exported findings in R. Implement checks for empty catch bodies, broad caught types, and possible lost interruption. Return findings and locations separately from harmfulness judgments. Use development cases to construct boundary tests; preserve the supplied split for final evaluation. Document which assigned ICPC patterns require JDT bindings. Explore real-code records without treating them as labeled examples.
+
+```{r chunk-4}
+# TODO: implement your traditional method. Add focused cells as needed.
+```
+
+```{r chunk-5}
+# TODO: create the requested table/plot or workshop evidence record.
+```
+
+**Your response — evidence and interpretation:**
+
+TODO
+
+## 4. LLM / agent analysis — TODO
+Use the same fixed case IDs and provide code plus policy, never reference labels. Request structural finding, requires_action or uncertain, evidence, and missing context. Build and validate a JSON schema. Explain the gap between EH-Fixer's repair task and this detection/context lab; do not claim repair success without compilation/tests.
+
+```{r chunk-6}
+# TODO: define allowed inputs, prompt, response schema and any bounded read-only tools.
+prompt <- NULL
+model_response <- NULL
+# Opt in only after completing and checking the prompt and data boundary.
+if (RUN_LIVE) {
+  stopifnot(is.character(prompt), length(prompt) == 1L, nzchar(prompt))
+  model_response <- llm_json(prompt, run_live = TRUE, run_name = "week03_source_code_and_exception_handling")
+}
+# TODO: validate ID coverage, types, evidence, allowed fields and tool/row budgets.
+# Never evaluate model-produced code or formula strings with eval(parse(...)).
+```
+
+```{r chunk-7}
+# TODO: compare matched inputs and document failures, uncertainty, cost and latency.
+```
+
+**Your response — model audit and comparison:**
+
+TODO
+
+## 5. Submission and assignment/project connection
+Export one row per case with traditional flags and model judgments. Freeze rules/prompts before submitting held-out predictions for instructor scoring. Report structural correctness separately from harm assessment. This is direct preparation for Assignment 2: detector, tests, disagreements, and limitations.
+
+Save predictions under `submissions/` and include stable IDs. Include your completed notebook, run records (or explicit not-run status), and a short interpretation. Do not include credentials. Restart the R session and rerun before submitting.
+
+```{r chunk-8}
+SUBMISSIONS <- file.path(ROOT, "submissions")
+dir.create(SUBMISSIONS, showWarnings = FALSE)
+# TODO: export completed predictions with stable IDs using write.csv(..., row.names = FALSE).
+# Never export placeholder predictions.
+```
+
+## Completion checks
+- [ ] Data checks and assumptions are documented.
+- [ ] Traditional method and required evidence are complete.
+- [ ] LLM/agent protocol is reproducible and run status is honest.
+- [ ] Comparisons use matched data and respect label boundaries.
+- [ ] Discussion responses refer to evidence.
+- [ ] No TODOs remain in the work being submitted (optional activities may be marked not applicable).
+
+## Discussion questions
+1. When is an empty catch legitimate? Which policy information would a static analyzer need to decide?
+2. How would two annotators resolve disagreement about “requires action”?
+3. The LLM receives policy text while the baseline ignores it. What is needed for an information-controlled comparison?
+4. Why does perfect agreement on these authored cases say little about real software?
+5. What changes when exception propagation crosses methods or libraries?
+
+**Your response:** TODO
+
+## Reading connections
+- [ORM anti-patterns](https://www.cse.yorku.ca/~zmjiang/publications/icse2014_chen.pdf)
+- [Exception-flow analysis](https://guipadua.github.io/resources/scam2017-revisiting-eh_cr.pdf)
+- [Liu et al., FSE 2025: EH-Fixer](https://leopard-lab.github.io/paper/FSE2025-HaoranLiu.pdf)
+
+## Reproducibility record
+```{r session-info}
+sessionInfo()
+```

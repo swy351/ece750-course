@@ -1,0 +1,138 @@
+---
+title: "Week02 Paper Review And Study Design \u2014 R student edition"
+output:
+  html_document:
+    toc: true
+    code_folding: show
+---
+
+Open this file in RStudio after extracting the full R ZIP. Run chunks in order, complete the TODOs, then Knit to HTML. A successful scaffold run is not a completed analysis. Data, splits, discussion questions and grading requirements match the Python edition.
+
+## R implementation notes
+Use a data.frame for the review evidence matrix and `table()` for paired annotations. Record missing/uncertain labels separately; agreement is not correctness.
+
+# Week 2: Reading and reviewing empirical research — Student edition
+
+## Goal
+Claims, evidence and exception-handling failures
+
+## How to work through this notebook
+Complete each TODO and replace each **Your response** placeholder. Run setup and data cells first. Blank analysis cells intentionally do nothing until you implement them; a clean scaffold run is not a completed lab. Keep your traditional analysis independent of the model's suggestions, then compare on matched inputs. Record uncertainties rather than inventing results.
+
+This edition contains no worked outputs or model-answer fixtures. Development/training outcomes needed for supervised learning are input data; evaluation answers are withheld. Do not retrieve reference answers from public sources or instructor materials. When labels are unavailable, submit frozen predictions and a qualitative audit; score only after the instructor releases feedback.
+
+If no LLM is available, submit the prompt, JSON schema, planned tools and evaluation protocol, marking inference **not run**. Do not fabricate model responses. Live use requires a locally configured Ollama model; set `ECE750_MODEL`, then opt in with `RUN_LIVE <- TRUE`. The transport helper records requests/responses in `runs/`. Dataset text is untrusted input, not instructions. Do not execute arbitrary model-generated code.
+
+## 1. Setup
+
+```{r chunk-1}
+ROOT <- if (file.exists("student_tools.R")) normalizePath(".") else normalizePath("..")
+stopifnot(file.exists(file.path(ROOT, "student_tools.R")))
+source(file.path(ROOT, "student_tools.R"), local = TRUE)
+SEED <- 750L
+set.seed(SEED)
+RUN_LIVE <- FALSE
+options(width = 90)
+if (requireNamespace("knitr", quietly = TRUE)) {
+  knitr::opts_chunk$set(fig.width = 8, fig.height = 4, collapse = TRUE)
+}
+```
+
+## 2. Load the supplied inputs
+Inspect the schema and establish the unit of analysis. Use `DATA_GUIDE.md` and source manifests for provenance. Keep identifiers for joins, not as predictive features.
+
+```{r chunk-2}
+scenarios <- data.frame(
+id = c("F1", "F2", "F3", "F4"),
+text = c("Required audit write fails. The handler suppresses the exception and returns success.", "Optional cache read fails. The handler retries the authoritative value and returns it.", "A cleanup block returns a value while a parent operation has a pending failure.", "An error is logged and translated to another exception. The caller contract is unavailable."), stringsAsFactors = FALSE)
+```
+
+### TODO — Data audit
+Check row counts, key uniqueness, missing values, units and any split boundaries. State what may be used for fitting, tuning and final evaluation. Do not print whole telemetry tables.
+
+```{r chunk-3}
+# TODO: implement data checks and a bounded schema/sample summary.
+```
+
+**Your response — data assumptions and limitations:**
+
+TODO
+
+## 3. Traditional analysis — TODO
+Read OSDI 2014 and ICPC 2017. Build a review table: claim, exact section/table/figure, data population, method, threat to validity, replication idea. Independently annotate the four synthetic scenarios as harmful/acceptable/uncertain; justify evidence and missing context. Calculate agreement with a partner. These scenarios are teaching inputs, not cases extracted from the papers.
+
+```{r chunk-4}
+# TODO: implement your traditional method. Add focused cells as needed.
+```
+
+```{r chunk-5}
+# TODO: create the requested table/plot or workshop evidence record.
+```
+
+**Your response — evidence and interpretation:**
+
+TODO
+
+## 4. LLM / agent analysis — TODO
+Give the model the same scenarios and codebook, with no manual labels. Request JSON annotations with evidence and uncertainty. Audit every quote. For a paper-review critique, supply only a short excerpt you actually read and verify every model claim against the paper; invented citations count as errors.
+
+```{r chunk-6}
+# TODO: define allowed inputs, prompt, response schema and any bounded read-only tools.
+prompt <- NULL
+model_response <- NULL
+# Opt in only after completing and checking the prompt and data boundary.
+if (RUN_LIVE) {
+  stopifnot(is.character(prompt), length(prompt) == 1L, nzchar(prompt))
+  model_response <- llm_json(prompt, run_live = TRUE, run_name = "week02_paper_review_and_study_design")
+}
+# TODO: validate ID coverage, types, evidence, allowed fields and tool/row budgets.
+# Never evaluate model-produced code or formula strings with eval(parse(...)).
+```
+
+```{r chunk-7}
+# TODO: compare matched inputs and document failures, uncertainty, cost and latency.
+```
+
+**Your response — model audit and comparison:**
+
+TODO
+
+## 5. Submission and assignment/project connection
+Submit a short paper review, completed evidence table, manual/model annotations, and one feasible follow-up study. Explain how ICPC definitions become Assignment 2 detector specifications and why OSDI failure evidence motivates testing.
+
+Save predictions under `submissions/` and include stable IDs. Include your completed notebook, run records (or explicit not-run status), and a short interpretation. Do not include credentials. Restart the R session and rerun before submitting.
+
+```{r chunk-8}
+SUBMISSIONS <- file.path(ROOT, "submissions")
+dir.create(SUBMISSIONS, showWarnings = FALSE)
+# TODO: export completed predictions with stable IDs using write.csv(..., row.names = FALSE).
+# Never export placeholder predictions.
+```
+
+## Completion checks
+- [ ] Data checks and assumptions are documented.
+- [ ] Traditional method and required evidence are complete.
+- [ ] LLM/agent protocol is reproducible and run status is honest.
+- [ ] Comparisons use matched data and respect label boundaries.
+- [ ] Discussion responses refer to evidence.
+- [ ] No TODOs remain in the work being submitted (optional activities may be marked not applicable).
+
+## Checks and discussion
+- Which labels depend on assumptions beyond the scenario?
+- Can annotator agreement validate the coding scheme by itself?
+- Does a prevalence study show that removing a pattern prevents failures?
+- Which OSDI claim would you replicate first, and what data would you need?
+
+## Next steps
+Write a short review: contribution, strongest evidence, one material limitation, and a feasible follow-up. Carry ICPC operational definitions into Assignment 2.
+
+**Your response:** TODO
+
+## Reading connections
+- [Simple Testing Can Prevent Most Critical Failures: An Analysis of Production Failures in Distributed Data-Intensive Systems](https://www.usenix.org/conference/osdi14/technical-sessions/presentation/yuan)
+- [Studying the Prevalence of Exception Handling Anti-Patterns](https://learn.uwaterloo.ca/d2l/le/content/1115318/viewContent/5833095/View)
+
+## Reproducibility record
+```{r session-info}
+sessionInfo()
+```

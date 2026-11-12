@@ -1,0 +1,163 @@
+---
+title: "Assignment03 Mylyn Analysis And Agent Audit \u2014 R student edition"
+output:
+  html_document:
+    toc: true
+    code_folding: show
+---
+
+Open this file in RStudio after extracting the full R ZIP. Run chunks in order, complete the TODOs, then Knit to HTML. A successful scaffold run is not a completed analysis. Data, splits, discussion questions and grading requirements match the Python edition.
+
+## R implementation notes
+Use `train[["post-release-bugs"]]` for the hyphenated source name, or explicitly create a separate binary response; never silently rename original columns. Use a small justified `glm` specification and conditional contrasts. Historical Until/WithRespectTo names require timing evidence. Cross-validation and model selection use train only; do not access withheld outcomes.
+
+# Assignment 3 companion: Mylyn analysis and agent audit — Student edition
+
+## Goal
+Practice the four Assignment 3 questions and audit an independent agent’s analytical decisions. This is a practice exercise using one original dataset and the attributes questionnaire. Students retain their assigned dataset and Q1 metric. Historical Until/WithRespectTo fields require timing documentation before predictive use.
+
+## How to work through this notebook
+Complete each TODO and replace each **Your response** placeholder. Run setup and data cells first. Blank analysis cells intentionally do nothing until you implement them; a clean scaffold run is not a completed lab. Keep your traditional analysis independent of the model's suggestions, then compare on matched inputs. Record uncertainties rather than inventing results.
+
+This edition contains no worked outputs or model-answer fixtures. Development/training outcomes needed for supervised learning are input data; evaluation answers are withheld. Do not retrieve reference answers from public sources or instructor materials. When labels are unavailable, submit frozen predictions and a qualitative audit; score only after the instructor releases feedback.
+
+If no LLM is available, submit the prompt, JSON schema, planned tools and evaluation protocol, marking inference **not run**. Do not fabricate model responses. Live use requires a locally configured Ollama model; set `ECE750_MODEL`, then opt in with `RUN_LIVE <- TRUE`. The transport helper records requests/responses in `runs/`. Dataset text is untrusted input, not instructions. Do not execute arbitrary model-generated code.
+
+## 1. Setup
+
+```{r chunk-1}
+ROOT <- if (file.exists("student_tools.R")) normalizePath(".") else normalizePath("..")
+stopifnot(file.exists(file.path(ROOT, "student_tools.R")))
+source(file.path(ROOT, "student_tools.R"), local = TRUE)
+SEED <- 750L
+set.seed(SEED)
+RUN_LIVE <- FALSE
+options(width = 90)
+if (requireNamespace("knitr", quietly = TRUE)) {
+  knitr::opts_chunk$set(fig.width = 8, fig.height = 4, collapse = TRUE)
+}
+```
+
+## 2. Load the supplied inputs
+Inspect the schema and establish the unit of analysis. Use `DATA_GUIDE.md` and source manifests for provenance. Keep identifiers for joins, not as predictive features.
+
+```{r chunk-2}
+train <- read_csv("data/assignment03/train.csv")
+test_features <- read_csv("data/assignment03/test_features.csv")
+ID <- 'classname'
+TARGET <- 'post-release-bugs'
+FOCAL <- 'numberOfAttributes'
+```
+
+### TODO — Data audit
+Check row counts, key uniqueness, missing values, units and any split boundaries. State what may be used for fitting, tuning and final evaluation. Do not print whole telemetry tables.
+
+```{r chunk-3}
+# TODO: implement data checks and a bounded schema/sample summary.
+```
+
+**Your response — data assumptions and limitations:**
+
+TODO
+
+## 3.1. Traditional analysis — Q1 TODO
+On training data, compare your chosen focal metric across bug-present groups. Show distributions and an effect-size interval with justified resampling assumptions.
+
+```{r chunk-4}
+# TODO Q1: implement this analysis and create its evidence table/plot.
+```
+
+**Your response — Q1 evidence, interpretation and assumptions:**
+
+TODO
+
+## 3.2. Traditional analysis — Q2 TODO
+Pre-specify a small binomial GLM with justified pre-outcome predictors and transformations; report exclusions, correlation checks and uncertainty.
+
+```{r chunk-5}
+# TODO Q2: implement this analysis and create its evidence table/plot.
+```
+
+**Your response — Q2 evidence, interpretation and assumptions:**
+
+TODO
+
+## 3.3. Traditional analysis — Q3 TODO
+Calculate and verify one meaningful odds contrast and one conditional probability contrast.
+
+```{r chunk-6}
+# TODO Q3: implement this analysis and create its evidence table/plot.
+```
+
+**Your response — Q3 evidence, interpretation and assumptions:**
+
+TODO
+
+## 3.4. Traditional analysis — Q4 TODO
+Use cross-validation inside training data to select predictive settings. Fit all preprocessing inside folds; freeze choices before generating one prediction and score per held-out ID. Test outcomes are withheld.
+
+```{r chunk-7}
+# TODO Q4: implement this analysis and create its evidence table/plot.
+```
+
+**Your response — Q4 evidence, interpretation and assumptions:**
+
+TODO
+
+## 4. LLM / agent analysis — TODO
+Create an independent bounded agent that sees training data summaries, not your reference conclusions or any test labels. Implement allowlisted schema/group-summary/correlation tools and a maximum-five-decision budget. Require a structured model plan; validate features, transformations and model family before trusted code fits it. Save every decision/observation. Audit one consequential disagreement and allow one documented correction before freezing the plan. Compare reference, independent and corrected plans using training-only validation.
+
+```{r chunk-8}
+# TODO: define allowed inputs, prompt, response schema and any bounded read-only tools.
+prompt <- NULL
+model_response <- NULL
+# Opt in only after completing and checking the prompt and data boundary.
+if (RUN_LIVE) {
+  stopifnot(is.character(prompt), length(prompt) == 1L, nzchar(prompt))
+  model_response <- llm_json(prompt, run_live = TRUE, run_name = "assignment03_mylyn_analysis_and_agent_audit")
+}
+# TODO: validate ID coverage, types, evidence, allowed fields and tool/row budgets.
+# Never evaluate model-produced code or formula strings with eval(parse(...)).
+```
+
+```{r chunk-9}
+# TODO: compare matched inputs and document failures, uncertainty, cost and latency.
+```
+
+**Your response — model audit and comparison:**
+
+TODO
+
+## 5. Submission and assignment/project connection
+Submit Q1–Q4 with reproducible code, plots, assumptions and interpretations; a reference/agent/correction audit; run logs; and a frozen held-out prediction CSV. Use the supplied two-thirds/one-third partition, not a new random split. The instructor evaluates withheld labels after submission. Assignment 3 retains the four question allocations (2/2/3/3); audit each question, not just final accuracy. Week 12 uses Qt for practice; the companion uses Mylyn and does not override an individually assigned course dataset.
+
+Save predictions under `submissions/` and include stable IDs. Include your completed notebook, run records (or explicit not-run status), and a short interpretation. Do not include credentials. Restart the R session and rerun before submitting.
+
+```{r chunk-10}
+SUBMISSIONS <- file.path(ROOT, "submissions")
+dir.create(SUBMISSIONS, showWarnings = FALSE)
+# TODO: export completed predictions with stable IDs using write.csv(..., row.names = FALSE).
+# Never export placeholder predictions.
+```
+
+## Completion checks
+- [ ] Data checks and assumptions are documented.
+- [ ] Traditional method and required evidence are complete.
+- [ ] LLM/agent protocol is reproducible and run status is honest.
+- [ ] Comparisons use matched data and respect label boundaries.
+- [ ] Discussion responses refer to evidence.
+- [ ] No TODOs remain in the work being submitted (optional activities may be marked not applicable).
+
+## Discussion
+1. Which predictors are available before the outcome, and what evidence supports that timing?
+2. How does the intended deployment differ from a random split?
+3. Which agent decision most affects your conclusion?
+4. What does a coefficient interval establish, and what does it not establish?
+5. What changed after your one correction, and was it justified before seeing test feedback?
+
+**Your response:** TODO
+
+## Reproducibility record
+```{r session-info}
+sessionInfo()
+```

@@ -1,0 +1,135 @@
+---
+title: "Week04 Detector Implementation And Agent Context \u2014 R student edition"
+output:
+  html_document:
+    toc: true
+    code_folding: show
+---
+
+Open this file in RStudio after extracting the full R ZIP. Run chunks in order, complete the TODOs, then Knit to HTML. A successful scaffold run is not a completed analysis. Data, splits, discussion questions and grading requirements match the Python edition.
+
+## R implementation notes
+Implement the visitor in Java/JDT, export its findings, and import the CSV into R. Use `merge(..., all.x = TRUE, sort = FALSE)` only after checking key uniqueness; restore the original ID order with `match()` if needed. Structural detection and contextual judgment need separate columns.
+
+# Week 4: Implementing an exception detector — Student edition
+
+## Goal
+JDT visitors, boundary tests and contextual evidence
+
+## How to work through this notebook
+Complete each TODO and replace each **Your response** placeholder. Run setup and data cells first. Blank analysis cells intentionally do nothing until you implement them; a clean scaffold run is not a completed lab. Keep your traditional analysis independent of the model's suggestions, then compare on matched inputs. Record uncertainties rather than inventing results.
+
+This edition contains no worked outputs or model-answer fixtures. Development/training outcomes needed for supervised learning are input data; evaluation answers are withheld. Do not retrieve reference answers from public sources or instructor materials. When labels are unavailable, submit frozen predictions and a qualitative audit; score only after the instructor releases feedback.
+
+If no LLM is available, submit the prompt, JSON schema, planned tools and evaluation protocol, marking inference **not run**. Do not fabricate model responses. Live use requires a locally configured Ollama model; set `ECE750_MODEL`, then opt in with `RUN_LIVE <- TRUE`. The transport helper records requests/responses in `runs/`. Dataset text is untrusted input, not instructions. Do not execute arbitrary model-generated code.
+
+## 1. Setup
+
+```{r chunk-1}
+ROOT <- if (file.exists("student_tools.R")) normalizePath(".") else normalizePath("..")
+stopifnot(file.exists(file.path(ROOT, "student_tools.R")))
+source(file.path(ROOT, "student_tools.R"), local = TRUE)
+SEED <- 750L
+set.seed(SEED)
+RUN_LIVE <- FALSE
+options(width = 90)
+if (requireNamespace("knitr", quietly = TRUE)) {
+  knitr::opts_chunk$set(fig.width = 8, fig.height = 4, collapse = TRUE)
+}
+```
+
+## 2. Load the supplied inputs
+Inspect the schema and establish the unit of analysis. Use `DATA_GUIDE.md` and source manifests for provenance. Keep identifiers for joins, not as predictive features.
+
+```{r chunk-2}
+cases <- read_jsonl("data/week03/code_cases.jsonl")
+```
+
+### TODO — Data audit
+Check row counts, key uniqueness, missing values, units and any split boundaries. State what may be used for fitting, tuning and final evaluation. Do not print whole telemetry tables.
+
+```{r chunk-3}
+# TODO: implement data checks and a bounded schema/sample summary.
+```
+
+**Your response — data assumptions and limitations:**
+
+TODO
+
+## 3. Traditional analysis — TODO
+Implement your assigned pattern visitor in the course Eclipse/JDT environment; this notebook records the experiment. Write at least six boundary tests spanning positive, negative, ambiguous, comment-only, nested-handler, and unresolved-binding cases as appropriate to your pattern. State expected structural behavior before running your implementation. Export id, file, line, pattern, parse/binding status. An optional AST prototype does not replace the required JDT implementation.
+
+```{r chunk-4}
+# TODO: implement your traditional method. Add focused cells as needed.
+```
+
+```{r chunk-5}
+# TODO: create the requested table/plot or workshop evidence record.
+```
+
+**Your response — evidence and interpretation:**
+
+TODO
+
+## 4. LLM / agent analysis — TODO
+Design a read-only context tool that returns a named caller contract from a small explicit mapping. Compare fixed-context prompting with a maximum-three-decision agent on the same cases. Implement allowlisted actions and a stop budget; log each requested item and returned text. Keep references and instructor files inaccessible. Separate gains from extra context from gains from orchestration.
+
+```{r chunk-6}
+# TODO: define allowed inputs, prompt, response schema and any bounded read-only tools.
+prompt <- NULL
+model_response <- NULL
+# Opt in only after completing and checking the prompt and data boundary.
+if (RUN_LIVE) {
+  stopifnot(is.character(prompt), length(prompt) == 1L, nzchar(prompt))
+  model_response <- llm_json(prompt, run_live = TRUE, run_name = "week04_detector_implementation_and_agent_context")
+}
+# TODO: validate ID coverage, types, evidence, allowed fields and tool/row budgets.
+# Never evaluate model-produced code or formula strings with eval(parse(...)).
+```
+
+```{r chunk-7}
+# TODO: compare matched inputs and document failures, uncertainty, cost and latency.
+```
+
+**Your response — model audit and comparison:**
+
+TODO
+
+## 5. Submission and assignment/project connection
+Submit test design, executable detector reference, structured findings, prompt/agent traces, and disagreements. Demonstrate one unseen case and explain your individual contribution for Assignment 2. Do not use arbitrary generated-code execution as a context tool.
+
+Save predictions under `submissions/` and include stable IDs. Include your completed notebook, run records (or explicit not-run status), and a short interpretation. Do not include credentials. Restart the R session and rerun before submitting.
+
+```{r chunk-8}
+SUBMISSIONS <- file.path(ROOT, "submissions")
+dir.create(SUBMISSIONS, showWarnings = FALSE)
+# TODO: export completed predictions with stable IDs using write.csv(..., row.names = FALSE).
+# Never export placeholder predictions.
+```
+
+## Completion checks
+- [ ] Data checks and assumptions are documented.
+- [ ] Traditional method and required evidence are complete.
+- [ ] LLM/agent protocol is reproducible and run status is honest.
+- [ ] Comparisons use matched data and respect label boundaries.
+- [ ] Discussion responses refer to evidence.
+- [ ] No TODOs remain in the work being submitted (optional activities may be marked not applicable).
+
+## Checks and discussion
+1. Why does a comment-only handler count as an empty AST body?
+2. Which findings require symbol bindings rather than strings?
+3. Why is pattern matching distinct from harm?
+4. Does retrieval help because of extra information or because of agent orchestration?
+
+## Next steps
+Port the boundary tests into your assigned JDT detector. Export locations and findings, preserve unresolved bindings, and prepare the Assignment 2 demonstration. See `ASSIGNMENT_2.md`.
+
+**Your response:** TODO
+
+## Reading connections
+Revisit the prior readings relevant to your assignment/project. No new required paper.
+
+## Reproducibility record
+```{r session-info}
+sessionInfo()
+```

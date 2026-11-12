@@ -15,3 +15,7 @@ GitHub Pages serves the root of the main branch. `.nojekyll` preserves the stati
 ## Teaching notes
 
 Student notebooks contain instructions and TODOs, with no executed outputs. Instructor grading materials and withheld evaluation answers are excluded. Download and extract the full student lab package before running notebooks. Learning notes and progress stay in the browser; they are not submissions. Current dates and course policies remain on LEARN. Research and data provenance are linked in the weekly pages and data guide. Upstream materials retain their original terms.
+
+## R labs
+
+R Markdown previews and downloads are available on each weekly page and Resources. The full R ZIP contains 13 .Rmd notebooks, plain .R scripts, identical student datasets and a model transport helper. All scaffolds execute and render; student analyses are TODOs and live model calls are disabled by default.

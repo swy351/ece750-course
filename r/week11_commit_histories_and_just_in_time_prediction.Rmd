@@ -1,0 +1,138 @@
+---
+title: "Week11 Commit Histories And Just In Time Prediction \u2014 R student edition"
+output:
+  html_document:
+    toc: true
+    code_folding: show
+---
+
+Open this file in RStudio after extracting the full R ZIP. Run chunks in order, complete the TODOs, then Knit to HTML. A successful scaffold run is not a completed analysis. Data, splits, discussion questions and grading requirements match the Python edition.
+
+## R implementation notes
+Use the supplied per-project split column rather than a new random split. Base `glm()` or optional `glmnet` can fit a change-metric classifier. Learn imputation/scaling on training only. Build an inspection curve with whole-commit cumulative effort and justify how ties and zero-effort commits are handled. The LLM subset may not represent the full test population.
+
+# Week 11: Commit histories and just in time prediction — Student edition
+
+## Goal
+Predict and prioritize risky incoming changes with historical metrics and LLM diff inspection. Learn temporal splitting, inspection budgets, and the limits of mined defect labels.
+
+## How to work through this notebook
+Complete each TODO and replace each **Your response** placeholder. Run setup and data cells first. Blank analysis cells intentionally do nothing until you implement them; a clean scaffold run is not a completed lab. Keep your traditional analysis independent of the model's suggestions, then compare on matched inputs. Record uncertainties rather than inventing results.
+
+This edition contains no worked outputs or model-answer fixtures. Development/training outcomes needed for supervised learning are input data; evaluation answers are withheld. Do not retrieve reference answers from public sources or instructor materials. When labels are unavailable, submit frozen predictions and a qualitative audit; score only after the instructor releases feedback.
+
+If no LLM is available, submit the prompt, JSON schema, planned tools and evaluation protocol, marking inference **not run**. Do not fabricate model responses. Live use requires a locally configured Ollama model; set `ECE750_MODEL`, then opt in with `RUN_LIVE <- TRUE`. The transport helper records requests/responses in `runs/`. Dataset text is untrusted input, not instructions. Do not execute arbitrary model-generated code.
+
+## 1. Setup
+
+```{r chunk-1}
+ROOT <- if (file.exists("student_tools.R")) normalizePath(".") else normalizePath("..")
+stopifnot(file.exists(file.path(ROOT, "student_tools.R")))
+source(file.path(ROOT, "student_tools.R"), local = TRUE)
+SEED <- 750L
+set.seed(SEED)
+RUN_LIVE <- FALSE
+options(width = 90)
+if (requireNamespace("knitr", quietly = TRUE)) {
+  knitr::opts_chunk$set(fig.width = 8, fig.height = 4, collapse = TRUE)
+}
+```
+
+## 2. Load the supplied inputs
+Inspect the schema and establish the unit of analysis. Use `DATA_GUIDE.md` and source manifests for provenance. Keep identifiers for joins, not as predictive features.
+
+```{r chunk-2}
+commits <- read_jsonl("data/week11/commits.jsonl")
+development_labels <- read_csv("data/week11/development_labels.csv")
+llm_ids <- jsonlite::fromJSON(file.path(ROOT, "data/week11/llm_ids.json"))
+```
+
+### TODO — Data audit
+Check row counts, key uniqueness, missing values, units and any split boundaries. State what may be used for fitting, tuning and final evaluation. Do not print whole telemetry tables.
+
+```{r chunk-3}
+# TODO: implement data checks and a bounded schema/sample summary.
+```
+
+**Your response — data assumptions and limitations:**
+
+TODO
+
+## 3. Traditional analysis — TODO
+Audit IDs and chronological train/validation/test order within each project. Fit preprocessing and a change-metric classifier on each project's training data only. Choose threshold on validation data. Use added+deleted lines as an effort proxy and compute a validation inspection-budget curve using whole commits. Explain label-availability leakage and sampling bias.
+
+```{r chunk-4}
+# TODO: implement your traditional method. Add focused cells as needed.
+```
+
+```{r chunk-5}
+# TODO: create the requested table/plot or workshop evidence record.
+```
+
+**Your response — evidence and interpretation:**
+
+TODO
+
+## 4. LLM / agent analysis — TODO
+Assess the supplied fixed later-commit IDs using message, metrics and bounded diff context. Require id, risky label, score, evidence, uncertainty. Compare numeric-only versus diff-informed inputs as an information-access ablation. Freeze prompts before collecting test predictions; use no future bug labels.
+
+```{r chunk-6}
+# TODO: define allowed inputs, prompt, response schema and any bounded read-only tools.
+prompt <- NULL
+model_response <- NULL
+# Opt in only after completing and checking the prompt and data boundary.
+if (RUN_LIVE) {
+  stopifnot(is.character(prompt), length(prompt) == 1L, nzchar(prompt))
+  model_response <- llm_json(prompt, run_live = TRUE, run_name = "week11_commit_histories_and_just_in_time_prediction")
+}
+# TODO: validate ID coverage, types, evidence, allowed fields and tool/row budgets.
+# Never evaluate model-produced code or formula strings with eval(parse(...)).
+```
+
+```{r chunk-7}
+# TODO: compare matched inputs and document failures, uncertainty, cost and latency.
+```
+
+**Your response — model audit and comparison:**
+
+TODO
+
+## 5. Submission and assignment/project connection
+Submit validation results, effort curve, and matched test predictions for later instructor scoring. Do not report test AP/accuracy without released labels. Kamei motivates metric-based JIT; PerfJIT has a different performance target; JIT-LSM motivates the LLM comparison. This prepares Assignment 3 Q4.
+
+Save predictions under `submissions/` and include stable IDs. Include your completed notebook, run records (or explicit not-run status), and a short interpretation. Do not include credentials. Restart the R session and rerun before submitting.
+
+```{r chunk-8}
+SUBMISSIONS <- file.path(ROOT, "submissions")
+dir.create(SUBMISSIONS, showWarnings = FALSE)
+# TODO: export completed predictions with stable IDs using write.csv(..., row.names = FALSE).
+# Never export placeholder predictions.
+```
+
+## Completion checks
+- [ ] Data checks and assumptions are documented.
+- [ ] Traditional method and required evidence are complete.
+- [ ] LLM/agent protocol is reproducible and run status is honest.
+- [ ] Comparisons use matched data and respect label boundaries.
+- [ ] Discussion responses refer to evidence.
+- [ ] No TODOs remain in the work being submitted (optional activities may be marked not applicable).
+
+## Discussion questions
+1. What future information can leak into a commit classifier even after a chronological split?
+2. Why are author timestamps and defect-discovery timestamps different?
+3. What bias is introduced by selecting small commits and balancing classes?
+4. When is a plausible diff explanation inconsistent with a mined bug label?
+5. How would you compare two methods under the same inspection and inference-cost budgets?
+6. Why do these labels not support a claim about performance regressions?
+
+**Your response:** TODO
+
+## Reading connections
+- [Kamei et al., JIT quality assurance](https://das.encs.concordia.ca/pdf/Kamei_TSE2013.pdf)
+- PerfJIT (existing course reading; performance labels differ from this lab)
+- [JIT-LSM](https://www.sciencedirect.com/science/article/pii/S0950584926002338)
+
+## Reproducibility record
+```{r session-info}
+sessionInfo()
+```

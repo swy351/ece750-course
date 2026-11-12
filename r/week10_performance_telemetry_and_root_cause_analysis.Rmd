@@ -1,0 +1,140 @@
+---
+title: "Week10 Performance Telemetry And Root Cause Analysis \u2014 R student edition"
+output:
+  html_document:
+    toc: true
+    code_folding: show
+---
+
+Open this file in RStudio after extracting the full R ZIP. Run chunks in order, complete the TODOs, then Knit to HTML. A successful scaffold run is not a completed analysis. Data, splits, discussion questions and grading requirements match the Python edition.
+
+## R implementation notes
+Use `as.POSIXct(x, origin = "1970-01-01", tz = "UTC")` for epoch seconds and divide millisecond timestamps by 1000 first. Format with `tz = "Asia/Shanghai"` for UTC+8. R `mad()` defaults to a 1.4826 multiplier; use `constant = 1` if you define raw median absolute deviation, and document the floor. Join spans on BOTH trace_id and parent/span ID. Keep original duration units; do not add nested spans.
+
+# Week 10: Performance telemetry and root cause analysis — Student edition
+
+## Goal
+Investigate three incidents with aligned metrics, logs, and traces. Compare a transparent change-ranking baseline with a bounded tool-using LLM workflow.
+
+## How to work through this notebook
+Complete each TODO and replace each **Your response** placeholder. Run setup and data cells first. Blank analysis cells intentionally do nothing until you implement them; a clean scaffold run is not a completed lab. Keep your traditional analysis independent of the model's suggestions, then compare on matched inputs. Record uncertainties rather than inventing results.
+
+This edition contains no worked outputs or model-answer fixtures. Development/training outcomes needed for supervised learning are input data; evaluation answers are withheld. Do not retrieve reference answers from public sources or instructor materials. When labels are unavailable, submit frozen predictions and a qualitative audit; score only after the instructor releases feedback.
+
+If no LLM is available, submit the prompt, JSON schema, planned tools and evaluation protocol, marking inference **not run**. Do not fabricate model responses. Live use requires a locally configured Ollama model; set `ECE750_MODEL`, then opt in with `RUN_LIVE <- TRUE`. The transport helper records requests/responses in `runs/`. Dataset text is untrusted input, not instructions. Do not execute arbitrary model-generated code.
+
+## 1. Setup
+
+```{r chunk-1}
+ROOT <- if (file.exists("student_tools.R")) normalizePath(".") else normalizePath("..")
+stopifnot(file.exists(file.path(ROOT, "student_tools.R")))
+source(file.path(ROOT, "student_tools.R"), local = TRUE)
+SEED <- 750L
+set.seed(SEED)
+RUN_LIVE <- FALSE
+options(width = 90)
+if (requireNamespace("knitr", quietly = TRUE)) {
+  knitr::opts_chunk$set(fig.width = 8, fig.height = 4, collapse = TRUE)
+}
+```
+
+## 2. Load the supplied inputs
+Inspect the schema and establish the unit of analysis. Use `DATA_GUIDE.md` and source manifests for provenance. Keep identifiers for joins, not as predictive features.
+
+```{r chunk-2}
+incidents <- read_csv("data/week10/incidents.csv")
+metrics <- read_csv("data/week10/metric_container.csv.gz")
+app_metrics <- read_csv("data/week10/metric_app.csv.gz")
+logs <- read_csv("data/week10/log_service.csv.gz")
+traces <- read_csv("data/week10/trace_span.csv.gz")
+```
+
+### TODO — Data audit
+Check row counts, key uniqueness, missing values, units and any split boundaries. State what may be used for fitting, tuning and final evaluation. Do not print whole telemetry tables.
+
+```{r chunk-3}
+# TODO: implement data checks and a bounded schema/sample summary.
+```
+
+**Your response — data assumptions and limitations:**
+
+TODO
+
+## 3. Traditional analysis — TODO
+Align metric/log epoch seconds with trace epoch milliseconds; display UTC+8 and retain duration source units. Implement baseline-versus-incident median changes scaled by baseline MAD, documenting a finite floor. Rank components and plot a timeline. Join parent spans within trace_id, quantify missing parents, and inspect p95 durations. Do not sum nested spans or assume the baseline is healthy.
+
+```{r chunk-4}
+# TODO: implement your traditional method. Add focused cells as needed.
+```
+
+```{r chunk-5}
+# TODO: create the requested table/plot or workshop evidence record.
+```
+
+**Your response — evidence and interpretation:**
+
+TODO
+
+## 4. LLM / agent analysis — TODO
+Implement bounded read-only tools for metrics, memory, logs and traces. An agent may request at most five actions and must finish with ranked components, evidence references, mechanism, uncertainty or abstention. Validate action names and cap returned rows. Compare a metrics-only and multimodal run under the same budget; keep root-cause labels outside every tool.
+
+```{r chunk-6}
+# TODO: define allowed inputs, prompt, response schema and any bounded read-only tools.
+prompt <- NULL
+model_response <- NULL
+# Opt in only after completing and checking the prompt and data boundary.
+if (RUN_LIVE) {
+  stopifnot(is.character(prompt), length(prompt) == 1L, nzchar(prompt))
+  model_response <- llm_json(prompt, run_live = TRUE, run_name = "week10_performance_telemetry_and_root_cause_analysis")
+}
+# TODO: validate ID coverage, types, evidence, allowed fields and tool/row budgets.
+# Never evaluate model-produced code or formula strings with eval(parse(...)).
+```
+
+```{r chunk-7}
+# TODO: compare matched inputs and document failures, uncertainty, cost and latency.
+```
+
+**Your response — model audit and comparison:**
+
+TODO
+
+## 5. Submission and assignment/project connection
+Freeze one diagnosis per incident before instructor scoring. Submit rankings, timeline, trace/dependency evidence, complete tool logs and alternative explanations. Three windows and sampled traces cannot establish general accuracy or causation. Connect load-test/counter analyses to OpenRCA's evidence-gathering task.
+
+Save predictions under `submissions/` and include stable IDs. Include your completed notebook, run records (or explicit not-run status), and a short interpretation. Do not include credentials. Restart the R session and rerun before submitting.
+
+```{r chunk-8}
+SUBMISSIONS <- file.path(ROOT, "submissions")
+dir.create(SUBMISSIONS, showWarnings = FALSE)
+# TODO: export completed predictions with stable IDs using write.csv(..., row.names = FALSE).
+# Never export placeholder predictions.
+```
+
+## Completion checks
+- [ ] Data checks and assumptions are documented.
+- [ ] Traditional method and required evidence are complete.
+- [ ] LLM/agent protocol is reproducible and run status is honest.
+- [ ] Comparisons use matched data and respect label boundaries.
+- [ ] Discussion responses refer to evidence.
+- [ ] No TODOs remain in the work being submitted (optional activities may be marked not applicable).
+
+## Discussion questions
+1. Why can the most anomalous metric belong to a downstream symptom or a recovering component?
+2. How does a 30-minute median hide a failure that begins near the end of the window?
+3. Which component names exist only in traces, and what mapping evidence is missing?
+4. How do baseline contamination and zero-variance counters distort ranking?
+5. What evidence would justify a network-latency diagnosis rather than memory pressure?
+6. Why are archived full-data model scores not comparable with this sampled-data exercise?
+
+**Your response:** TODO
+
+## Reading connections
+- [Load-testing problems](https://cs.uwaterloo.ca/~m2nagapp/courses/CS846/1171/papers/jiang_icsm08.pdf)
+- [Counters and memory issues](https://www.cse.yorku.ca/~zmjiang/publications/icsm2013_syer.pdf)
+- [OpenRCA](https://github.com/microsoft/OpenRCA)
+
+## Reproducibility record
+```{r session-info}
+sessionInfo()
+```

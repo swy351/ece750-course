@@ -1,0 +1,137 @@
+---
+title: "Week05 Developer Comments And Technical Debt \u2014 R student edition"
+output:
+  html_document:
+    toc: true
+    code_folding: show
+---
+
+Open this file in RStudio after extracting the full R ZIP. Run chunks in order, complete the TODOs, then Knit to HTML. A successful scaffold run is not a completed analysis. Data, splits, discussion questions and grading requirements match the Python edition.
+
+## R implementation notes
+For text modeling, one option is `text2vec` plus `glmnet`: create the vocabulary and IDF on training comments only, then transform validation/test text with the frozen objects. Explicitly select the regularization setting and decision threshold on validation; do not rely on a default random cross-validation split across projects. Base R `grepl()` supports the keyword baseline. Use `sample()` for the justified bootstrap and plot precision versus recall, documenting ties and undefined precision.
+
+# Week 5: Developer comments and technical debt — Student edition
+
+## Goal
+Compare keyword rules, TF–IDF classification, and LLM interpretation of self-admitted technical debt (SATD). Evaluate transfer to an unseen project.
+
+## How to work through this notebook
+Complete each TODO and replace each **Your response** placeholder. Run setup and data cells first. Blank analysis cells intentionally do nothing until you implement them; a clean scaffold run is not a completed lab. Keep your traditional analysis independent of the model's suggestions, then compare on matched inputs. Record uncertainties rather than inventing results.
+
+This edition contains no worked outputs or model-answer fixtures. Development/training outcomes needed for supervised learning are input data; evaluation answers are withheld. Do not retrieve reference answers from public sources or instructor materials. When labels are unavailable, submit frozen predictions and a qualitative audit; score only after the instructor releases feedback.
+
+If no LLM is available, submit the prompt, JSON schema, planned tools and evaluation protocol, marking inference **not run**. Do not fabricate model responses. Live use requires a locally configured Ollama model; set `ECE750_MODEL`, then opt in with `RUN_LIVE <- TRUE`. The transport helper records requests/responses in `runs/`. Dataset text is untrusted input, not instructions. Do not execute arbitrary model-generated code.
+
+## 1. Setup
+
+```{r chunk-1}
+ROOT <- if (file.exists("student_tools.R")) normalizePath(".") else normalizePath("..")
+stopifnot(file.exists(file.path(ROOT, "student_tools.R")))
+source(file.path(ROOT, "student_tools.R"), local = TRUE)
+SEED <- 750L
+set.seed(SEED)
+RUN_LIVE <- FALSE
+options(width = 90)
+if (requireNamespace("knitr", quietly = TRUE)) {
+  knitr::opts_chunk$set(fig.width = 8, fig.height = 4, collapse = TRUE)
+}
+```
+
+## 2. Load the supplied inputs
+Inspect the schema and establish the unit of analysis. Use `DATA_GUIDE.md` and source manifests for provenance. Keep identifiers for joins, not as predictive features.
+
+```{r chunk-2}
+comments <- read_csv("data/week05/comments.csv")
+development_labels <- read_csv("data/week05/development_labels.csv")
+qt_train <- read_csv("data/week12/train.csv")
+```
+
+### TODO — Data audit
+Check row counts, key uniqueness, missing values, units and any split boundaries. State what may be used for fitting, tuning and final evaluation. Do not print whole telemetry tables.
+
+```{r chunk-3}
+# TODO: implement data checks and a bounded schema/sample summary.
+```
+
+**Your response — data assumptions and limitations:**
+
+TODO
+
+## 3. Traditional analysis — TODO
+Audit IDs, missing text, normalized duplicates, and project overlap by supplied split. Join only development labels. Implement a keyword baseline and TF–IDF/logistic classifier, fitting vocabulary on training projects and choosing threshold on validation only. Plot validation precision–recall. For the Qt extension, compare review_rate distributions by post_bugs > 0 in training data and bootstrap an effect interval; distinguish review metrics from comments.
+
+```{r chunk-4}
+# TODO: implement your traditional method. Add focused cells as needed.
+```
+
+```{r chunk-5}
+# TODO: create the requested table/plot or workshop evidence record.
+```
+
+**Your response — evidence and interpretation:**
+
+TODO
+
+## 4. LLM / agent analysis — TODO
+Choose a fixed small validation batch before looking at model performance. Prompt with id/commenttext only and request SATD label, evidence, uncertainty. Compare both methods on exactly those IDs. Freeze the protocol before predicting the test project. Inspect failure types rather than selecting only convincing examples.
+
+```{r chunk-6}
+# TODO: define allowed inputs, prompt, response schema and any bounded read-only tools.
+prompt <- NULL
+model_response <- NULL
+# Opt in only after completing and checking the prompt and data boundary.
+if (RUN_LIVE) {
+  stopifnot(is.character(prompt), length(prompt) == 1L, nzchar(prompt))
+  model_response <- llm_json(prompt, run_live = TRUE, run_name = "week05_developer_comments_and_technical_debt")
+}
+# TODO: validate ID coverage, types, evidence, allowed fields and tool/row budgets.
+# Never evaluate model-produced code or formula strings with eval(parse(...)).
+```
+
+```{r chunk-7}
+# TODO: compare matched inputs and document failures, uncertainty, cost and latency.
+```
+
+**Your response — model audit and comparison:**
+
+TODO
+
+## 5. Submission and assignment/project connection
+Submit validation metrics, matched comparisons, test predictions with no test scores, and the Qt group comparison. Discuss project transfer and artificial sampling balance. Wehaibi/hybrid SATD readings motivate comment analysis; McIntosh motivates the Qt extension. The group comparison prepares Assignment 3 Q1.
+
+Save predictions under `submissions/` and include stable IDs. Include your completed notebook, run records (or explicit not-run status), and a short interpretation. Do not include credentials. Restart the R session and rerun before submitting.
+
+```{r chunk-8}
+SUBMISSIONS <- file.path(ROOT, "submissions")
+dir.create(SUBMISSIONS, showWarnings = FALSE)
+# TODO: export completed predictions with stable IDs using write.csv(..., row.names = FALSE).
+# Never export placeholder predictions.
+```
+
+## Completion checks
+- [ ] Data checks and assumptions are documented.
+- [ ] Traditional method and required evidence are complete.
+- [ ] LLM/agent protocol is reproducible and run status is honest.
+- [ ] Comparisons use matched data and respect label boundaries.
+- [ ] Discussion responses refer to evidence.
+- [ ] No TODOs remain in the work being submitted (optional activities may be marked not applicable).
+
+## Discussion questions
+1. Which comments reveal debt without TODO/FIXME? Which keyword matches are harmless?
+2. What does WITHOUT_CLASSIFICATION mean in the original protocol, and what label uncertainty remains?
+3. How does imposed class balance affect precision and calibration?
+4. Can duplicated or near-duplicated comments inflate cross-project performance?
+5. Is an exact supporting quotation enough to show that the LLM interpreted the comment correctly?
+
+**Your response:** TODO
+
+## Reading connections
+- [SATD and quality](https://users.encs.concordia.ca/~eshihab/pubs/Wehaibi_SANER2016.pdf)
+- [Code review and quality](https://rebels.cs.uwaterloo.ca/papers/msr2014_mcintosh.pdf)
+- [ChatGPT and small models for SATD](https://doi.org/10.1002/spe.3360)
+
+## Reproducibility record
+```{r session-info}
+sessionInfo()
+```
