@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Assignment 3 Student Handout</title><style>body{font:17px/1.6 system-ui,sans-serif;max-width:1050px;margin:45px auto;padding:0 30px;color:#173448}h1{font-size:35px;color:#152b3a}h2{font-size:25px;margin-top:34px}h3{font-size:20px;margin-top:24px}table{border-collapse:collapse;width:100%;font-size:15px;margin:18px 0}th,td{padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid #cbd7df}th{background:#edf4f6}code{font-size:.9em}a{color:#087e8b}.anchor-link{display:none}li{margin:5px 0}@media print{body{font-size:10.5pt;margin:0;padding:0}h1{font-size:22pt}h2{font-size:15pt}h3{font-size:12pt}table{font-size:9.5pt}h1,h2,h3{break-after:avoid}tr{break-inside:avoid}@page{size:A4;margin:18mm}</style></head><body><p><a href="../index.html#assignments">← ECE 750 assignments</a></p><h1 id="ECE-750-Assignment-3">ECE 750 Assignment 3<a class="anchor-link" href="#ECE-750-Assignment-3">&#182;</a></h1><h2 id="Build-and-audit-an-empirical-software-analysis">Build and audit an empirical software analysis<a class="anchor-link" href="#Build-and-audit-an-empirical-software-analysis">&#182;</a></h2><p>Answer four research questions using your assigned software dataset. Develop a student-controlled reference analysis, obtain an independent agent analysis using training data, verify its claims, and document one evidence-based correction or confirmation. Keep predictive test outcomes withheld until your pipelines and predictions are frozen.</p>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Assignment 3 Student Handout</title><style>body{font:17px/1.6 system-ui,sans-serif;max-width:1050px;margin:45px auto;padding:0 30px;color:#173448}h1{font-size:35px;color:#152b3a}h2{font-size:25px;margin-top:34px}h3{font-size:20px;margin-top:24px}table{border-collapse:collapse;width:100%;font-size:15px;margin:18px 0}th,td{padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid #cbd7df}th{background:#edf4f6}code{font-size:.9em}a{color:#087e8b}.anchor-link{display:none}li{margin:5px 0}@media print{body{font-size:10.5pt;margin:0;padding:0}h1{font-size:22pt}h2{font-size:15pt}h3{font-size:12pt}table{font-size:9.5pt}h1,h2,h3{break-after:avoid}tr{break-inside:avoid}@page{size:A4;margin:18mm}</style></head><body><p><a href="../index.html#assignments">← ECE 750 assignments</a></p><h1 id="ECE-750-Assignment-3">ECE 750 Assignment 3<a class="anchor-link" href="#ECE-750-Assignment-3">&#182;</a></h1><p><strong>Updated 12 November 2026 — Python and R submissions.</strong></p>
+<h2 id="Build-and-audit-an-empirical-software-analysis">Build and audit an empirical software analysis<a class="anchor-link" href="#Build-and-audit-an-empirical-software-analysis">&#182;</a></h2><p>Answer four research questions using your assigned software dataset. Develop a student-controlled reference analysis, obtain an independent agent analysis using training data, verify its claims, and document one evidence-based correction or confirmation. Keep predictive test outcomes withheld until your pipelines and predictions are frozen.</p>
 <table>
 <thead>
 <tr>
@@ -26,6 +27,10 @@
 <tr>
   <td>Preparation</td>
   <td>Week 5 for Q1; Week 6 for Q2–Q3; Week 11 for Q4; Week 12 for integration</td>
+</tr>
+<tr>
+  <td>Analysis language</td>
+  <td>Python or R for Q1–Q4 and the LLM/agent workflow; submit one complete implementation</td>
 </tr>
 <tr>
   <td>Deadline</td>
@@ -92,7 +97,7 @@
   <td>Execution instructions, dataset/metric allocation, environment and seeds</td>
 </tr>
 <tr>
-  <td><code>analysis.ipynb</code> and <code>analysis.html</code></td>
+  <td><code>analysis.ipynb</code> <strong>or</strong> <code>analysis.Rmd</code>, plus <code>analysis.html</code></td>
   <td>Q1–Q4, executed analyses, plots/tables, assumptions and interpretations</td>
 </tr>
 <tr>
@@ -211,7 +216,33 @@
 <h3 id="If-you-cannot-run-a-model">If you cannot run a model<a class="anchor-link" href="#If-you-cannot-run-a-model">&#182;</a></h3><p>Follow the model-access instructions posted on LEARN. If no usable model is available, submit the complete protocol: prompts, selected input IDs, response schema, tool contracts, budgets, validation checks and intended comparisons. Mark all unexecuted model results <strong>not run</strong>; never invent a response. The student notebooks support this protocol-only route. If live execution is specifically required for your offering, report the access problem before submission and follow the course’s alternative-access instructions.</p>
 <p>When the protocol-only route is accepted, its design and auditability are graded in place of execution evidence. Empirical model-performance claims cannot receive credit without an actual run. This route does not waive the traditional analysis or the remaining deliverables.</p>
 <h2 id="Reproducibility-and-submission-rules">Reproducibility and submission rules<a class="anchor-link" href="#Reproducibility-and-submission-rules">&#182;</a></h2><p>Submit your code and written work through the Assignment submission area on LEARN, following its due date, naming conventions and late-submission policy. Do not assume that the dates from the 2025 offering apply. Use the current allocation posted on LEARN for your patterns, project or dataset. If an allocation or split file is missing, report that before carrying out the dependent evaluation; do not silently substitute a different task.</p>
-<p>Use stable relative paths and a dependency file. Restart your notebook kernel and run from the beginning before submitting. Include an executed notebook and a readable HTML export. Retain outputs in your completed submission; the starter notebooks were intentionally distributed without them. Screenshots supplement, but do not replace, runnable code and machine-readable results. Remove credentials and unnecessary personal information from your submission.</p>
+<h3 id="Choose-Python-or-R">Choose Python or R<a class="anchor-link" href="#Choose-Python-or-R">&#182;</a></h3><p><strong>You may use Python or R for the traditional analysis, LLM/agent workflow, plots and evaluation. Submit one complete implementation in your chosen language; you do not need to implement both.</strong> Both languages use the same rubric, data boundaries and prediction schema. Assignment 2 retains its Java/JDT detector requirement; Python or R analyzes the detector's exported findings and implements the comparison workflow.</p>
+<table>
+<thead>
+<tr>
+  <th>Chosen language</th>
+  <th>Required analysis files</th>
+  <th>Environment and execution evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Python</td>
+  <td>Executed <code>analysis.ipynb</code> and readable <code>analysis.html</code>; all imported <code>.py</code> helpers</td>
+  <td>Python version and pinned dependencies (for example <code>requirements.txt</code>); exact fresh-kernel run/export commands in <code>README</code></td>
+</tr>
+<tr>
+  <td>R</td>
+  <td>Completed <code>analysis.Rmd</code> and knitted <code>analysis.html</code>; all sourced <code>.R</code> helpers</td>
+  <td>R version, <code>sessionInfo()</code> output, and package versions (for example <code>renv.lock</code> or a versioned package list with installation instructions); exact fresh-session render command in <code>README</code></td>
+</tr>
+</tbody>
+</table>
+<p>For Python, restart the kernel and run all cells in order before exporting HTML. For R, render in a fresh R session, for example <code>Rscript -e 'rmarkdown::render(&quot;analysis.Rmd&quot;, output_format=&quot;html_document&quot;)'</code>. Document the working directory and include any additional system dependencies. A standalone script or HTML file alone does not replace the required notebook source and narrative answers. If you use both languages, include both environments and explain their execution order; this earns no extra credit by itself.</p>
+<p>Use stable relative paths. Include all necessary helper code, plots/assets needed by the HTML, and machine-readable outputs. Retain the completed traditional results, written answers and genuine model-run outputs; replace the starter TODOs. A declared not-run model protocol follows the model-access rules above. Screenshots supplement, but do not replace, runnable source and results. Remove credentials and unnecessary personal information.</p>
+<h3 id="Equivalent-results-and-reproducibility">Equivalent results and reproducibility<a class="anchor-link" href="#Equivalent-results-and-reproducibility">&#182;</a></h3><p>Document the data version/hash, actual split and fold IDs, preprocessing fit scope, seeds, model specification, regularization, decision threshold, metric definitions and interval/resampling method. Keep the supplied final holdout unchanged. The same seed in Python and R does not guarantee identical folds or bootstrap samples.</p>
+<p>Valid, justified choices of packages, solvers, bootstrap methods or training-selected thresholds can produce different coefficients, intervals and predictive scores. You are graded on correctness, evidence and interpretation, not exact agreement with a reference implementation. Identical frozen predictions evaluated with the same metric definition should agree apart from numerical precision. Explain meaningful differences; language choice does not justify leakage, changed targets, missing rows or incorrect metrics.</p>
+<h3 id="CSV-exports-in-either-language">CSV exports in either language<a class="anchor-link" href="#CSV-exports-in-either-language">&#182;</a></h3><p>Use the assignment's exact column names, UTF-8 encoding and one header row. Export without a dataframe index: Python <code>to_csv(..., index=False)</code> or R <code>write.csv(..., row.names=FALSE)</code>. Preserve IDs as character strings from import, including leading zeros, and preserve source column names where needed (R <code>check.names=FALSE</code>). Binary predictions must be literal <code>0</code>, <code>1</code> or <code>ABSTAIN</code>, not <code>TRUE</code>, <code>FALSE</code>, <code>NA</code> or <code>NaN</code>. Follow the assignment's score/abstention rules. Export full-precision scores and verify ID coverage and uniqueness after reading the CSV back. The same instructor scorer evaluates either language's files; R students do not need to supply a Python implementation.</p>
 <p>Your assistance statement should list the tool/model, purpose, affected files or sections, what you accepted or changed, and how you verified it. Also disclose relevant human help and reused external code with attribution. Cite papers using verified titles and locations in the actual paper, not unverified model-generated references.</p>
 <h2 id="Final-submission-checklist">Final submission checklist<a class="anchor-link" href="#Final-submission-checklist">&#182;</a></h2><ul>
 <li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Assigned dataset, Q1 metric, unit, target and supplied split are documented.</li>
@@ -221,6 +252,7 @@
 <li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Numerical claims and effect interpretations are independently verified.</li>
 <li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Held-out predictions contain the correct IDs and frozen methods.</li>
 <li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Unavailable model runs and test metrics are explicitly marked.</li>
-<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Notebook, HTML, manifests, audit table, decision log and assistance statement are included.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Python <code>.ipynb</code> or R <code>.Rmd</code>, executed HTML, helper code, environment versions and run commands are included.</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" type="checkbox" disabled/>Prediction CSV round-trip checks, manifests, audit table, decision log and assistance statement are included.</li>
 </ul>
 </body></html>
