@@ -129,7 +129,7 @@ dir.create(SUBMISSIONS, showWarnings = FALSE)
 ## Reading connections
 - [SATD and quality](https://users.encs.concordia.ca/~eshihab/pubs/Wehaibi_SANER2016.pdf)
 - [Code review and quality](https://rebels.cs.uwaterloo.ca/papers/msr2014_mcintosh.pdf)
-- [ChatGPT and small models for SATD](https://doi.org/10.1002/spe.3360)
+- [ChatGPT and small models for SATD](https://xiaoyu-cs.github.io/pdf/largelanguage.pdf)
 
 ## Reproducibility record
 ```{r session-info}

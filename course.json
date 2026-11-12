@@ -75,7 +75,7 @@
         },
         {
           "title": "Studying the Prevalence of Exception Handling Anti-Patterns",
-          "url": "https://learn.uwaterloo.ca/d2l/le/content/1115318/viewContent/5833095/View",
+          "url": "https://arxiv.org/abs/1704.00778",
           "venue": "Pádua and Shang / ICPC 2017",
           "idea": "Operationalize anti-patterns and measure their prevalence.",
           "question": "Does a detectable pattern necessarily imply a harmful behavior?",
@@ -110,7 +110,7 @@
       "papers": [
         {
           "title": "Detecting Performance Anti-patterns for Applications Developed Using Object-Relational Mapping",
-          "url": "https://www.cse.yorku.ca/~zmjiang/publications/icse2014_chen.pdf",
+          "url": "https://petertsehsun.github.io/papers/peter_icse2014.pdf",
           "venue": "Chen et al. • ICSE 2014",
           "idea": "Traditional lens: program structure and domain-specific performance patterns.",
           "question": "Which parts of a domain rule can be checked mechanically?",
@@ -203,7 +203,7 @@
         },
         {
           "title": "Large language model ChatGPT versus small deep learning models for self-admitted technical debt detection: Why not together?",
-          "url": "https://doi.org/10.1002/spe.3360",
+          "url": "https://xiaoyu-cs.github.io/pdf/largelanguage.pdf",
           "venue": "Li et al. • Software: Practice and Experience",
           "idea": "Hybrid lens: compare large and small models for SATD detection.",
           "question": "When should an inexpensive classifier defer to a larger model?",
@@ -400,7 +400,7 @@
         },
         {
           "title": "Leveraging Performance Counters and Execution Logs to Diagnose Memory-Related Performance Issues",
-          "url": "https://www.cse.yorku.ca/~zmjiang/publications/icsm2013_syer.pdf",
+          "url": "https://cs.uwaterloo.ca/~m2nagapp/publications/pdfs/Leveraging-Performance-Counters-and-Execution-Logs-to-Diagnose-Memory-Related-Performance-Issues.pdf",
           "venue": "Syer et al. • 2013",
           "idea": "Traditional lens: combine counters and logs to investigate memory-related problems.",
           "question": "Which independent observations would corroborate a memory hypothesis?",
@@ -451,7 +451,7 @@
         },
         {
           "title": "PerfJIT: Test-level Just-in-time Prediction for Performance Regression Introducing Commits",
-          "url": "https://users.encs.concordia.ca/~fu_chen/paper/PerfJIT.pdf",
+          "url": "https://users.encs.concordia.ca/~shang/pubs/Jinfu2020TSE.pdf",
           "venue": "ICSE 2021 journal-first presentation",
           "idea": "Traditional lens: predict performance-regression risk at test level.",
           "question": "How does changing the outcome change the dataset and evaluation?",

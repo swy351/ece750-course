@@ -131,7 +131,7 @@ dir.create(SUBMISSIONS, showWarnings = FALSE)
 
 ## Reading connections
 - [Load-testing problems](https://cs.uwaterloo.ca/~m2nagapp/courses/CS846/1171/papers/jiang_icsm08.pdf)
-- [Counters and memory issues](https://www.cse.yorku.ca/~zmjiang/publications/icsm2013_syer.pdf)
+- [Counters and memory issues](https://cs.uwaterloo.ca/~m2nagapp/publications/pdfs/Leveraging-Performance-Counters-and-Execution-Logs-to-Diagnose-Memory-Related-Performance-Issues.pdf)
 - [OpenRCA](https://github.com/microsoft/OpenRCA)
 
 ## Reproducibility record

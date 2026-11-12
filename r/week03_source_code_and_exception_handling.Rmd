@@ -126,7 +126,7 @@ dir.create(SUBMISSIONS, showWarnings = FALSE)
 **Your response:** TODO
 
 ## Reading connections
-- [ORM anti-patterns](https://www.cse.yorku.ca/~zmjiang/publications/icse2014_chen.pdf)
+- [ORM anti-patterns](https://petertsehsun.github.io/papers/peter_icse2014.pdf)
 - [Exception-flow analysis](https://guipadua.github.io/resources/scam2017-revisiting-eh_cr.pdf)
 - [Liu et al., FSE 2025: EH-Fixer](https://leopard-lab.github.io/paper/FSE2025-HaoranLiu.pdf)
 
